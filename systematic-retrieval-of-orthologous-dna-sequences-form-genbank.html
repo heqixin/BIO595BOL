@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 14 Systematic Retrieval of orthologous DNA sequences form GenBank | BIO595 The Tree of Life</title>
+  <meta name="description" content="Test writing the book for the course bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 14 Systematic Retrieval of orthologous DNA sequences form GenBank | BIO595 The Tree of Life" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Test writing the book for the course bookdown::gitbook." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 14 Systematic Retrieval of orthologous DNA sequences form GenBank | BIO595 The Tree of Life" />
+  
+  <meta name="twitter:description" content="Test writing the book for the course bookdown::gitbook." />
+  
+
+<meta name="author" content="Qixin He, Daniel Park" />
+
+
+<meta name="date" content="2023-04-10" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="resources-and-guidelines-for-the-term-project.html"/>
+<link rel="next" href="sequence-alignment.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Tree of Life: Phylogenetic inferences and applications</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
+<li class="chapter" data-level="2" data-path="unix.html"><a href="unix.html"><i class="fa fa-check"></i><b>2</b> Unix</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="unix.html"><a href="unix.html#what-is-unix-and-why-do-we-use-it"><i class="fa fa-check"></i><b>2.1</b> What is Unix and why do we use it?</a></li>
+<li class="chapter" data-level="2.2" data-path="unix.html"><a href="unix.html#installation"><i class="fa fa-check"></i><b>2.2</b> Installation</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="unix.html"><a href="unix.html#mac-os-and-linux"><i class="fa fa-check"></i><b>2.2.1</b> Mac OS and Linux</a></li>
+<li class="chapter" data-level="2.2.2" data-path="unix.html"><a href="unix.html#windows"><i class="fa fa-check"></i><b>2.2.2</b> Windows</a></li>
+<li class="chapter" data-level="2.2.3" data-path="unix.html"><a href="unix.html#use-scholar-remote-desktop-during-the-class"><i class="fa fa-check"></i><b>2.2.3</b> Use Scholar Remote Desktop During the Class</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="unix.html"><a href="unix.html#operation"><i class="fa fa-check"></i><b>2.3</b> Operation</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="unix.html"><a href="unix.html#starting-the-shell"><i class="fa fa-check"></i><b>2.3.1</b> Starting the Shell</a></li>
+<li class="chapter" data-level="2.3.2" data-path="unix.html"><a href="unix.html#directoryfolder-sturcture"><i class="fa fa-check"></i><b>2.3.2</b> Directory/folder sturcture</a></li>
+<li class="chapter" data-level="2.3.3" data-path="unix.html"><a href="unix.html#absolute-and-relative-directory"><i class="fa fa-check"></i><b>2.3.3</b> Absolute and Relative directory</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="unix.html"><a href="unix.html#handling-directories-and-files"><i class="fa fa-check"></i><b>2.4</b> Handling directories and files</a></li>
+<li class="chapter" data-level="2.5" data-path="unix.html"><a href="unix.html#excercises-i"><i class="fa fa-check"></i><b>2.5</b> Excercises I</a></li>
+<li class="chapter" data-level="2.6" data-path="unix.html"><a href="unix.html#viewing-and-processing-text-files"><i class="fa fa-check"></i><b>2.6</b> Viewing and processing text files</a></li>
+<li class="chapter" data-level="2.7" data-path="unix.html"><a href="unix.html#redirecting-printouts-and-piping"><i class="fa fa-check"></i><b>2.7</b> Redirecting printouts and piping</a></li>
+<li class="chapter" data-level="2.8" data-path="unix.html"><a href="unix.html#exercises-ii"><i class="fa fa-check"></i><b>2.8</b> Exercises II</a></li>
+<li class="chapter" data-level="2.9" data-path="unix.html"><a href="unix.html#useful-wildcards"><i class="fa fa-check"></i><b>2.9</b> Useful wildcards</a></li>
+<li class="chapter" data-level="2.10" data-path="unix.html"><a href="unix.html#exercises-iii"><i class="fa fa-check"></i><b>2.10</b> Exercises III</a></li>
+<li class="chapter" data-level="2.11" data-path="unix.html"><a href="unix.html#search-and-select-lines-using-grep"><i class="fa fa-check"></i><b>2.11</b> Search and select lines using <em>grep</em></a></li>
+<li class="chapter" data-level="2.12" data-path="unix.html"><a href="unix.html#substituting-characters-using-tr"><i class="fa fa-check"></i><b>2.12</b> Substituting characters using <em>tr</em></a></li>
+<li class="chapter" data-level="2.13" data-path="unix.html"><a href="unix.html#cut-sort-and-unique"><i class="fa fa-check"></i><b>2.13</b> cut, sort and unique</a></li>
+<li class="chapter" data-level="2.14" data-path="unix.html"><a href="unix.html#exercises-iv"><i class="fa fa-check"></i><b>2.14</b> Exercises IV</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-basics-i.html"><a href="r-basics-i.html"><i class="fa fa-check"></i><b>3</b> R Basics I</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="r-basics-i.html"><a href="r-basics-i.html#what-is-programming"><i class="fa fa-check"></i><b>3.1</b> What is programming?</a></li>
+<li class="chapter" data-level="3.2" data-path="r-basics-i.html"><a href="r-basics-i.html#r"><i class="fa fa-check"></i><b>3.2</b> <code>R</code></a></li>
+<li class="chapter" data-level="3.3" data-path="r-basics-i.html"><a href="r-basics-i.html#installation-1"><i class="fa fa-check"></i><b>3.3</b> Installation</a></li>
+<li class="chapter" data-level="3.4" data-path="r-basics-i.html"><a href="r-basics-i.html#variables"><i class="fa fa-check"></i><b>3.4</b> Variables</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="r-basics-i.html"><a href="r-basics-i.html#exercise-1"><i class="fa fa-check"></i><b>3.4.1</b> Exercise (1):</a></li>
+<li class="chapter" data-level="3.4.2" data-path="r-basics-i.html"><a href="r-basics-i.html#variable-naming-conventions"><i class="fa fa-check"></i><b>3.4.2</b> Variable naming conventions</a></li>
+<li class="chapter" data-level="3.4.3" data-path="r-basics-i.html"><a href="r-basics-i.html#arithmetic-operators"><i class="fa fa-check"></i><b>3.4.3</b> Arithmetic Operators</a></li>
+<li class="chapter" data-level="3.4.4" data-path="r-basics-i.html"><a href="r-basics-i.html#logical-operators"><i class="fa fa-check"></i><b>3.4.4</b> Logical Operators</a></li>
+<li class="chapter" data-level="3.4.5" data-path="r-basics-i.html"><a href="r-basics-i.html#basic-built-in-mathematical-functions"><i class="fa fa-check"></i><b>3.4.5</b> Basic built-in mathematical functions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="r-basics-i.html"><a href="r-basics-i.html#subsetting-data"><i class="fa fa-check"></i><b>3.5</b> Subsetting data</a></li>
+<li class="chapter" data-level="3.6" data-path="r-basics-i.html"><a href="r-basics-i.html#logical-values"><i class="fa fa-check"></i><b>3.6</b> Logical values</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="r-basics-i.html"><a href="r-basics-i.html#missing-dealing-with-na-values"><i class="fa fa-check"></i><b>3.6.1</b> Missing: dealing with <code>NA</code> values</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="r-basics-i.html"><a href="r-basics-i.html#generating-data"><i class="fa fa-check"></i><b>3.7</b> Generating Data</a></li>
+<li class="chapter" data-level="3.8" data-path="r-basics-i.html"><a href="r-basics-i.html#data-structures-and-types"><i class="fa fa-check"></i><b>3.8</b> Data Structures and Types</a>
+<ul>
+<li class="chapter" data-level="3.8.1" data-path="r-basics-i.html"><a href="r-basics-i.html#vectors"><i class="fa fa-check"></i><b>3.8.1</b> Vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="3.9" data-path="r-basics-i.html"><a href="r-basics-i.html#matrices"><i class="fa fa-check"></i><b>3.9</b> Matrices</a>
+<ul>
+<li class="chapter" data-level="3.9.1" data-path="r-basics-i.html"><a href="r-basics-i.html#exercise-2"><i class="fa fa-check"></i><b>3.9.1</b> Exercise (2):</a></li>
+</ul></li>
+<li class="chapter" data-level="3.10" data-path="r-basics-i.html"><a href="r-basics-i.html#data-frames"><i class="fa fa-check"></i><b>3.10</b> Data Frames</a>
+<ul>
+<li class="chapter" data-level="3.10.1" data-path="r-basics-i.html"><a href="r-basics-i.html#exercise-3"><i class="fa fa-check"></i><b>3.10.1</b> Exercise (3):</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="r-basics-ii.html"><a href="r-basics-ii.html"><i class="fa fa-check"></i><b>4</b> R Basics II</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="r-basics-ii.html"><a href="r-basics-ii.html#setting-up-the-environment"><i class="fa fa-check"></i><b>4.1</b> Setting up the environment</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="r-basics-ii.html"><a href="r-basics-ii.html#exercise-1-1"><i class="fa fa-check"></i><b>4.1.1</b> Exercise (1)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="r-basics-ii.html"><a href="r-basics-ii.html#reading-in-data-from-files"><i class="fa fa-check"></i><b>4.2</b> Reading in data from files</a></li>
+<li class="chapter" data-level="4.3" data-path="r-basics-ii.html"><a href="r-basics-ii.html#wrangling-data"><i class="fa fa-check"></i><b>4.3</b> Wrangling Data</a></li>
+<li class="chapter" data-level="4.4" data-path="r-basics-ii.html"><a href="r-basics-ii.html#subsetting-by-columns-and-rows"><i class="fa fa-check"></i><b>4.4</b> Subsetting by columns and rows</a></li>
+<li class="chapter" data-level="4.5" data-path="r-basics-ii.html"><a href="r-basics-ii.html#subsetting-with-conditions"><i class="fa fa-check"></i><b>4.5</b> Subsetting with conditions</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="r-basics-ii.html"><a href="r-basics-ii.html#exercise-2-1"><i class="fa fa-check"></i><b>4.5.1</b> Exercise (2)</a></li>
+<li class="chapter" data-level="4.5.2" data-path="r-basics-ii.html"><a href="r-basics-ii.html#bonus-1"><i class="fa fa-check"></i><b>4.5.2</b> Bonus [1]</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="r-basics-ii.html"><a href="r-basics-ii.html#merging-data"><i class="fa fa-check"></i><b>4.6</b> Merging data</a></li>
+<li class="chapter" data-level="4.7" data-path="r-basics-ii.html"><a href="r-basics-ii.html#saving-files-and-sessions"><i class="fa fa-check"></i><b>4.7</b> Saving files and sessions</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="r-basics-ii.html"><a href="r-basics-ii.html#exercise-3-1"><i class="fa fa-check"></i><b>4.7.1</b> Exercise (3)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="r-basics-ii.html"><a href="r-basics-ii.html#the-for-loop"><i class="fa fa-check"></i><b>4.8</b> The <span class="smallcaps">for</span>-loop</a></li>
+<li class="chapter" data-level="4.9" data-path="r-basics-ii.html"><a href="r-basics-ii.html#lists"><i class="fa fa-check"></i><b>4.9</b> Lists</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="tree-and-traits-in-r.html"><a href="tree-and-traits-in-r.html"><i class="fa fa-check"></i><b>5</b> Tree and Traits in R</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="tree-and-traits-in-r.html"><a href="tree-and-traits-in-r.html#setting-up-the-environment-1"><i class="fa fa-check"></i><b>5.1</b> Setting up the environment</a></li>
+<li class="chapter" data-level="5.2" data-path="tree-and-traits-in-r.html"><a href="tree-and-traits-in-r.html#examining-phylogenetic-trees"><i class="fa fa-check"></i><b>5.2</b> Examining phylogenetic trees</a></li>
+<li class="chapter" data-level="5.3" data-path="tree-and-traits-in-r.html"><a href="tree-and-traits-in-r.html#plotting-phylogenetic-trees"><i class="fa fa-check"></i><b>5.3</b> Plotting phylogenetic trees</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="tree-and-traits-in-r.html"><a href="tree-and-traits-in-r.html#exercise-1-2"><i class="fa fa-check"></i><b>5.3.1</b> Exercise (1)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="tree-and-traits-in-r.html"><a href="tree-and-traits-in-r.html#associating-phylogenies-and-traits"><i class="fa fa-check"></i><b>5.4</b> Associating phylogenies and traits</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="tree-and-traits-in-r.html"><a href="tree-and-traits-in-r.html#saving-plots"><i class="fa fa-check"></i><b>5.4.1</b> Saving plots</a></li>
+<li class="chapter" data-level="5.4.2" data-path="tree-and-traits-in-r.html"><a href="tree-and-traits-in-r.html#exercise-2-2"><i class="fa fa-check"></i><b>5.4.2</b> Exercise (2)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html"><i class="fa fa-check"></i><b>6</b> Biogeography and Macroevolution in R</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#setting-up-the-environment-2"><i class="fa fa-check"></i><b>6.1</b> Setting up the environment</a></li>
+<li class="chapter" data-level="6.2" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#ancestral-state-reconstructions"><i class="fa fa-check"></i><b>6.2</b> Ancestral State Reconstructions</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#bonus-2"><i class="fa fa-check"></i><b>6.2.1</b> Bonus [2]</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#continuous-traits"><i class="fa fa-check"></i><b>6.3</b> Continuous traits</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#maximum-likelihood"><i class="fa fa-check"></i><b>6.3.1</b> Maximum likelihood</a></li>
+<li class="chapter" data-level="6.3.2" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#phylogenetically-independent-contrasts"><i class="fa fa-check"></i><b>6.3.2</b> Phylogenetically independent contrasts</a></li>
+<li class="chapter" data-level="6.3.3" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#plotting-ancestral-states"><i class="fa fa-check"></i><b>6.3.3</b> Plotting ancestral states</a></li>
+<li class="chapter" data-level="6.3.4" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#exercise-1-3"><i class="fa fa-check"></i><b>6.3.4</b> Exercise (1)</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#discrete-traits"><i class="fa fa-check"></i><b>6.4</b> Discrete traits</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#exercise-2-3"><i class="fa fa-check"></i><b>6.4.1</b> Exercise (2)</a></li>
+<li class="chapter" data-level="6.4.2" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#maximum-likelihood-1"><i class="fa fa-check"></i><b>6.4.2</b> Maximum likelihood</a></li>
+<li class="chapter" data-level="6.4.3" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#choosing-models"><i class="fa fa-check"></i><b>6.4.3</b> Choosing models</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#saving-multiple-plots-together"><i class="fa fa-check"></i><b>6.5</b> Saving multiple plots together</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#exercise-3-2"><i class="fa fa-check"></i><b>6.5.1</b> Exercise (3)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="phylogenetic-diversity-in-r.html"><a href="phylogenetic-diversity-in-r.html"><i class="fa fa-check"></i><b>7</b> Phylogenetic Diversity in R</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="phylogenetic-diversity-in-r.html"><a href="phylogenetic-diversity-in-r.html#setting-up-the-environment-3"><i class="fa fa-check"></i><b>7.1</b> Setting up the environment</a></li>
+<li class="chapter" data-level="7.2" data-path="phylogenetic-diversity-in-r.html"><a href="phylogenetic-diversity-in-r.html#phylogenetic-diversity"><i class="fa fa-check"></i><b>7.2</b> Phylogenetic Diversity</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="phylogenetic-diversity-in-r.html"><a href="phylogenetic-diversity-in-r.html#preprocessing"><i class="fa fa-check"></i><b>7.2.1</b> Preprocessing</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="phylogenetic-diversity-in-r.html"><a href="phylogenetic-diversity-in-r.html#estimating-phylogenetic-diversity-metrics"><i class="fa fa-check"></i><b>7.3</b> Estimating phylogenetic diversity metrics</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="phylogenetic-diversity-in-r.html"><a href="phylogenetic-diversity-in-r.html#exercise-1-4"><i class="fa fa-check"></i><b>7.3.1</b> Exercise (1)</a></li>
+<li class="chapter" data-level="7.3.2" data-path="phylogenetic-diversity-in-r.html"><a href="phylogenetic-diversity-in-r.html#exercise-2-4"><i class="fa fa-check"></i><b>7.3.2</b> Exercise (2)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="community-phylogenetics.html"><a href="community-phylogenetics.html"><i class="fa fa-check"></i><b>8</b> Community Phylogenetics</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="community-phylogenetics.html"><a href="community-phylogenetics.html#setting-up-the-environment-4"><i class="fa fa-check"></i><b>8.1</b> Setting up the environment</a></li>
+<li class="chapter" data-level="8.2" data-path="community-phylogenetics.html"><a href="community-phylogenetics.html#definition-of-community-phylogenetics"><i class="fa fa-check"></i><b>8.2</b> Definition of Community Phylogenetics</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="community-phylogenetics.html"><a href="community-phylogenetics.html#alpha-diversity"><i class="fa fa-check"></i><b>8.2.1</b> Alpha diversity</a></li>
+<li class="chapter" data-level="8.2.2" data-path="community-phylogenetics.html"><a href="community-phylogenetics.html#beta-diversity"><i class="fa fa-check"></i><b>8.2.2</b> Beta diversity</a></li>
+<li class="chapter" data-level="8.2.3" data-path="community-phylogenetics.html"><a href="community-phylogenetics.html#exercise-1-5"><i class="fa fa-check"></i><b>8.2.3</b> Exercise (1)</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="community-phylogenetics.html"><a href="community-phylogenetics.html#standardized-effect-sizes"><i class="fa fa-check"></i><b>8.3</b> Standardized effect sizes</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="community-phylogenetics.html"><a href="community-phylogenetics.html#exercise-2-5"><i class="fa fa-check"></i><b>8.3.1</b> Exercise (2)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="coevolution-and-phylogenetic-signals-in-r.html"><a href="coevolution-and-phylogenetic-signals-in-r.html"><i class="fa fa-check"></i><b>9</b> Coevolution and Phylogenetic Signals in R</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="coevolution-and-phylogenetic-signals-in-r.html"><a href="coevolution-and-phylogenetic-signals-in-r.html#setting-up-the-environment-5"><i class="fa fa-check"></i><b>9.1</b> Setting up the environment</a></li>
+<li class="chapter" data-level="9.2" data-path="coevolution-and-phylogenetic-signals-in-r.html"><a href="coevolution-and-phylogenetic-signals-in-r.html#phylogenetic-signal"><i class="fa fa-check"></i><b>9.2</b> Phylogenetic Signal</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="coevolution-and-phylogenetic-signals-in-r.html"><a href="coevolution-and-phylogenetic-signals-in-r.html#blombergs-k"><i class="fa fa-check"></i><b>9.2.1</b> Blomberg’s K</a></li>
+<li class="chapter" data-level="9.2.2" data-path="coevolution-and-phylogenetic-signals-in-r.html"><a href="coevolution-and-phylogenetic-signals-in-r.html#pagels-lambda-λ"><i class="fa fa-check"></i><b>9.2.2</b> Pagel’s lambda (λ)</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="coevolution-and-phylogenetic-signals-in-r.html"><a href="coevolution-and-phylogenetic-signals-in-r.html#phylogenetically-independent-contrasts-1"><i class="fa fa-check"></i><b>9.3</b> Phylogenetically Independent Contrasts</a></li>
+<li class="chapter" data-level="9.4" data-path="coevolution-and-phylogenetic-signals-in-r.html"><a href="coevolution-and-phylogenetic-signals-in-r.html#coevolution"><i class="fa fa-check"></i><b>9.4</b> Coevolution</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="coevolution-and-phylogenetic-signals-in-r.html"><a href="coevolution-and-phylogenetic-signals-in-r.html#plotting-tanglegrams"><i class="fa fa-check"></i><b>9.4.1</b> Plotting tanglegrams</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html"><i class="fa fa-check"></i><b>10</b> Phylogenetic Visualization in R</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#setting-up-the-environment-6"><i class="fa fa-check"></i><b>10.1</b> Setting up the environment</a></li>
+<li class="chapter" data-level="10.2" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#using-phytools"><i class="fa fa-check"></i><b>10.2</b> Using <code>phytools</code></a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#phenograms"><i class="fa fa-check"></i><b>10.2.1</b> Phenograms</a></li>
+<li class="chapter" data-level="10.2.2" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#mapping-continuous-characters-on-branches"><i class="fa fa-check"></i><b>10.2.2</b> Mapping continuous characters on branches</a></li>
+<li class="chapter" data-level="10.2.3" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#plotting-images-on-phylogenies"><i class="fa fa-check"></i><b>10.2.3</b> Plotting images on phylogenies</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#using-ggtree"><i class="fa fa-check"></i><b>10.3</b> Using <code>ggtree</code></a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#basic-plotting"><i class="fa fa-check"></i><b>10.3.1</b> Basic plotting</a></li>
+<li class="chapter" data-level="10.3.2" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#labeling-tips-nodes-and-clades"><i class="fa fa-check"></i><b>10.3.2</b> Labeling tips, nodes, and clades</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#plotting-maps"><i class="fa fa-check"></i><b>10.4</b> Plotting maps</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#choropleth-maps"><i class="fa fa-check"></i><b>10.4.1</b> Choropleth maps</a></li>
+<li class="chapter" data-level="10.4.2" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#working-with-rasters"><i class="fa fa-check"></i><b>10.4.2</b> Working with rasters</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html"><i class="fa fa-check"></i><b>11</b> Gene tree vs Species tree</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#learning-goals"><i class="fa fa-check"></i><b>11.1</b> Learning goals:</a></li>
+<li class="chapter" data-level="11.2" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#tracing-ancestry-within-one-population"><i class="fa fa-check"></i><b>11.2</b> Tracing ancestry within one population</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#vary-pop-size-and-generation"><i class="fa fa-check"></i><b>11.2.1</b> Vary pop size and generation</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#speciation-and-coalescence"><i class="fa fa-check"></i><b>11.3</b> Speciation and coalescence</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#two-species-coalescent-history"><i class="fa fa-check"></i><b>11.3.1</b> Two-species coalescent history</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#exercise-i"><i class="fa fa-check"></i><b>11.4</b> Exercise I</a></li>
+<li class="chapter" data-level="11.5" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#gene-tree-locus-tree-and-species-tree"><i class="fa fa-check"></i><b>11.5</b> Gene tree, Locus tree and Species tree</a>
+<ul>
+<li class="chapter" data-level="11.5.1" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#loading-data-and-packages"><i class="fa fa-check"></i><b>11.5.1</b> loading data and packages</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#effects-of-incomplete-lineage-sorting-ils-alone"><i class="fa fa-check"></i><b>11.6</b> Effects of Incomplete Lineage Sorting (ILS) alone</a>
+<ul>
+<li class="chapter" data-level="11.6.1" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#generate-species-tree-with-no-extinction"><i class="fa fa-check"></i><b>11.6.1</b> generate species tree with no extinction</a></li>
+<li class="chapter" data-level="11.6.2" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#simulate-gene-trees-using-the-multispecies-coalescent-process"><i class="fa fa-check"></i><b>11.6.2</b> simulate gene trees using the multispecies coalescent process</a></li>
+</ul></li>
+<li class="chapter" data-level="11.7" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#calculate-tree-distances"><i class="fa fa-check"></i><b>11.7</b> Calculate tree distances</a>
+<ul>
+<li class="chapter" data-level="11.7.1" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#rf-distances"><i class="fa fa-check"></i><b>11.7.1</b> RF distances</a></li>
+<li class="chapter" data-level="11.7.2" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#inspect-pairwise-rf-distances-among-all-the-gene-trees-generated-under-one-guiding-species-tree"><i class="fa fa-check"></i><b>11.7.2</b> Inspect pairwise RF distances among all the gene trees generated under one guiding species tree</a></li>
+</ul></li>
+<li class="chapter" data-level="11.8" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#inspect-node-support-i.e.-subtrees-defined-by-a-split"><i class="fa fa-check"></i><b>11.8</b> Inspect node support (i.e., subtrees defined by a split)</a></li>
+<li class="chapter" data-level="11.9" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#combined-effects-of-gene-duplication-loss-and-horizontal-gene-transfer-events"><i class="fa fa-check"></i><b>11.9</b> Combined effects of gene duplication, loss and horizontal gene transfer events</a></li>
+<li class="chapter" data-level="11.10" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#exercise-ii"><i class="fa fa-check"></i><b>11.10</b> Exercise II</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="overview-of-phylogenetic-inferences.html"><a href="overview-of-phylogenetic-inferences.html"><i class="fa fa-check"></i><b>12</b> Overview of Phylogenetic Inferences</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="overview-of-phylogenetic-inferences.html"><a href="overview-of-phylogenetic-inferences.html#mega"><i class="fa fa-check"></i><b>12.1</b> <code>MEGA</code></a></li>
+<li class="chapter" data-level="12.2" data-path="overview-of-phylogenetic-inferences.html"><a href="overview-of-phylogenetic-inferences.html#view-and-align-sequences"><i class="fa fa-check"></i><b>12.2</b> View and Align Sequences</a></li>
+<li class="chapter" data-level="12.3" data-path="overview-of-phylogenetic-inferences.html"><a href="overview-of-phylogenetic-inferences.html#dnaprotein-evolution-model"><i class="fa fa-check"></i><b>12.3</b> DNA/protein evolution model</a></li>
+<li class="chapter" data-level="12.4" data-path="overview-of-phylogenetic-inferences.html"><a href="overview-of-phylogenetic-inferences.html#phylogenetic-inference"><i class="fa fa-check"></i><b>12.4</b> Phylogenetic inference</a></li>
+<li class="chapter" data-level="12.5" data-path="overview-of-phylogenetic-inferences.html"><a href="overview-of-phylogenetic-inferences.html#estimate-divergence-times"><i class="fa fa-check"></i><b>12.5</b> Estimate divergence times</a></li>
+<li class="chapter" data-level="12.6" data-path="overview-of-phylogenetic-inferences.html"><a href="overview-of-phylogenetic-inferences.html#exercises"><i class="fa fa-check"></i><b>12.6</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html"><i class="fa fa-check"></i><b>13</b> Resources and Guidelines for the Term Project</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#bioinformatics-databases"><i class="fa fa-check"></i><b>13.1</b> Bioinformatics Databases</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#ncbi-national-center-for-biotechnology-information"><i class="fa fa-check"></i><b>13.1.1</b> NCBI (National Center for Biotechnology Information)</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#retrieving-genetic-resources-for-your-taxa"><i class="fa fa-check"></i><b>13.2</b> Retrieving genetic resources for your taxa</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#ncbi-taxonomy-database"><i class="fa fa-check"></i><b>13.2.1</b> NCBI taxonomy database</a></li>
+<li class="chapter" data-level="13.2.2" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#individual-genes-from-the-whole-genome-data"><i class="fa fa-check"></i><b>13.2.2</b> Individual genes from the whole genome data</a></li>
+<li class="chapter" data-level="13.2.3" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#get-homologous-sequences-from-related-species"><i class="fa fa-check"></i><b>13.2.3</b> Get homologous sequences from related species</a></li>
+<li class="chapter" data-level="13.2.4" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#european-bioinformatics-institute-ebi"><i class="fa fa-check"></i><b>13.2.4</b> European Bioinformatics Institute (EBI)</a></li>
+<li class="chapter" data-level="13.2.5" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#protein-data-bank"><i class="fa fa-check"></i><b>13.2.5</b> Protein Data Bank</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#biogeographic-databases"><i class="fa fa-check"></i><b>13.3</b> Biogeographic Databases</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#climate-data"><i class="fa fa-check"></i><b>13.3.1</b> Climate Data</a></li>
+<li class="chapter" data-level="13.3.2" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#occurrence-data"><i class="fa fa-check"></i><b>13.3.2</b> Occurrence Data</a></li>
+<li class="chapter" data-level="13.3.3" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#topographic-data"><i class="fa fa-check"></i><b>13.3.3</b> TOPOGRAPHIC DATA</a></li>
+<li class="chapter" data-level="13.3.4" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#trait-data"><i class="fa fa-check"></i><b>13.3.4</b> TRAIT DATA</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#publication-databases"><i class="fa fa-check"></i><b>13.4</b> Publication Databases</a></li>
+<li class="chapter" data-level="13.5" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#example-research-questions"><i class="fa fa-check"></i><b>13.5</b> Example research questions:</a>
+<ul>
+<li class="chapter" data-level="13.5.1" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#biogeography-and-phylogenetic-diversity"><i class="fa fa-check"></i><b>13.5.1</b> Biogeography and Phylogenetic Diversity:</a></li>
+<li class="chapter" data-level="13.5.2" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#community-ecology"><i class="fa fa-check"></i><b>13.5.2</b> Community Ecology:</a></li>
+<li class="chapter" data-level="13.5.3" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#coevolution-1"><i class="fa fa-check"></i><b>13.5.3</b> Coevolution:</a></li>
+<li class="chapter" data-level="13.5.4" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#species-tree"><i class="fa fa-check"></i><b>13.5.4</b> Species tree:</a></li>
+</ul></li>
+<li class="chapter" data-level="13.6" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#how-to-submit-jobs-on-scholar-cluster-and-run-remotely"><i class="fa fa-check"></i><b>13.6</b> How to submit jobs on Scholar Cluster and run remotely</a></li>
+<li class="chapter" data-level="13.7" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#term-project-proposal"><i class="fa fa-check"></i><b>13.7</b> Term project proposal</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><i class="fa fa-check"></i><b>14</b> Systematic Retrieval of orthologous DNA sequences form GenBank</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#introduction"><i class="fa fa-check"></i><b>14.1</b> Introduction</a></li>
+<li class="chapter" data-level="14.2" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#installing-tools"><i class="fa fa-check"></i><b>14.2</b> Installing Tools</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#windows-1"><i class="fa fa-check"></i><b>14.2.1</b> Windows</a></li>
+<li class="chapter" data-level="14.2.2" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#mac"><i class="fa fa-check"></i><b>14.2.2</b> Mac</a></li>
+<li class="chapter" data-level="14.2.3" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#ncbi-blast-tools"><i class="fa fa-check"></i><b>14.2.3</b> NCBI BLAST+ Tools</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#using-phylotar"><i class="fa fa-check"></i><b>14.3</b> Using <code>phylotaR</code></a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#pipeline"><i class="fa fa-check"></i><b>14.3.1</b> Pipeline</a></li>
+<li class="chapter" data-level="14.3.2" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#running"><i class="fa fa-check"></i><b>14.3.2</b> Running</a></li>
+<li class="chapter" data-level="14.3.3" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#restarting"><i class="fa fa-check"></i><b>14.3.3</b> Restarting</a></li>
+<li class="chapter" data-level="14.3.4" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cluster-i.e.-orthologous-genes-selection"><i class="fa fa-check"></i><b>14.3.4</b> Cluster (i.e., orthologous genes) selection</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#exercise-i-1"><i class="fa fa-check"></i><b>14.4</b> Exercise I</a></li>
+<li class="chapter" data-level="14.5" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#using-annotationbustr"><i class="fa fa-check"></i><b>14.5</b> Using <code>AnnotationBustR</code></a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#introduction-1"><i class="fa fa-check"></i><b>14.5.1</b> Introduction</a></li>
+<li class="chapter" data-level="14.5.2" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#install-the-tools"><i class="fa fa-check"></i><b>14.5.2</b> Install the tools</a></li>
+<li class="chapter" data-level="14.5.3" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#specify-search-terms-of-genomes"><i class="fa fa-check"></i><b>14.5.3</b> Specify search terms of genomes</a></li>
+<li class="chapter" data-level="14.5.4" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#load-gene-search-terms-of-interest"><i class="fa fa-check"></i><b>14.5.4</b> Load Gene Search Terms of Interest</a></li>
+<li class="chapter" data-level="14.5.5" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#extract-sequences-with-annotationbust"><i class="fa fa-check"></i><b>14.5.5</b> Extract sequences with AnnotationBust</a></li>
+</ul></li>
+<li class="chapter" data-level="14.6" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#exercise-ii-1"><i class="fa fa-check"></i><b>14.6</b> Exercise II</a></li>
+<li class="chapter" data-level="14.7" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#combine-gene-information-from-the-two-analyses"><i class="fa fa-check"></i><b>14.7</b> Combine gene information from the two analyses</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="sequence-alignment.html"><a href="sequence-alignment.html"><i class="fa fa-check"></i><b>15</b> Sequence alignment</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="sequence-alignment.html"><a href="sequence-alignment.html#load-libraries"><i class="fa fa-check"></i><b>15.1</b> Load libraries</a></li>
+<li class="chapter" data-level="15.2" data-path="sequence-alignment.html"><a href="sequence-alignment.html#perform-alignments"><i class="fa fa-check"></i><b>15.2</b> Perform Alignments</a></li>
+<li class="chapter" data-level="15.3" data-path="sequence-alignment.html"><a href="sequence-alignment.html#processing-multiple-alignments"><i class="fa fa-check"></i><b>15.3</b> Processing Multiple Alignments</a></li>
+<li class="chapter" data-level="15.4" data-path="sequence-alignment.html"><a href="sequence-alignment.html#build-your-first-nj-tree"><i class="fa fa-check"></i><b>15.4</b> Build your first NJ tree</a></li>
+<li class="chapter" data-level="15.5" data-path="sequence-alignment.html"><a href="sequence-alignment.html#exercise"><i class="fa fa-check"></i><b>15.5</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html"><i class="fa fa-check"></i><b>16</b> Maximum likelihood, model tests, tree and branch tests</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#learning-goals-1"><i class="fa fa-check"></i><b>16.1</b> Learning Goals</a></li>
+<li class="chapter" data-level="16.2" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#iqtree"><i class="fa fa-check"></i><b>16.2</b> IQtree</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#version"><i class="fa fa-check"></i><b>16.2.1</b> Version</a></li>
+<li class="chapter" data-level="16.2.2" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#find-the-best-explanatory-sequence-evolution-model"><i class="fa fa-check"></i><b>16.2.2</b> find the best explanatory sequence evolution model</a></li>
+<li class="chapter" data-level="16.2.3" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#using-the-best-sequence-evolution-model"><i class="fa fa-check"></i><b>16.2.3</b> using the best sequence evolution model</a></li>
+<li class="chapter" data-level="16.2.4" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#different-partitions-for-the-data-for-multiple-genes-or-different-codons"><i class="fa fa-check"></i><b>16.2.4</b> Different partitions for the data for multiple genes, or different codons</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#run-an-ml-tree-with-multiple-gene-files-in-a-folder"><i class="fa fa-check"></i><b>16.3</b> Run an ML tree with multiple gene files in a folder</a></li>
+<li class="chapter" data-level="16.4" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#gene-concordance-factor"><i class="fa fa-check"></i><b>16.4</b> Gene concordance factor</a></li>
+<li class="chapter" data-level="16.5" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#tree-topology-tests"><i class="fa fa-check"></i><b>16.5</b> Tree topology tests</a></li>
+<li class="chapter" data-level="16.6" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#tree-branches-tests"><i class="fa fa-check"></i><b>16.6</b> Tree branches tests</a></li>
+<li class="chapter" data-level="16.7" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#assignments"><i class="fa fa-check"></i><b>16.7</b> Assignments</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="molecular-clock-and-phylogenetic-dating.html"><a href="molecular-clock-and-phylogenetic-dating.html"><i class="fa fa-check"></i><b>17</b> Molecular Clock and Phylogenetic Dating</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="molecular-clock-and-phylogenetic-dating.html"><a href="molecular-clock-and-phylogenetic-dating.html#inferring-time-tree-with-tip-dates"><i class="fa fa-check"></i><b>17.1</b> Inferring time tree with tip dates</a></li>
+<li class="chapter" data-level="17.2" data-path="molecular-clock-and-phylogenetic-dating.html"><a href="molecular-clock-and-phylogenetic-dating.html#calibrating-tree-using-ancestral-dates"><i class="fa fa-check"></i><b>17.2</b> Calibrating tree using ancestral dates</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="molecular-clock-and-phylogenetic-dating.html"><a href="molecular-clock-and-phylogenetic-dating.html#search-for-an-ml-tree"><i class="fa fa-check"></i><b>17.2.1</b> search for an ML tree</a></li>
+<li class="chapter" data-level="17.2.2" data-path="molecular-clock-and-phylogenetic-dating.html"><a href="molecular-clock-and-phylogenetic-dating.html#root-calibration"><i class="fa fa-check"></i><b>17.2.2</b> Root calibration</a></li>
+<li class="chapter" data-level="17.2.3" data-path="molecular-clock-and-phylogenetic-dating.html"><a href="molecular-clock-and-phylogenetic-dating.html#internal-nodes"><i class="fa fa-check"></i><b>17.2.3</b> Internal nodes</a></li>
+<li class="chapter" data-level="17.2.4" data-path="molecular-clock-and-phylogenetic-dating.html"><a href="molecular-clock-and-phylogenetic-dating.html#confidence-interval"><i class="fa fa-check"></i><b>17.2.4</b> Confidence interval</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="molecular-clock-and-phylogenetic-dating.html"><a href="molecular-clock-and-phylogenetic-dating.html#exercise-4"><i class="fa fa-check"></i><b>17.3</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html"><i class="fa fa-check"></i><b>18</b> Character evolution and Ancestral state reconstruction</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#continuous-characters"><i class="fa fa-check"></i><b>18.1</b> Continuous characters</a>
+<ul>
+<li class="chapter" data-level="18.1.1" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#load-libraries-1"><i class="fa fa-check"></i><b>18.1.1</b> load libraries</a></li>
+<li class="chapter" data-level="18.1.2" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#tree-file-and-the-character-file"><i class="fa fa-check"></i><b>18.1.2</b> Tree file and the character file</a></li>
+<li class="chapter" data-level="18.1.3" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#visualization-of-the-reconstructed-nodes"><i class="fa fa-check"></i><b>18.1.3</b> Visualization of the reconstructed nodes</a></li>
+<li class="chapter" data-level="18.1.4" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#visualization-of-phenotypic-evolution"><i class="fa fa-check"></i><b>18.1.4</b> Visualization of phenotypic evolution</a></li>
+</ul></li>
+<li class="chapter" data-level="18.2" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#brownian-motion-vs-ornstein-uhlenbeck-process"><i class="fa fa-check"></i><b>18.2</b> Brownian Motion vs Ornstein-Uhlenbeck Process</a></li>
+<li class="chapter" data-level="18.3" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#brownian-motion"><i class="fa fa-check"></i><b>18.3</b> Brownian Motion</a>
+<ul>
+<li class="chapter" data-level="18.3.1" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#ornsteinuhlenbeck-process"><i class="fa fa-check"></i><b>18.3.1</b> Ornstein–Uhlenbeck process</a></li>
+<li class="chapter" data-level="18.3.2" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#incorporate-prior-knowledge-using-bayesian-estimates"><i class="fa fa-check"></i><b>18.3.2</b> Incorporate prior knowledge using Bayesian estimates</a></li>
+</ul></li>
+<li class="chapter" data-level="18.4" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#discrete-characters"><i class="fa fa-check"></i><b>18.4</b> Discrete characters</a></li>
+<li class="chapter" data-level="18.5" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#exercises-1"><i class="fa fa-check"></i><b>18.5</b> Exercises:</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html"><i class="fa fa-check"></i><b>19</b> Model Selection of Character Evolution</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html#load-libraries-2"><i class="fa fa-check"></i><b>19.1</b> Load libraries</a></li>
+<li class="chapter" data-level="19.2" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html#discrete-traits-model-fitting"><i class="fa fa-check"></i><b>19.2</b> Discrete traits model fitting</a>
+<ul>
+<li class="chapter" data-level="19.2.1" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html#choosing-a-character-model"><i class="fa fa-check"></i><b>19.2.1</b> Choosing a character model</a></li>
+<li class="chapter" data-level="19.2.2" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html#marginal-ancestral-state-reconstruction"><i class="fa fa-check"></i><b>19.2.2</b> Marginal ancestral state reconstruction</a></li>
+<li class="chapter" data-level="19.2.3" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html#more-than-two-states"><i class="fa fa-check"></i><b>19.2.3</b> More than two states</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html#exercise-i-2"><i class="fa fa-check"></i><b>19.3</b> Exercise I</a></li>
+<li class="chapter" data-level="19.4" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html#continuous-traits-model-fitting"><i class="fa fa-check"></i><b>19.4</b> Continuous traits model fitting</a>
+<ul>
+<li class="chapter" data-level="19.4.1" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html#model-selection"><i class="fa fa-check"></i><b>19.4.1</b> Model selection</a></li>
+<li class="chapter" data-level="19.4.2" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html#ancestral-states"><i class="fa fa-check"></i><b>19.4.2</b> Ancestral states</a></li>
+</ul></li>
+<li class="chapter" data-level="19.5" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html#exercise-ii-2"><i class="fa fa-check"></i><b>19.5</b> Exercise II</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">BIO595 The Tree of Life</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="systematic-retrieval-of-orthologous-dna-sequences-form-genbank" class="section level1 hasAnchor" number="14">
+<h1><span class="header-section-number">Chapter 14</span> Systematic Retrieval of orthologous DNA sequences form GenBank<a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#systematic-retrieval-of-orthologous-dna-sequences-form-genbank" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="introduction" class="section level2 hasAnchor" number="14.1">
+<h2><span class="header-section-number">14.1</span> Introduction<a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In the previous chapter, we introduced many public databases for genetic/genomic resources. However, it is often difficult to systematically retrieve representative sequences for the focal taxa with a good balance of the coverage of taxa and genes. We can, for example, use a gene name and a taxon group to download sequences, but often times, gene names differ, and sometimes mislabelled. These issues can be especially problematic for large-scale analyses where individual errors cannot be detected.</p>
+<p>Today, we are going to introduce two tools to systematically select taxa and markers for a large-scale phylogenetic analyses. The first tool, <a href="https://www.ncbi.nlm.nih.gov/pubmed/18570030">phylotaR</a>, is a pipeline that uses an alignment search tool to identify orthologous sequences without the need for gene name matching. For a given parental taxonomic group, the pipeline will search through available sequences hosted on GenBank and identify orthologous sequence clusters. A user is then able to survey the identified clusters and select the ones which best suit their phylogenetic analysis needs, e.g. by selecting the clusters that maximizee the number of taxonomic groups.</p>
+<p>The second tool, <a href="https://peerj.com/articles/5179/">AnnotationBustR</a>, is a pipieline that extracts gene regions from complete genomes or long contigs with proper annotations, so that we are not limited to use individually sequenced genes, but also extract gene regions from complete genome sequencing resources.</p>
+</div>
+<div id="installing-tools" class="section level2 hasAnchor" number="14.2">
+<h2><span class="header-section-number">14.2</span> Installing Tools<a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#installing-tools" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="windows-1" class="section level3 hasAnchor" number="14.2.1">
+<h3><span class="header-section-number">14.2.1</span> Windows<a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#windows-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If you haven’t installed <code>Rtools</code>, you should install <a href="https://cran.r-project.org/bin/windows/Rtools/rtools42/rtools.html">Rtools42</a> first. Follow the default folder of installing it onto <code>C:\rtools42</code>.</p>
+</div>
+<div id="mac" class="section level3 hasAnchor" number="14.2.2">
+<h3><span class="header-section-number">14.2.2</span> Mac<a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#mac" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Install <code>Xcode</code> from the Mac App Store.</p>
+<p>For <em>Windows</em>, <em>Mac</em>, <em>Linux</em>, we then need to install <code>devtools</code>, so we have the capability of building packages from codes directly.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span></code></pre></div>
+<p>If prompted with “compiling from source directly”, click “Yes”.</p>
+<p>Now you are ready to compile <code>phylotaR</code> from the source</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb2-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&#39;ropensci/phylotaR&#39;</span>)</span></code></pre></div>
+</div>
+<div id="ncbi-blast-tools" class="section level3 hasAnchor" number="14.2.3">
+<h3><span class="header-section-number">14.2.3</span> NCBI BLAST+ Tools<a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#ncbi-blast-tools" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The PhyLoTa pipeline uses BLAST to identify orthologous sequence clusters. In order to run phylotaR, a local copy of the BLAST software must be installed on your computer. <strong>Installing the phylotaR package does not install BLAST, it must be installed separately</strong>. To install BLAST+, please see the NCBI website’s <a href="https://www.ncbi.nlm.nih.gov/books/NBK279671/">installation instructions</a>.</p>
+<div id="windows-2" class="section level4 hasAnchor" number="14.2.3.1">
+<h4><span class="header-section-number">14.2.3.1</span> Windows<a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#windows-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Download the latest executable (<code>.exe</code>) or tar zip (<code>win64.tar.gz</code>) from <a href="https://ftp.ncbi.nlm.nih.gov/blast/executables/LATEST/" class="uri">https://ftp.ncbi.nlm.nih.gov/blast/executables/LATEST/</a>. After downloading, you can choose where you’d like to install (<code>.exe</code>) or where you’d like to unzip (<code>.tar.gz</code>).</p>
+</div>
+<div id="macos" class="section level4 hasAnchor" number="14.2.3.2">
+<h4><span class="header-section-number">14.2.3.2</span> MacOS<a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#macos" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Download the latest executable (<code>.dmg</code>) or tar zip (<code>macosx.tar.gz</code>) from <a href="https://ftp.ncbi.nlm.nih.gov/blast/executables/LATEST/" class="uri">https://ftp.ncbi.nlm.nih.gov/blast/executables/LATEST/</a>. If install directly from <code>.dmg</code>, the directory will be <code>/usr/local/ncbi/blast/bin/</code>.</p>
+<p>if install <code>.dmg</code>, we need to turn off the security check, go to <code>system settings</code>-&gt;<code>privacy &amp; security</code> <img src="pics/installncbi.png" /></p>
+</div>
+</div>
+</div>
+<div id="using-phylotar" class="section level2 hasAnchor" number="14.3">
+<h2><span class="header-section-number">14.3</span> Using <code>phylotaR</code><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#using-phylotar" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="pipeline" class="section level3 hasAnchor" number="14.3.1">
+<h3><span class="header-section-number">14.3.1</span> Pipeline<a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#pipeline" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><code>phylotaR</code> runs the PhyLoTa pipeline in four automated stages: identify and retrieve taxonomic information on all descendent nodes of the taxonomic group of interest (<code>taxise</code>), download sequence data for every identified node (<code>download</code>), identify orthologous clusters using BLAST (<code>cluster</code>), and identify sister clusters for sets of clusters identified in the previous stage (<code>cluster^2</code>) After these stages are complete, <code>phylotaR</code> provides tools for exploring, identifying and exporting suitable clusters for subsequent analysis.</p>
+<div class="figure">
+<img src="pics/phylotaRflow.png" alt="" />
+<p class="caption">Flowchart of the phylotaR pipeline</p>
+</div>
+</div>
+<div id="running" class="section level3 hasAnchor" number="14.3.2">
+<h3><span class="header-section-number">14.3.2</span> Running<a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#running" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>First we need to provide a list of species you are interested, or an NCBI taxonomic ID of a group (such as genus, family, order). We can find the taxon ID using the <a href="https://www.ncbi.nlm.nih.gov/Taxonomy/taxonomyhome.html/">NCBI taxonomy home page</a>. As an example, we will investigate all the available sequences of Night Monkeys genus, <a href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&amp;id=9504">Aotus</a>, with a taxon ID of <strong>9504</strong>. We also need to provide a working directory for phylotaR to store files, and the directory to where the <code>blast+</code> is installed.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(phylotaR)</span>
+<span id="cb3-2"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># working directory for phylotaR to save output</span></span>
+<span id="cb3-3"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb3-3" aria-hidden="true" tabindex="-1"></a>wd <span class="ot">&lt;-</span> <span class="st">&quot;~/Dropbox/teaching/bookdown-demo-main/lab17/phylotaR_Aotus&quot;</span></span>
+<span id="cb3-4"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># directory to ncbi blast+</span></span>
+<span id="cb3-5"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb3-5" aria-hidden="true" tabindex="-1"></a>ncbi_dr <span class="ot">&lt;-</span> <span class="st">&quot;/usr/local/ncbi/blast/bin/&quot;</span> </span>
+<span id="cb3-6"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># this applies if installed directly from dmg on mac, it changes on windows or unzip tar</span></span>
+<span id="cb3-7"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># windows: [folder where unzipped tar]/ncbi-blast-2.13.0+-x64-win64/ncbi-blast-2.13.0+/bin</span></span>
+<span id="cb3-8"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb3-8" aria-hidden="true" tabindex="-1"></a>txid <span class="ot">&lt;-</span> <span class="dv">9504</span></span></code></pre></div>
+<blockquote>
+<p>Attention: if your directory names contain spaces, you need to add backslash before the space. e.g., if your path to ncbi directory is “C:/Desktop/lab 16/ncbi-blast-2.13.0+/bin”, you need to write “C:/Desktop/lab 16/ncbi-blast-2.13.0+/bin”.</p>
+</blockquote>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb4-1" aria-hidden="true" tabindex="-1"></a>phylotaR<span class="sc">::</span><span class="fu">setup</span>(<span class="at">wd =</span> wd,<span class="at">txid=</span>txid,<span class="at">ncbi_dr=</span>ncbi_dr, <span class="at">v=</span>T)</span></code></pre></div>
+<p>After setting up the pipeline, it’s ready to run:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb5-1" aria-hidden="true" tabindex="-1"></a>phylotaR<span class="sc">::</span><span class="fu">run</span>(<span class="at">wd =</span> wd)</span></code></pre></div>
+</div>
+<div id="restarting" class="section level3 hasAnchor" number="14.3.3">
+<h3><span class="header-section-number">14.3.3</span> Restarting<a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#restarting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The pipeline can be halted and restarted. The cache records all downloaded and generated data by the pipeline. If there is a system crash or the user wishes to halt the program, the pipeline can be restarted from the same point it stopped with the function <code>restart()</code>. Additionally, due to the potential random nature of the pipeline, a user may wish to re-run the pipeline from certain stages. This can be archieved by first using <code>reset()</code> followed by <code>restart()</code>. For example, in the code below a completed pipeline is reset to ‘cluster’ and then restarted. After running these commands, the pipeline will run as if it has only just completed the download stage. Note, all resets and restarts are recorded in the log.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">reset</span>(<span class="at">wd =</span> wd, <span class="at">stage =</span> <span class="st">&#39;cluster&#39;</span>)</span>
+<span id="cb6-2"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">restart</span>(<span class="at">wd =</span> wd)</span></code></pre></div>
+</div>
+<div id="cluster-i.e.-orthologous-genes-selection" class="section level3 hasAnchor" number="14.3.4">
+<h3><span class="header-section-number">14.3.4</span> Cluster (i.e., orthologous genes) selection<a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cluster-i.e.-orthologous-genes-selection" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>After a pipeline has completed, the identified clusters can be interrogated. We can generate a phylota object using <code>read_phylota()</code> but in the code below we will load a pre-existing phylota S4 object from the package data. For referencing <code>slots</code> within S4 objects, we use <code>@</code> instead of <code>$</code>. The phylota object contains cluster, sequence and taxonomic information on all the clusters. It has 6 data slots: cids, sids, txids, txdct, sqs, clstrs, prnt_id and prnt_nm. Each of these slots can be accessed with <code>@</code>, see ?`Phylota-class` for more information. The <code>phylotaR</code> package has a range of functions for probing clusters in a phylota object. For example, if we want to know how many different taxonomic groups are represented by each cluster we can use <code>get_ntaxa()</code>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb7-1" aria-hidden="true" tabindex="-1"></a>Aotus_clusters<span class="ot">&lt;-</span><span class="fu">read_phylota</span>(<span class="at">wd=</span>wd)</span>
+<span id="cb7-2"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Aotus_clusters)</span></code></pre></div>
+<pre><code>## [1] &quot;Phylota Table (Aotus)\n- [184] clusters\n- [1945] sequences\n- [13] source taxa\n&quot;</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb9-1" aria-hidden="true" tabindex="-1"></a>n_taxa<span class="ot">&lt;-</span><span class="fu">get_ntaxa</span>(Aotus_clusters,<span class="at">cid=</span>Aotus_clusters<span class="sc">@</span>cids)</span></code></pre></div>
+<p>Let’s inspect the cluster coverage distribution:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb10-1" aria-hidden="true" tabindex="-1"></a>total_taxa <span class="ot">&lt;-</span> <span class="fu">length</span>(Aotus_clusters<span class="sc">@</span>txids)</span>
+<span id="cb10-2"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb10-2" aria-hidden="true" tabindex="-1"></a>total_taxa</span></code></pre></div>
+<pre><code>## [1] 13</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(n_taxa)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/13_hist-1.png" width="672" /></p>
+<p>We see that out of 13 species, most of the clusters (genes) cover less than 6 species, only a handful cover more than 50% of the taxa. Therefore, we filter all the clusters that have less than 6 species by using <code>drop_clstrs()</code>:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb13-1" aria-hidden="true" tabindex="-1"></a>keep <span class="ot">&lt;-</span> Aotus_clusters<span class="sc">@</span>cids[n_taxa <span class="sc">&gt;</span> <span class="dv">6</span>]</span>
+<span id="cb13-2"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb13-2" aria-hidden="true" tabindex="-1"></a>selected <span class="ot">&lt;-</span> <span class="fu">drop_clstrs</span>(<span class="at">phylota =</span> Aotus_clusters, <span class="at">cid =</span> keep)</span>
+<span id="cb13-3"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb13-3" aria-hidden="true" tabindex="-1"></a>selectedStats <span class="ot">&lt;-</span> <span class="fu">summary</span>(selected)</span>
+<span id="cb13-4"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(selectedStats)</span></code></pre></div>
+<pre><code>##    ID    Type       Seed Parent N_taxa N_seqs Med_sql       MAD
+## 1   1 subtree DQ098863.1   9504     10     66  1140.0 0.8966920
+## 2   5 subtree HM761925.1   9504      9     49   710.0 0.9581328
+## 3   6 subtree HM763429.1   9504      9     49   339.0 0.8417867
+## 4   7 subtree JQ933053.1   9504      9     48   582.5 0.6754071
+## 5   8 subtree HM759641.1   9504      9     48   272.0 0.8482955
+## 6   9 subtree KC761951.1   9504      9     47   649.0 0.9808119
+## 7  10 subtree MT489103.1   9504      8     45  1138.0 0.9992970
+## 8  11 subtree KC762127.1   9504      9     45   797.0 0.9619747
+## 9  12 subtree KC761371.1   9504      9     45   584.0 0.9551948
+## 10 13 subtree KC760228.1   9504      9     43   276.0 0.8748720
+## 11 16 subtree EF658652.1   9504      9     41   647.0 0.9793822
+## 12 17 subtree HM760775.1   9504      8     41   680.0 0.9590605
+## 13 18 subtree MT488555.1   9504      8     41   842.0 1.0000000
+## 14 19 subtree   U38998.1   9504      8     40   618.0 0.4020846
+## 15 20 subtree DQ321662.1   9504      8     36   549.0 0.7970658
+##                           Definition     Feature
+## 1             aotus (0.1), cds (0.1)           -
+## 2            aotus (0.1), fbn1 (0.1)           -
+## 3        aotus (0.09), chrna1 (0.09)           -
+## 4         aotus (0.1), genomic (0.1)           -
+## 5            aotus (0.1), gene (0.1)           -
+## 6         aotus (0.1), genomic (0.1)           -
+## 7         gene (0.2), complete (0.1)           -
+## 8         aotus (0.1), genomic (0.1)           -
+## 9         aotus (0.1), genomic (0.1)           -
+## 10        aotus (0.1), genomic (0.1)           -
+## 11          aotus (0.09), cds (0.09) barcode (1)
+## 12           aotus (0.1), gene (0.1)           -
+## 13               atp (0.1), f0 (0.1)           -
+## 14      gene (0.08), sequence (0.08)           -
+## 15 gene (0.09), mitochondrial (0.09)           -</code></pre>
+<p>This summary provides information on each cluster in the phylota object, such as median sequence length, MAD score (the mean alignment density, values closer to 1 indicate all the sequences are of a similar length), most common words in the sequence descriptions and feature names. We would like to further filter the clusters with a MAD score less than 0.75</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb15-1" aria-hidden="true" tabindex="-1"></a>keep <span class="ot">&lt;-</span> keep[selectedStats<span class="sc">$</span>MAD<span class="sc">&gt;</span><span class="fl">0.75</span>]</span>
+<span id="cb15-2"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb15-2" aria-hidden="true" tabindex="-1"></a>selected <span class="ot">&lt;-</span> <span class="fu">drop_clstrs</span>(<span class="at">phylota =</span> Aotus_clusters, <span class="at">cid =</span> keep)</span>
+<span id="cb15-3"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb15-3" aria-hidden="true" tabindex="-1"></a>selectedStats <span class="ot">&lt;-</span> <span class="fu">summary</span>(selected)</span>
+<span id="cb15-4"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(selectedStats)</span></code></pre></div>
+<pre><code>##    ID    Type       Seed Parent N_taxa N_seqs Med_sql       MAD
+## 1   1 subtree DQ098863.1   9504     10     66    1140 0.8966920
+## 2   5 subtree HM761925.1   9504      9     49     710 0.9581328
+## 3   6 subtree HM763429.1   9504      9     49     339 0.8417867
+## 4   8 subtree HM759641.1   9504      9     48     272 0.8482955
+## 5   9 subtree KC761951.1   9504      9     47     649 0.9808119
+## 6  10 subtree MT489103.1   9504      8     45    1138 0.9992970
+## 7  11 subtree KC762127.1   9504      9     45     797 0.9619747
+## 8  12 subtree KC761371.1   9504      9     45     584 0.9551948
+## 9  13 subtree KC760228.1   9504      9     43     276 0.8748720
+## 10 16 subtree EF658652.1   9504      9     41     647 0.9793822
+## 11 17 subtree HM760775.1   9504      8     41     680 0.9590605
+## 12 18 subtree MT488555.1   9504      8     41     842 1.0000000
+## 13 20 subtree DQ321662.1   9504      8     36     549 0.7970658
+##                           Definition     Feature
+## 1             aotus (0.1), cds (0.1)           -
+## 2            aotus (0.1), fbn1 (0.1)           -
+## 3        aotus (0.09), chrna1 (0.09)           -
+## 4            aotus (0.1), gene (0.1)           -
+## 5         aotus (0.1), genomic (0.1)           -
+## 6         gene (0.2), complete (0.1)           -
+## 7         aotus (0.1), genomic (0.1)           -
+## 8         aotus (0.1), genomic (0.1)           -
+## 9         aotus (0.1), genomic (0.1)           -
+## 10          aotus (0.09), cds (0.09) barcode (1)
+## 11           aotus (0.1), gene (0.1)           -
+## 12               atp (0.1), f0 (0.1)           -
+## 13 gene (0.09), mitochondrial (0.09)           -</code></pre>
+<p>Let’s select the second cluster ID in this table for further investigation. We can extract its cluster and sequences records in the following way.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb17-1" aria-hidden="true" tabindex="-1"></a>cid <span class="ot">&lt;-</span> selectedStats[<span class="dv">2</span>, <span class="st">&#39;ID&#39;</span>]</span>
+<span id="cb17-2"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># get the cluster record</span></span>
+<span id="cb17-3"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb17-3" aria-hidden="true" tabindex="-1"></a>cluster_record <span class="ot">&lt;-</span> selected<span class="sc">@</span>clstrs[[cid]]</span>
+<span id="cb17-4"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># use the seq. IDs to get the sequence records</span></span>
+<span id="cb17-5"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb17-5" aria-hidden="true" tabindex="-1"></a>seq_records <span class="ot">&lt;-</span> selected<span class="sc">@</span>sqs[cluster_record<span class="sc">@</span>sids]</span>
+<span id="cb17-6"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># extract a single record</span></span>
+<span id="cb17-7"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb17-7" aria-hidden="true" tabindex="-1"></a>seq_record <span class="ot">&lt;-</span> seq_records[[seq_records<span class="sc">@</span>ids[[<span class="dv">1</span>]]]]</span>
+<span id="cb17-8"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(seq_record)</span></code></pre></div>
+<pre><code>## SeqRec [ID: MT488778.1]</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb19-1" aria-hidden="true" tabindex="-1"></a>seq_record<span class="sc">@</span>dfln</span></code></pre></div>
+<pre><code>## [1] &quot;Aotus griseimembra voucher ALGM71 fibrillin 1 (FBN1) gene, 3&#39; UTR&quot;</code></pre>
+<p>Inspect the actual sequence</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb21-1" aria-hidden="true" tabindex="-1"></a>seq <span class="ot">&lt;-</span> <span class="fu">rawToChar</span>(seq_record<span class="sc">@</span>sq)</span>
+<span id="cb21-2"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">substr</span>(<span class="at">x =</span> seq, <span class="at">start =</span> <span class="dv">1</span>, <span class="at">stop =</span> <span class="dv">80</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;TGGGTGATAATCTGAAGATGAAAATCCAGATTTTGCTTCATTAATTCACCATCCAGAGACCAAATAATTAAAAGAAAAAC&quot;</code></pre>
+<p>We could further reduce the dataset by choose best sequence per species. By default, the function will choose the top ten sequences by first sorting by those with the fewest number of ambiguous sequences, then by latest upload, then by sequence length. We can then inspect the completeness of the data by plotting presence and absence of clusters.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># choose best sequence per species</span></span>
+<span id="cb23-2"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb23-2" aria-hidden="true" tabindex="-1"></a>reduced <span class="ot">&lt;-</span> <span class="fu">drop_by_rank</span>(<span class="at">phylota =</span> selected, <span class="at">rnk =</span> <span class="st">&#39;species&#39;</span>, <span class="at">n =</span> <span class="dv">1</span>)</span>
+<span id="cb23-3"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># look up name for txids</span></span>
+<span id="cb23-4"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb23-4" aria-hidden="true" tabindex="-1"></a>scientific_names <span class="ot">&lt;-</span> <span class="fu">get_tx_slot</span>(reduced, reduced<span class="sc">@</span>txids, <span class="at">slt_nm =</span> <span class="st">&#39;scnm&#39;</span>)</span>
+<span id="cb23-5"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co"># clean the names</span></span>
+<span id="cb23-6"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb23-6" aria-hidden="true" tabindex="-1"></a>scientific_names <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&#39;</span><span class="sc">\\</span><span class="st">.&#39;</span>, <span class="st">&#39;&#39;</span>, scientific_names)</span>
+<span id="cb23-7"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb23-7" aria-hidden="true" tabindex="-1"></a>scientific_names <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&#39;</span><span class="sc">\\</span><span class="st">s+&#39;</span>, <span class="st">&#39;_&#39;</span>, scientific_names)</span>
+<span id="cb23-8"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(scientific_names)</span></code></pre></div>
+<pre><code>##                     231953                    1002694 
+##  &quot;Aotus_sp_(in:_primates)&quot;        &quot;Aotus_sp_AVB-2011&quot; 
+##                     361674                     292213 
+##          &quot;Aotus_brumbacki&quot;       &quot;Aotus_griseimembra&quot; 
+##                      57176                      57175 
+##         &quot;Aotus_vociferans&quot;          &quot;Aotus_nigriceps&quot; 
+##                      43147                      37293 
+##          &quot;Aotus_lemurinus&quot;          &quot;Aotus_nancymaae&quot; 
+##                     280755                      30591 
+## &quot;Aotus_azarai_boliviensis&quot;             &quot;Aotus_azarai&quot; 
+##                     867331                       9505 
+##   &quot;Aotus_azarai_infulatus&quot;        &quot;Aotus_trivirgatus&quot;</code></pre>
+<p>plot presence and absence of clusters:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb25-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_phylota_pa</span>(<span class="at">phylota =</span> reduced, <span class="at">cids =</span>reduced<span class="sc">@</span>cids, <span class="at">txids =</span> reduced<span class="sc">@</span>txids,</span>
+<span id="cb25-2"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb25-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">txnms =</span> scientific_names)</span>
+<span id="cb25-3"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/13_pa-1.png" width="672" /></p>
+<p>Based on the presense absence table, you might want to remove certain taxa from the final written fasta file when you build your phylogenies. Here we write the sequences to individual fasta files, and then write the summary info to a table.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="fu">paste0</span>(wd,<span class="st">&quot;/outfiles&quot;</span>))</span>
+<span id="cb26-2"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb26-2" aria-hidden="true" tabindex="-1"></a>outSummary <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Species=</span><span class="fu">character</span>(), <span class="at">Cluster=</span><span class="fu">character</span>(), <span class="at">Accession_ID=</span><span class="fu">character</span>(),<span class="at">Sequence_Info=</span><span class="fu">character</span>())</span>
+<span id="cb26-3"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb26-3" aria-hidden="true" tabindex="-1"></a>k <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb26-4"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> reduced<span class="sc">@</span>cids){</span>
+<span id="cb26-5"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
+<span id="cb26-6"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb26-6" aria-hidden="true" tabindex="-1"></a>  tempSid <span class="ot">&lt;-</span> reduced[[i]]<span class="sc">@</span>sids</span>
+<span id="cb26-7"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_sqs</span>(<span class="at">phylota =</span> reduced, <span class="at">sid =</span> tempSid,</span>
+<span id="cb26-8"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb26-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">outfile =</span> <span class="fu">paste0</span>(wd, <span class="st">&quot;/outfiles/aotus_cl&quot;</span>,i,<span class="st">&quot;.fasta&quot;</span>))</span>
+<span id="cb26-9"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> tempSid) {</span>
+<span id="cb26-10"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb26-10" aria-hidden="true" tabindex="-1"></a>    tempSeq<span class="ot">&lt;-</span>reduced<span class="sc">@</span>sqs[j]</span>
+<span id="cb26-11"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb26-11" aria-hidden="true" tabindex="-1"></a>    outSummary[k,]<span class="ot">&lt;-</span>  <span class="fu">c</span>(scientific_names[reduced<span class="sc">@</span>txids<span class="sc">==</span>tempSeq<span class="sc">@</span>txids],</span>
+<span id="cb26-12"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb26-12" aria-hidden="true" tabindex="-1"></a>                        i,j,tempSeq<span class="sc">@</span>sqs[[<span class="dv">1</span>]]<span class="sc">@</span>dfln)</span>
+<span id="cb26-13"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb26-13" aria-hidden="true" tabindex="-1"></a>    k <span class="ot">&lt;-</span> k<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb26-14"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb26-14" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb26-15"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb26-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-16"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(outSummary,<span class="fu">paste0</span>(wd, <span class="st">&quot;/outfiles/aotus_phylotaR_summary.csv&quot;</span>),<span class="at">row.names =</span> F)</span></code></pre></div>
+</div>
+</div>
+<div id="exercise-i-1" class="section level2 hasAnchor" number="14.4">
+<h2><span class="header-section-number">14.4</span> Exercise I<a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#exercise-i-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li>Follow the instruction above, and upload a screenshot of the output fasta files, and upload the <code>aotus_phylotaR_summary.csv</code> file.</li>
+<li>Use phylotaR and download genes for the taxa of your term project. In each step, explain how you selected the taxa ID/ID vectors (lists of species or genus or families, etc.); Out of the orthologous clusters, how you filtered the ones for final usage; upload a figure of the presence/absence matrix of the clusters for your included species; generate the output with fasta files and a summary file of records.</li>
+</ol>
+</div>
+<div id="using-annotationbustr" class="section level2 hasAnchor" number="14.5">
+<h2><span class="header-section-number">14.5</span> Using <code>AnnotationBustR</code><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#using-annotationbustr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="introduction-1" class="section level3 hasAnchor" number="14.5.1">
+<h3><span class="header-section-number">14.5.1</span> Introduction<a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#introduction-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><code>AnnotationBustR</code> reads in sequences from GenBank and allows you to quickly extract specific parts and write them to FASTA files given a set of search terms. It is complementary to the first tool <code>phylotaR</code> in that <code>phylotaR</code> only works with short sequences containing one gene. Recently, there are more whole genomes available and extracting individual genes out of these long sequences can be tedious. We can use <code>AnnotationBustR</code> and extract gene regions based on their gene names from whole genome sequences. The package also provides lists of common barcoding genes for different group of species and their synonyms. Notice that the tool only extracts gene regions directly according to the annotation information, and since it doesn’t perform <code>blast</code>, it cannot detect incorrect annotation if present.</p>
+</div>
+<div id="install-the-tools" class="section level3 hasAnchor" number="14.5.2">
+<h3><span class="header-section-number">14.5.2</span> Install the tools<a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#install-the-tools" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install (if necessary) and load reutils</span></span>
+<span id="cb27-2"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;rentez&quot;</span>)</span>
+<span id="cb27-3"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;AnnotationBustR&quot;</span>)</span></code></pre></div>
+</div>
+<div id="specify-search-terms-of-genomes" class="section level3 hasAnchor" number="14.5.3">
+<h3><span class="header-section-number">14.5.3</span> Specify search terms of genomes<a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#specify-search-terms-of-genomes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We need to find all the complete genomes sequenced for night monkeys (Genus: Aotus). Let’s inspect the search terms on <a href="https://www.ncbi.nlm.nih.gov/books/NBK49540/">Entrez Sequences Help</a>. We can specify the organisms we are interested in using [Organism] or [orgn], and require the entry title to include “complete genome”.</p>
+<p>From the <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a> Database, we discovered that the genus name “Aotus” can refer to eudicots plants or night monkeys. Therefore, we need to restrict our searches in mammals or primates in ther [orgn] term in addition to “Aotus”.</p>
+<p>We can test if the following search terms work on <a href="https://www.ncbi.nlm.nih.gov/nuccore">Genbank</a> first before we use it in <code>rentez</code> directly:</p>
+<pre><code>mammals[orgn] AND aotus[orgn] AND complete genome[title] </code></pre>
+<p>The search term returned 10 records of complete mitochondrial genomes. Let’s fetch the accession numbers using <code>rentrez</code>:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rentrez)</span>
+<span id="cb29-2"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb29-2" aria-hidden="true" tabindex="-1"></a>aotus.search<span class="ot">&lt;-</span><span class="fu">entrez_search</span>(<span class="at">db =</span> <span class="st">&quot;nucleotide&quot;</span>, <span class="co"># this is the genbank nucleotide database)</span></span>
+<span id="cb29-3"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">term =</span> <span class="st">&quot;mammals[orgn] AND aotus[orgn] AND complete genome[title] AND 0001/01/01:2021/10/15[PDAT] &quot;</span>)</span>
+<span id="cb29-4"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># from the search results, we are retrieveing genbank accession ID for each sequence</span></span>
+<span id="cb29-6"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co"># we can also retrieve other data, e.g., sequences directly</span></span>
+<span id="cb29-7"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co"># check Table 1 in https://www.ncbi.nlm.nih.gov/books/NBK25499/table/chapter4.T._valid_values_of__retmode_and/</span></span>
+<span id="cb29-8"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb29-8" aria-hidden="true" tabindex="-1"></a>accessions <span class="ot">&lt;-</span> <span class="fu">entrez_fetch</span>(<span class="at">db =</span> <span class="st">&quot;nucleotide&quot;</span>,<span class="at">id =</span> aotus.search<span class="sc">$</span>ids,<span class="at">rettype=</span><span class="st">&#39;acc&#39;</span>)               <span class="co"># the returned accessions are one single string with &quot;\n&quot; as the line breaks</span></span>
+<span id="cb29-9"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co"># we will separate the accessions into a vector of characters</span></span>
+<span id="cb29-10"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb29-10" aria-hidden="true" tabindex="-1"></a>accessions <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(accessions, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)[[<span class="dv">1</span>]]</span>
+<span id="cb29-11"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="co"># seqs accession starts with &quot;NC_&quot; is part of the refseq database</span></span>
+<span id="cb29-12"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="co"># we need to remove them</span></span>
+<span id="cb29-13"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(<span class="fu">grep</span>(<span class="st">&quot;NC_&quot;</span>,accessions))<span class="sc">&gt;</span><span class="dv">0</span>){</span>
+<span id="cb29-14"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb29-14" aria-hidden="true" tabindex="-1"></a>  accessions<span class="ot">&lt;-</span>accessions[<span class="sc">-</span><span class="fu">grep</span>(<span class="st">&quot;NC_&quot;</span>,accessions)]</span>
+<span id="cb29-15"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb29-15" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="load-gene-search-terms-of-interest" class="section level3 hasAnchor" number="14.5.4">
+<h3><span class="header-section-number">14.5.4</span> Load Gene Search Terms of Interest<a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#load-gene-search-terms-of-interest" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><code>AnnotationBustR</code> works by searching through the annotation features table for a locus of interest using search terms for it (i.e. possible synonyms it may be listed under). These search terms are formatted to have three columns:</p>
+<ul>
+<li><p>Locus: The name of the locus and the name of the FASTA of the file for that locus to be written. It is important that you use names that will not confuse R, so don’t start these with numbers or include other characters like “.” or “-” that R uses for math.</p></li>
+<li><p>Type: The type of sequence to search for. Can be one of <code>CDS</code>(coding sequence), <code>Intron</code>, <code>Exon</code>, <code>tRNA</code>, <code>rRNA</code>, <code>misc_RNA</code>, <code>D-Loop</code>, or <code>misc_feature</code>. For building phylogenies, we prioritize the usage of <code>CDS</code>,<code>Intron</code>, <code>Exon</code> in this case.</p></li>
+</ul>
+<p><img src="pics/cds.png" /></p>
+<ul>
+<li>Name: A possible synonym that the locus could be listed under.</li>
+</ul>
+<p>For extracting introns and exons, an additional fourth column is needed (which will be discussed in more detail later in the tutorial):</p>
+<p>-IntronExonNumber: The number of the intron or exon to extract</p>
+<p>An example dataframe could look like:</p>
+<pre><code>  Locus Type    Name
+1  ATP8  CDS ATPase8
+2  ATP6  CDS ATPase6</code></pre>
+<p>Or if the genes you are extracting has introns and you’d like to extract exons only for a specific gene, you could specify:</p>
+<pre><code>        Locus   Type       Name IntronExonNumber
+1  trnK_Intron Intron   trnK-UUU                1
+2  trnK_Intron Intron   tRNA-Lys                1
+3   trnK_Exon2   Exon   trnK-UUU                2
+4   trnK_Exon2   Exon   tRNA-Lys                2
+5         matK    CDS       matK               NA
+6         matK    CDS   maturase               NA
+7         matK    CDS        mat               NA
+8         matK    CDS maturase K               NA
+9         matK    CDS       MATK               NA
+10        matK    CDS       matk               NA</code></pre>
+<p>AnnotationBustR has pre-made data frames for extracting animal and plant mitochondrial DNA (mtDNA), chloroplast DNA (cpDNA), and ribosomal DNA (rDNA). We can load these databases first:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Load in pre-made data frames of search terms</span></span>
+<span id="cb32-2"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AnnotationBustR)</span>
+<span id="cb32-3"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mtDNAterms)<span class="co">#loads the mitochondrial DNA search terms for metazoans</span></span>
+<span id="cb32-4"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mtDNAtermsPlants)<span class="co">#loads the mitochondrial DNA search terms for plants</span></span>
+<span id="cb32-5"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(cpDNAterms)<span class="co">#loads the chloroplast DNA search terms</span></span>
+<span id="cb32-6"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(rDNAterms)<span class="co">#loads the ribosomal DNA search terms</span></span></code></pre></div>
+<p>We can subset these data.frames for specific markers we are interested in:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mtDNAterms)</span></code></pre></div>
+<pre><code>##      Locus Type                        Name
+## 1 tRNA_Phe tRNA                    tRNA-Phe
+## 2 tRNA_Phe tRNA                    trnF-gaa
+## 3 tRNA_Phe tRNA                    trnF GAA
+## 4 rRNA_12S rRNA           12S ribosomal RNA
+## 5 rRNA_12S rRNA                      s-rRNA
+## 6 rRNA_12S rRNA small subunit ribosomal RNA</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mtDNAterms<span class="sc">$</span>Type)</span></code></pre></div>
+<pre><code>##          CDS       D-loop misc_feature         rRNA         tRNA 
+##          132            1            2           39           79</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb37-1" aria-hidden="true" tabindex="-1"></a>Aotus.genes<span class="ot">&lt;-</span>mtDNAterms[mtDNAterms<span class="sc">$</span>Type <span class="sc">==</span> <span class="st">&quot;CDS&quot;</span>,]</span>
+<span id="cb37-2"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(Aotus.genes<span class="sc">$</span>Locus)</span></code></pre></div>
+<pre><code>##  [1] ND1   ND2   COI   COII  ATP8  ATP6  COIII ND3   ND4L  ND4   ND5   ND6  
+## [13] CYTB 
+## 36 Levels: ATP6 ATP8 COI COII COIII CYTB D_loop ND1 ND2 ND3 ND4 ND4L ... tRNA_Val</code></pre>
+</div>
+<div id="extract-sequences-with-annotationbust" class="section level3 hasAnchor" number="14.5.5">
+<h3><span class="header-section-number">14.5.5</span> Extract sequences with AnnotationBust<a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#extract-sequences-with-annotationbust" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The main function for pulling out the sequence information is called <code>AnnotationBust</code>. We need to provide Accessions, Search terms for loci and some other arguments:</p>
+<ul>
+<li><p>Duplicates and DuplicateInstances: if you would like to extract genes that have more than one copy in the genome, you need to specify the vector of the loci names (<code>Duplicates=c("tRNA-Leu")</code>), and tell how many copies of the duplicate genes (e.g., <code>DuplicateInstances = 2</code>) you’d wish to extract.</p></li>
+<li><p>DuplicateSpecies: whether you’d like to have multiple individuals per species.</p></li>
+<li><p>Prefix: If a prefix is specified, all output FASTA files written will begin with the prefix. Default is NULL.</p></li>
+<li><p>TidyAccession: Logical as to whether the accession table should have a single row per species. If numerous accessions for a species occur, they will be seperated by a comma in the accession table. Default=TRUE.</p></li>
+</ul>
+<p><code>AnnotationBustR</code> also has arguments to translate coding sequences into the corresponding peptide sequence setting the TranslateSeqs argument to TRUE. If TranslateSeqs=TRUE, users should also specify the GenBank translation code number corresponding to their sequences using the TranslateCode argument. A list of GenBank translaton codes for taxa is available here: <a href="https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi" class="uri">https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi</a></p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first set our output folder directory</span></span>
+<span id="cb39-2"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb39-2" aria-hidden="true" tabindex="-1"></a>wd<span class="ot">&lt;-</span><span class="st">&quot;~/Dropbox/teaching/bookdown-demo-main/lab17/annotationBust-Aotus&quot;</span></span>
+<span id="cb39-3"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co"># creat this folder</span></span>
+<span id="cb39-4"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(wd)</span>
+<span id="cb39-5"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(wd)</span>
+<span id="cb39-6"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="co"># run AnnotationBust function for extracting CDS without duplicated genes</span></span>
+<span id="cb39-7"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="co"># with no translation; but allow multiple individuals per species</span></span>
+<span id="cb39-8"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb39-8" aria-hidden="true" tabindex="-1"></a>Aotus.seqs<span class="ot">&lt;-</span><span class="fu">AnnotationBust</span>(<span class="at">Accessions=</span>accessions, <span class="at">Terms=</span>Aotus.genes,<span class="at">TranslateSeqs=</span>F, <span class="at">DuplicateSpecies=</span><span class="cn">TRUE</span>, <span class="at">Prefix=</span><span class="st">&quot;Aotus&quot;</span>, <span class="at">TidyAccessions=</span><span class="cn">TRUE</span>)</span>
+<span id="cb39-9"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb39-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-10"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="co">#We can return the accession table and write it to a CSV file.</span></span>
+<span id="cb39-11"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb39-11" aria-hidden="true" tabindex="-1"></a>Aotus.seqs<span class="co">#retutn the accession table</span></span>
+<span id="cb39-12"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(Aotus.seqs, <span class="at">file=</span><span class="st">&quot;Aotus_AccessionTable.csv&quot;</span>)<span class="co">#Write the accession table to a csv file</span></span></code></pre></div>
+</div>
+</div>
+<div id="exercise-ii-1" class="section level2 hasAnchor" number="14.6">
+<h2><span class="header-section-number">14.6</span> Exercise II<a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#exercise-ii-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li><p>Follow the instruction above, and upload a screenshot of the output fasta files, and upload the <code>Aotus_AccessionTable.csv</code> file. Compare the output summary from <code>phylotaR</code> and inspect how many additional loci we got for which species.</p></li>
+<li><p>Use <code>AnnotationBustR</code> to extract genes from whole genomes for the taxa of your term project. In each step, explain how you wrote the search terms and how many loci you got for which taxa.</p></li>
+</ol>
+</div>
+<div id="combine-gene-information-from-the-two-analyses" class="section level2 hasAnchor" number="14.7">
+<h2><span class="header-section-number">14.7</span> Combine gene information from the two analyses<a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#combine-gene-information-from-the-two-analyses" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>I wrote several functions in <code>combine_analysis.R</code> (BrightSpace-&gt;lab18), which can analyze the species and genes recovered from <code>phylotaR</code> and <code>AnnotationBustR</code>, merge the output, select the final list of species and genes, and write them into a user-defined folder for the following analyses.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;~/Dropbox/teaching/bookdown-demo-main/lab17&quot;</span>)</span>
+<span id="cb40-2"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;combine_analysis.R&quot;</span>)</span></code></pre></div>
+<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
+## ✔ ggplot2 3.4.1      ✔ purrr   0.3.4 
+## ✔ tibble  3.2.0      ✔ dplyr   1.0.10
+## ✔ tidyr   1.2.1      ✔ stringr 1.5.0 
+## ✔ readr   2.1.2      ✔ forcats 0.5.2 
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<p>Function <code>generate_combined_list</code> generates a merged list of genes and species by annotations of gene names. We just need to supply some input arguments for the previous analyses:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The directory info will be different on your machine</span></span>
+<span id="cb42-2"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># depending on where you stored your analyses</span></span>
+<span id="cb42-3"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co"># directory of phylotar output folder with .fasta files</span></span>
+<span id="cb42-5"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb42-5" aria-hidden="true" tabindex="-1"></a>phylotaR_dir<span class="ot">&lt;-</span><span class="st">&quot;~/Dropbox/teaching/bookdown-demo-main/lab17/phylotaR_Aotus/outfiles&quot;</span></span>
+<span id="cb42-6"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="co"># prefix of phylotar fastas</span></span>
+<span id="cb42-7"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb42-7" aria-hidden="true" tabindex="-1"></a>phylotaFastaPrefix<span class="ot">&lt;-</span><span class="st">&quot;aotus_cl&quot;</span></span>
+<span id="cb42-8"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Name of the phylotar summary file</span></span>
+<span id="cb42-9"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb42-9" aria-hidden="true" tabindex="-1"></a>phylotarSummaryFilename<span class="ot">&lt;-</span><span class="st">&quot;aotus_phylotaR_summary.csv&quot;</span></span>
+<span id="cb42-10"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb42-10" aria-hidden="true" tabindex="-1"></a><span class="co"># directory of annotationBust output folder with .fasta files</span></span>
+<span id="cb42-11"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb42-11" aria-hidden="true" tabindex="-1"></a>annotationBust_dir<span class="ot">&lt;-</span><span class="st">&quot;~/Dropbox/teaching/bookdown-demo-main/lab17/annotationBust-Aotus&quot;</span></span>
+<span id="cb42-12"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb42-12" aria-hidden="true" tabindex="-1"></a><span class="co"># prefix of .fasta files</span></span>
+<span id="cb42-13"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb42-13" aria-hidden="true" tabindex="-1"></a>annotationBustFastaPrefix<span class="ot">&lt;-</span><span class="st">&quot;Aotus_&quot;</span></span>
+<span id="cb42-14"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb42-14" aria-hidden="true" tabindex="-1"></a><span class="co"># data frame of the gene search terms used in AnnotationBustR</span></span>
+<span id="cb42-15"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb42-15" aria-hidden="true" tabindex="-1"></a><span class="co"># notice that you might be using a different search term table</span></span>
+<span id="cb42-16"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb42-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AnnotationBustR)</span>
+<span id="cb42-17"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb42-17" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mtDNAterms)</span>
+<span id="cb42-18"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb42-18" aria-hidden="true" tabindex="-1"></a>annotationBustGeneSearchTerms<span class="ot">&lt;-</span>mtDNAterms</span>
+<span id="cb42-19"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb42-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Name of the annotationBustR summary file</span></span>
+<span id="cb42-20"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb42-20" aria-hidden="true" tabindex="-1"></a>annotationBustSummaryFilename<span class="ot">&lt;-</span><span class="st">&quot;Aotus_AccessionTable.csv&quot;</span></span>
+<span id="cb42-21"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb42-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Output directory of the merged analyses</span></span>
+<span id="cb42-22"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb42-22" aria-hidden="true" tabindex="-1"></a>out_dir<span class="ot">&lt;-</span><span class="st">&quot;~/Dropbox/teaching/bookdown-demo-main/lab17/combined&quot;</span></span></code></pre></div>
+<p>Let’s generate the merged list first</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb43-1" aria-hidden="true" tabindex="-1"></a>combined_list<span class="ot">&lt;-</span><span class="fu">generate_combined_list</span>(</span>
+<span id="cb43-2"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb43-2" aria-hidden="true" tabindex="-1"></a>  phylotaR_dir,phylotarSummaryFilename,phylotaFastaPrefix,</span>
+<span id="cb43-3"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb43-3" aria-hidden="true" tabindex="-1"></a>  annotationBust_dir,annotationBustSummaryFilename,annotationBustFastaPrefix,</span>
+<span id="cb43-4"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb43-4" aria-hidden="true" tabindex="-1"></a>  annotationBustGeneSearchTerms)</span></code></pre></div>
+<p>Next, let’s inspect the coverage of genes across the taxa</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_sp_gene_pa</span>(combined_list)</span></code></pre></div>
+<p>We plan to remove all the species with less than six genes in total, and we also filter genes that have less than five species in total. (This is just an example filtering scheme, you should decide on the filtering schemes based on your research question)</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb45-1" aria-hidden="true" tabindex="-1"></a>final_list<span class="ot">&lt;-</span><span class="fu">final_curated_genes</span>(<span class="at">combined_list=</span>combined_list,</span>
+<span id="cb45-2"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb45-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">out_dir=</span>out_dir,</span>
+<span id="cb45-3"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb45-3" aria-hidden="true" tabindex="-1"></a>                 <span class="co"># change to your preferred output prefix</span></span>
+<span id="cb45-4"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb45-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">out_prefix=</span><span class="st">&quot;aotusCombined&quot;</span>,</span>
+<span id="cb45-5"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb45-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">minGeneCoveragePerSp=</span><span class="dv">6</span>,<span class="at">minSpCoveragePerGene=</span><span class="dv">5</span>)</span></code></pre></div>
+<p>Let’s inspect the gene/sp combination of the final matrix:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_sp_gene_pa</span>(final_list)</span>
+<span id="cb46-2"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">paste0</span>(out_dir,<span class="st">&quot;/final_Sp_Gene_matrix.pdf&quot;</span>),</span>
+<span id="cb46-3"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb46-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">height=</span><span class="fu">length</span>(<span class="fu">unique</span>(final_list<span class="sc">$</span>Species))<span class="sc">*</span><span class="fl">0.5</span>, </span>
+<span id="cb46-4"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cb46-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">width=</span><span class="fu">length</span>(<span class="fu">unique</span>(final_list<span class="sc">$</span>Locus))<span class="sc">*</span><span class="fl">0.5</span>)</span></code></pre></div>
+<p>In the output folder we set, we can see that each gene is saved as an <code>.fasta</code>, each sequence is named with the species name, and there is a summary file with the information for the included genes, species and sequence accession ID.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="resources-and-guidelines-for-the-term-project.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sequence-alignment.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/13_phyloInfo.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

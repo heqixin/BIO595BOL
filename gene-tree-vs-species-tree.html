@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 11 Gene tree vs Species tree | BIO595 The Tree of Life</title>
+  <meta name="description" content="Test writing the book for the course bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 11 Gene tree vs Species tree | BIO595 The Tree of Life" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Test writing the book for the course bookdown::gitbook." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 11 Gene tree vs Species tree | BIO595 The Tree of Life" />
+  
+  <meta name="twitter:description" content="Test writing the book for the course bookdown::gitbook." />
+  
+
+<meta name="author" content="Qixin He, Daniel Park" />
+
+
+<meta name="date" content="2023-04-10" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="phylogenetic-visualization-in-r.html"/>
+<link rel="next" href="overview-of-phylogenetic-inferences.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Tree of Life: Phylogenetic inferences and applications</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
+<li class="chapter" data-level="2" data-path="unix.html"><a href="unix.html"><i class="fa fa-check"></i><b>2</b> Unix</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="unix.html"><a href="unix.html#what-is-unix-and-why-do-we-use-it"><i class="fa fa-check"></i><b>2.1</b> What is Unix and why do we use it?</a></li>
+<li class="chapter" data-level="2.2" data-path="unix.html"><a href="unix.html#installation"><i class="fa fa-check"></i><b>2.2</b> Installation</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="unix.html"><a href="unix.html#mac-os-and-linux"><i class="fa fa-check"></i><b>2.2.1</b> Mac OS and Linux</a></li>
+<li class="chapter" data-level="2.2.2" data-path="unix.html"><a href="unix.html#windows"><i class="fa fa-check"></i><b>2.2.2</b> Windows</a></li>
+<li class="chapter" data-level="2.2.3" data-path="unix.html"><a href="unix.html#use-scholar-remote-desktop-during-the-class"><i class="fa fa-check"></i><b>2.2.3</b> Use Scholar Remote Desktop During the Class</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="unix.html"><a href="unix.html#operation"><i class="fa fa-check"></i><b>2.3</b> Operation</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="unix.html"><a href="unix.html#starting-the-shell"><i class="fa fa-check"></i><b>2.3.1</b> Starting the Shell</a></li>
+<li class="chapter" data-level="2.3.2" data-path="unix.html"><a href="unix.html#directoryfolder-sturcture"><i class="fa fa-check"></i><b>2.3.2</b> Directory/folder sturcture</a></li>
+<li class="chapter" data-level="2.3.3" data-path="unix.html"><a href="unix.html#absolute-and-relative-directory"><i class="fa fa-check"></i><b>2.3.3</b> Absolute and Relative directory</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="unix.html"><a href="unix.html#handling-directories-and-files"><i class="fa fa-check"></i><b>2.4</b> Handling directories and files</a></li>
+<li class="chapter" data-level="2.5" data-path="unix.html"><a href="unix.html#excercises-i"><i class="fa fa-check"></i><b>2.5</b> Excercises I</a></li>
+<li class="chapter" data-level="2.6" data-path="unix.html"><a href="unix.html#viewing-and-processing-text-files"><i class="fa fa-check"></i><b>2.6</b> Viewing and processing text files</a></li>
+<li class="chapter" data-level="2.7" data-path="unix.html"><a href="unix.html#redirecting-printouts-and-piping"><i class="fa fa-check"></i><b>2.7</b> Redirecting printouts and piping</a></li>
+<li class="chapter" data-level="2.8" data-path="unix.html"><a href="unix.html#exercises-ii"><i class="fa fa-check"></i><b>2.8</b> Exercises II</a></li>
+<li class="chapter" data-level="2.9" data-path="unix.html"><a href="unix.html#useful-wildcards"><i class="fa fa-check"></i><b>2.9</b> Useful wildcards</a></li>
+<li class="chapter" data-level="2.10" data-path="unix.html"><a href="unix.html#exercises-iii"><i class="fa fa-check"></i><b>2.10</b> Exercises III</a></li>
+<li class="chapter" data-level="2.11" data-path="unix.html"><a href="unix.html#search-and-select-lines-using-grep"><i class="fa fa-check"></i><b>2.11</b> Search and select lines using <em>grep</em></a></li>
+<li class="chapter" data-level="2.12" data-path="unix.html"><a href="unix.html#substituting-characters-using-tr"><i class="fa fa-check"></i><b>2.12</b> Substituting characters using <em>tr</em></a></li>
+<li class="chapter" data-level="2.13" data-path="unix.html"><a href="unix.html#cut-sort-and-unique"><i class="fa fa-check"></i><b>2.13</b> cut, sort and unique</a></li>
+<li class="chapter" data-level="2.14" data-path="unix.html"><a href="unix.html#exercises-iv"><i class="fa fa-check"></i><b>2.14</b> Exercises IV</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-basics-i.html"><a href="r-basics-i.html"><i class="fa fa-check"></i><b>3</b> R Basics I</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="r-basics-i.html"><a href="r-basics-i.html#what-is-programming"><i class="fa fa-check"></i><b>3.1</b> What is programming?</a></li>
+<li class="chapter" data-level="3.2" data-path="r-basics-i.html"><a href="r-basics-i.html#r"><i class="fa fa-check"></i><b>3.2</b> <code>R</code></a></li>
+<li class="chapter" data-level="3.3" data-path="r-basics-i.html"><a href="r-basics-i.html#installation-1"><i class="fa fa-check"></i><b>3.3</b> Installation</a></li>
+<li class="chapter" data-level="3.4" data-path="r-basics-i.html"><a href="r-basics-i.html#variables"><i class="fa fa-check"></i><b>3.4</b> Variables</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="r-basics-i.html"><a href="r-basics-i.html#exercise-1"><i class="fa fa-check"></i><b>3.4.1</b> Exercise (1):</a></li>
+<li class="chapter" data-level="3.4.2" data-path="r-basics-i.html"><a href="r-basics-i.html#variable-naming-conventions"><i class="fa fa-check"></i><b>3.4.2</b> Variable naming conventions</a></li>
+<li class="chapter" data-level="3.4.3" data-path="r-basics-i.html"><a href="r-basics-i.html#arithmetic-operators"><i class="fa fa-check"></i><b>3.4.3</b> Arithmetic Operators</a></li>
+<li class="chapter" data-level="3.4.4" data-path="r-basics-i.html"><a href="r-basics-i.html#logical-operators"><i class="fa fa-check"></i><b>3.4.4</b> Logical Operators</a></li>
+<li class="chapter" data-level="3.4.5" data-path="r-basics-i.html"><a href="r-basics-i.html#basic-built-in-mathematical-functions"><i class="fa fa-check"></i><b>3.4.5</b> Basic built-in mathematical functions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="r-basics-i.html"><a href="r-basics-i.html#subsetting-data"><i class="fa fa-check"></i><b>3.5</b> Subsetting data</a></li>
+<li class="chapter" data-level="3.6" data-path="r-basics-i.html"><a href="r-basics-i.html#logical-values"><i class="fa fa-check"></i><b>3.6</b> Logical values</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="r-basics-i.html"><a href="r-basics-i.html#missing-dealing-with-na-values"><i class="fa fa-check"></i><b>3.6.1</b> Missing: dealing with <code>NA</code> values</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="r-basics-i.html"><a href="r-basics-i.html#generating-data"><i class="fa fa-check"></i><b>3.7</b> Generating Data</a></li>
+<li class="chapter" data-level="3.8" data-path="r-basics-i.html"><a href="r-basics-i.html#data-structures-and-types"><i class="fa fa-check"></i><b>3.8</b> Data Structures and Types</a>
+<ul>
+<li class="chapter" data-level="3.8.1" data-path="r-basics-i.html"><a href="r-basics-i.html#vectors"><i class="fa fa-check"></i><b>3.8.1</b> Vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="3.9" data-path="r-basics-i.html"><a href="r-basics-i.html#matrices"><i class="fa fa-check"></i><b>3.9</b> Matrices</a>
+<ul>
+<li class="chapter" data-level="3.9.1" data-path="r-basics-i.html"><a href="r-basics-i.html#exercise-2"><i class="fa fa-check"></i><b>3.9.1</b> Exercise (2):</a></li>
+</ul></li>
+<li class="chapter" data-level="3.10" data-path="r-basics-i.html"><a href="r-basics-i.html#data-frames"><i class="fa fa-check"></i><b>3.10</b> Data Frames</a>
+<ul>
+<li class="chapter" data-level="3.10.1" data-path="r-basics-i.html"><a href="r-basics-i.html#exercise-3"><i class="fa fa-check"></i><b>3.10.1</b> Exercise (3):</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="r-basics-ii.html"><a href="r-basics-ii.html"><i class="fa fa-check"></i><b>4</b> R Basics II</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="r-basics-ii.html"><a href="r-basics-ii.html#setting-up-the-environment"><i class="fa fa-check"></i><b>4.1</b> Setting up the environment</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="r-basics-ii.html"><a href="r-basics-ii.html#exercise-1-1"><i class="fa fa-check"></i><b>4.1.1</b> Exercise (1)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="r-basics-ii.html"><a href="r-basics-ii.html#reading-in-data-from-files"><i class="fa fa-check"></i><b>4.2</b> Reading in data from files</a></li>
+<li class="chapter" data-level="4.3" data-path="r-basics-ii.html"><a href="r-basics-ii.html#wrangling-data"><i class="fa fa-check"></i><b>4.3</b> Wrangling Data</a></li>
+<li class="chapter" data-level="4.4" data-path="r-basics-ii.html"><a href="r-basics-ii.html#subsetting-by-columns-and-rows"><i class="fa fa-check"></i><b>4.4</b> Subsetting by columns and rows</a></li>
+<li class="chapter" data-level="4.5" data-path="r-basics-ii.html"><a href="r-basics-ii.html#subsetting-with-conditions"><i class="fa fa-check"></i><b>4.5</b> Subsetting with conditions</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="r-basics-ii.html"><a href="r-basics-ii.html#exercise-2-1"><i class="fa fa-check"></i><b>4.5.1</b> Exercise (2)</a></li>
+<li class="chapter" data-level="4.5.2" data-path="r-basics-ii.html"><a href="r-basics-ii.html#bonus-1"><i class="fa fa-check"></i><b>4.5.2</b> Bonus [1]</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="r-basics-ii.html"><a href="r-basics-ii.html#merging-data"><i class="fa fa-check"></i><b>4.6</b> Merging data</a></li>
+<li class="chapter" data-level="4.7" data-path="r-basics-ii.html"><a href="r-basics-ii.html#saving-files-and-sessions"><i class="fa fa-check"></i><b>4.7</b> Saving files and sessions</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="r-basics-ii.html"><a href="r-basics-ii.html#exercise-3-1"><i class="fa fa-check"></i><b>4.7.1</b> Exercise (3)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="r-basics-ii.html"><a href="r-basics-ii.html#the-for-loop"><i class="fa fa-check"></i><b>4.8</b> The <span class="smallcaps">for</span>-loop</a></li>
+<li class="chapter" data-level="4.9" data-path="r-basics-ii.html"><a href="r-basics-ii.html#lists"><i class="fa fa-check"></i><b>4.9</b> Lists</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="tree-and-traits-in-r.html"><a href="tree-and-traits-in-r.html"><i class="fa fa-check"></i><b>5</b> Tree and Traits in R</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="tree-and-traits-in-r.html"><a href="tree-and-traits-in-r.html#setting-up-the-environment-1"><i class="fa fa-check"></i><b>5.1</b> Setting up the environment</a></li>
+<li class="chapter" data-level="5.2" data-path="tree-and-traits-in-r.html"><a href="tree-and-traits-in-r.html#examining-phylogenetic-trees"><i class="fa fa-check"></i><b>5.2</b> Examining phylogenetic trees</a></li>
+<li class="chapter" data-level="5.3" data-path="tree-and-traits-in-r.html"><a href="tree-and-traits-in-r.html#plotting-phylogenetic-trees"><i class="fa fa-check"></i><b>5.3</b> Plotting phylogenetic trees</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="tree-and-traits-in-r.html"><a href="tree-and-traits-in-r.html#exercise-1-2"><i class="fa fa-check"></i><b>5.3.1</b> Exercise (1)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="tree-and-traits-in-r.html"><a href="tree-and-traits-in-r.html#associating-phylogenies-and-traits"><i class="fa fa-check"></i><b>5.4</b> Associating phylogenies and traits</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="tree-and-traits-in-r.html"><a href="tree-and-traits-in-r.html#saving-plots"><i class="fa fa-check"></i><b>5.4.1</b> Saving plots</a></li>
+<li class="chapter" data-level="5.4.2" data-path="tree-and-traits-in-r.html"><a href="tree-and-traits-in-r.html#exercise-2-2"><i class="fa fa-check"></i><b>5.4.2</b> Exercise (2)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html"><i class="fa fa-check"></i><b>6</b> Biogeography and Macroevolution in R</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#setting-up-the-environment-2"><i class="fa fa-check"></i><b>6.1</b> Setting up the environment</a></li>
+<li class="chapter" data-level="6.2" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#ancestral-state-reconstructions"><i class="fa fa-check"></i><b>6.2</b> Ancestral State Reconstructions</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#bonus-2"><i class="fa fa-check"></i><b>6.2.1</b> Bonus [2]</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#continuous-traits"><i class="fa fa-check"></i><b>6.3</b> Continuous traits</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#maximum-likelihood"><i class="fa fa-check"></i><b>6.3.1</b> Maximum likelihood</a></li>
+<li class="chapter" data-level="6.3.2" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#phylogenetically-independent-contrasts"><i class="fa fa-check"></i><b>6.3.2</b> Phylogenetically independent contrasts</a></li>
+<li class="chapter" data-level="6.3.3" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#plotting-ancestral-states"><i class="fa fa-check"></i><b>6.3.3</b> Plotting ancestral states</a></li>
+<li class="chapter" data-level="6.3.4" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#exercise-1-3"><i class="fa fa-check"></i><b>6.3.4</b> Exercise (1)</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#discrete-traits"><i class="fa fa-check"></i><b>6.4</b> Discrete traits</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#exercise-2-3"><i class="fa fa-check"></i><b>6.4.1</b> Exercise (2)</a></li>
+<li class="chapter" data-level="6.4.2" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#maximum-likelihood-1"><i class="fa fa-check"></i><b>6.4.2</b> Maximum likelihood</a></li>
+<li class="chapter" data-level="6.4.3" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#choosing-models"><i class="fa fa-check"></i><b>6.4.3</b> Choosing models</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#saving-multiple-plots-together"><i class="fa fa-check"></i><b>6.5</b> Saving multiple plots together</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#exercise-3-2"><i class="fa fa-check"></i><b>6.5.1</b> Exercise (3)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="phylogenetic-diversity-in-r.html"><a href="phylogenetic-diversity-in-r.html"><i class="fa fa-check"></i><b>7</b> Phylogenetic Diversity in R</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="phylogenetic-diversity-in-r.html"><a href="phylogenetic-diversity-in-r.html#setting-up-the-environment-3"><i class="fa fa-check"></i><b>7.1</b> Setting up the environment</a></li>
+<li class="chapter" data-level="7.2" data-path="phylogenetic-diversity-in-r.html"><a href="phylogenetic-diversity-in-r.html#phylogenetic-diversity"><i class="fa fa-check"></i><b>7.2</b> Phylogenetic Diversity</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="phylogenetic-diversity-in-r.html"><a href="phylogenetic-diversity-in-r.html#preprocessing"><i class="fa fa-check"></i><b>7.2.1</b> Preprocessing</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="phylogenetic-diversity-in-r.html"><a href="phylogenetic-diversity-in-r.html#estimating-phylogenetic-diversity-metrics"><i class="fa fa-check"></i><b>7.3</b> Estimating phylogenetic diversity metrics</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="phylogenetic-diversity-in-r.html"><a href="phylogenetic-diversity-in-r.html#exercise-1-4"><i class="fa fa-check"></i><b>7.3.1</b> Exercise (1)</a></li>
+<li class="chapter" data-level="7.3.2" data-path="phylogenetic-diversity-in-r.html"><a href="phylogenetic-diversity-in-r.html#exercise-2-4"><i class="fa fa-check"></i><b>7.3.2</b> Exercise (2)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="community-phylogenetics.html"><a href="community-phylogenetics.html"><i class="fa fa-check"></i><b>8</b> Community Phylogenetics</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="community-phylogenetics.html"><a href="community-phylogenetics.html#setting-up-the-environment-4"><i class="fa fa-check"></i><b>8.1</b> Setting up the environment</a></li>
+<li class="chapter" data-level="8.2" data-path="community-phylogenetics.html"><a href="community-phylogenetics.html#definition-of-community-phylogenetics"><i class="fa fa-check"></i><b>8.2</b> Definition of Community Phylogenetics</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="community-phylogenetics.html"><a href="community-phylogenetics.html#alpha-diversity"><i class="fa fa-check"></i><b>8.2.1</b> Alpha diversity</a></li>
+<li class="chapter" data-level="8.2.2" data-path="community-phylogenetics.html"><a href="community-phylogenetics.html#beta-diversity"><i class="fa fa-check"></i><b>8.2.2</b> Beta diversity</a></li>
+<li class="chapter" data-level="8.2.3" data-path="community-phylogenetics.html"><a href="community-phylogenetics.html#exercise-1-5"><i class="fa fa-check"></i><b>8.2.3</b> Exercise (1)</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="community-phylogenetics.html"><a href="community-phylogenetics.html#standardized-effect-sizes"><i class="fa fa-check"></i><b>8.3</b> Standardized effect sizes</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="community-phylogenetics.html"><a href="community-phylogenetics.html#exercise-2-5"><i class="fa fa-check"></i><b>8.3.1</b> Exercise (2)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="coevolution-and-phylogenetic-signals-in-r.html"><a href="coevolution-and-phylogenetic-signals-in-r.html"><i class="fa fa-check"></i><b>9</b> Coevolution and Phylogenetic Signals in R</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="coevolution-and-phylogenetic-signals-in-r.html"><a href="coevolution-and-phylogenetic-signals-in-r.html#setting-up-the-environment-5"><i class="fa fa-check"></i><b>9.1</b> Setting up the environment</a></li>
+<li class="chapter" data-level="9.2" data-path="coevolution-and-phylogenetic-signals-in-r.html"><a href="coevolution-and-phylogenetic-signals-in-r.html#phylogenetic-signal"><i class="fa fa-check"></i><b>9.2</b> Phylogenetic Signal</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="coevolution-and-phylogenetic-signals-in-r.html"><a href="coevolution-and-phylogenetic-signals-in-r.html#blombergs-k"><i class="fa fa-check"></i><b>9.2.1</b> Blomberg’s K</a></li>
+<li class="chapter" data-level="9.2.2" data-path="coevolution-and-phylogenetic-signals-in-r.html"><a href="coevolution-and-phylogenetic-signals-in-r.html#pagels-lambda-λ"><i class="fa fa-check"></i><b>9.2.2</b> Pagel’s lambda (λ)</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="coevolution-and-phylogenetic-signals-in-r.html"><a href="coevolution-and-phylogenetic-signals-in-r.html#phylogenetically-independent-contrasts-1"><i class="fa fa-check"></i><b>9.3</b> Phylogenetically Independent Contrasts</a></li>
+<li class="chapter" data-level="9.4" data-path="coevolution-and-phylogenetic-signals-in-r.html"><a href="coevolution-and-phylogenetic-signals-in-r.html#coevolution"><i class="fa fa-check"></i><b>9.4</b> Coevolution</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="coevolution-and-phylogenetic-signals-in-r.html"><a href="coevolution-and-phylogenetic-signals-in-r.html#plotting-tanglegrams"><i class="fa fa-check"></i><b>9.4.1</b> Plotting tanglegrams</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html"><i class="fa fa-check"></i><b>10</b> Phylogenetic Visualization in R</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#setting-up-the-environment-6"><i class="fa fa-check"></i><b>10.1</b> Setting up the environment</a></li>
+<li class="chapter" data-level="10.2" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#using-phytools"><i class="fa fa-check"></i><b>10.2</b> Using <code>phytools</code></a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#phenograms"><i class="fa fa-check"></i><b>10.2.1</b> Phenograms</a></li>
+<li class="chapter" data-level="10.2.2" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#mapping-continuous-characters-on-branches"><i class="fa fa-check"></i><b>10.2.2</b> Mapping continuous characters on branches</a></li>
+<li class="chapter" data-level="10.2.3" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#plotting-images-on-phylogenies"><i class="fa fa-check"></i><b>10.2.3</b> Plotting images on phylogenies</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#using-ggtree"><i class="fa fa-check"></i><b>10.3</b> Using <code>ggtree</code></a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#basic-plotting"><i class="fa fa-check"></i><b>10.3.1</b> Basic plotting</a></li>
+<li class="chapter" data-level="10.3.2" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#labeling-tips-nodes-and-clades"><i class="fa fa-check"></i><b>10.3.2</b> Labeling tips, nodes, and clades</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#plotting-maps"><i class="fa fa-check"></i><b>10.4</b> Plotting maps</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#choropleth-maps"><i class="fa fa-check"></i><b>10.4.1</b> Choropleth maps</a></li>
+<li class="chapter" data-level="10.4.2" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#working-with-rasters"><i class="fa fa-check"></i><b>10.4.2</b> Working with rasters</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html"><i class="fa fa-check"></i><b>11</b> Gene tree vs Species tree</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#learning-goals"><i class="fa fa-check"></i><b>11.1</b> Learning goals:</a></li>
+<li class="chapter" data-level="11.2" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#tracing-ancestry-within-one-population"><i class="fa fa-check"></i><b>11.2</b> Tracing ancestry within one population</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#vary-pop-size-and-generation"><i class="fa fa-check"></i><b>11.2.1</b> Vary pop size and generation</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#speciation-and-coalescence"><i class="fa fa-check"></i><b>11.3</b> Speciation and coalescence</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#two-species-coalescent-history"><i class="fa fa-check"></i><b>11.3.1</b> Two-species coalescent history</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#exercise-i"><i class="fa fa-check"></i><b>11.4</b> Exercise I</a></li>
+<li class="chapter" data-level="11.5" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#gene-tree-locus-tree-and-species-tree"><i class="fa fa-check"></i><b>11.5</b> Gene tree, Locus tree and Species tree</a>
+<ul>
+<li class="chapter" data-level="11.5.1" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#loading-data-and-packages"><i class="fa fa-check"></i><b>11.5.1</b> loading data and packages</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#effects-of-incomplete-lineage-sorting-ils-alone"><i class="fa fa-check"></i><b>11.6</b> Effects of Incomplete Lineage Sorting (ILS) alone</a>
+<ul>
+<li class="chapter" data-level="11.6.1" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#generate-species-tree-with-no-extinction"><i class="fa fa-check"></i><b>11.6.1</b> generate species tree with no extinction</a></li>
+<li class="chapter" data-level="11.6.2" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#simulate-gene-trees-using-the-multispecies-coalescent-process"><i class="fa fa-check"></i><b>11.6.2</b> simulate gene trees using the multispecies coalescent process</a></li>
+</ul></li>
+<li class="chapter" data-level="11.7" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#calculate-tree-distances"><i class="fa fa-check"></i><b>11.7</b> Calculate tree distances</a>
+<ul>
+<li class="chapter" data-level="11.7.1" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#rf-distances"><i class="fa fa-check"></i><b>11.7.1</b> RF distances</a></li>
+<li class="chapter" data-level="11.7.2" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#inspect-pairwise-rf-distances-among-all-the-gene-trees-generated-under-one-guiding-species-tree"><i class="fa fa-check"></i><b>11.7.2</b> Inspect pairwise RF distances among all the gene trees generated under one guiding species tree</a></li>
+</ul></li>
+<li class="chapter" data-level="11.8" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#inspect-node-support-i.e.-subtrees-defined-by-a-split"><i class="fa fa-check"></i><b>11.8</b> Inspect node support (i.e., subtrees defined by a split)</a></li>
+<li class="chapter" data-level="11.9" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#combined-effects-of-gene-duplication-loss-and-horizontal-gene-transfer-events"><i class="fa fa-check"></i><b>11.9</b> Combined effects of gene duplication, loss and horizontal gene transfer events</a></li>
+<li class="chapter" data-level="11.10" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#exercise-ii"><i class="fa fa-check"></i><b>11.10</b> Exercise II</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="overview-of-phylogenetic-inferences.html"><a href="overview-of-phylogenetic-inferences.html"><i class="fa fa-check"></i><b>12</b> Overview of Phylogenetic Inferences</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="overview-of-phylogenetic-inferences.html"><a href="overview-of-phylogenetic-inferences.html#mega"><i class="fa fa-check"></i><b>12.1</b> <code>MEGA</code></a></li>
+<li class="chapter" data-level="12.2" data-path="overview-of-phylogenetic-inferences.html"><a href="overview-of-phylogenetic-inferences.html#view-and-align-sequences"><i class="fa fa-check"></i><b>12.2</b> View and Align Sequences</a></li>
+<li class="chapter" data-level="12.3" data-path="overview-of-phylogenetic-inferences.html"><a href="overview-of-phylogenetic-inferences.html#dnaprotein-evolution-model"><i class="fa fa-check"></i><b>12.3</b> DNA/protein evolution model</a></li>
+<li class="chapter" data-level="12.4" data-path="overview-of-phylogenetic-inferences.html"><a href="overview-of-phylogenetic-inferences.html#phylogenetic-inference"><i class="fa fa-check"></i><b>12.4</b> Phylogenetic inference</a></li>
+<li class="chapter" data-level="12.5" data-path="overview-of-phylogenetic-inferences.html"><a href="overview-of-phylogenetic-inferences.html#estimate-divergence-times"><i class="fa fa-check"></i><b>12.5</b> Estimate divergence times</a></li>
+<li class="chapter" data-level="12.6" data-path="overview-of-phylogenetic-inferences.html"><a href="overview-of-phylogenetic-inferences.html#exercises"><i class="fa fa-check"></i><b>12.6</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html"><i class="fa fa-check"></i><b>13</b> Resources and Guidelines for the Term Project</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#bioinformatics-databases"><i class="fa fa-check"></i><b>13.1</b> Bioinformatics Databases</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#ncbi-national-center-for-biotechnology-information"><i class="fa fa-check"></i><b>13.1.1</b> NCBI (National Center for Biotechnology Information)</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#retrieving-genetic-resources-for-your-taxa"><i class="fa fa-check"></i><b>13.2</b> Retrieving genetic resources for your taxa</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#ncbi-taxonomy-database"><i class="fa fa-check"></i><b>13.2.1</b> NCBI taxonomy database</a></li>
+<li class="chapter" data-level="13.2.2" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#individual-genes-from-the-whole-genome-data"><i class="fa fa-check"></i><b>13.2.2</b> Individual genes from the whole genome data</a></li>
+<li class="chapter" data-level="13.2.3" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#get-homologous-sequences-from-related-species"><i class="fa fa-check"></i><b>13.2.3</b> Get homologous sequences from related species</a></li>
+<li class="chapter" data-level="13.2.4" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#european-bioinformatics-institute-ebi"><i class="fa fa-check"></i><b>13.2.4</b> European Bioinformatics Institute (EBI)</a></li>
+<li class="chapter" data-level="13.2.5" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#protein-data-bank"><i class="fa fa-check"></i><b>13.2.5</b> Protein Data Bank</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#biogeographic-databases"><i class="fa fa-check"></i><b>13.3</b> Biogeographic Databases</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#climate-data"><i class="fa fa-check"></i><b>13.3.1</b> Climate Data</a></li>
+<li class="chapter" data-level="13.3.2" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#occurrence-data"><i class="fa fa-check"></i><b>13.3.2</b> Occurrence Data</a></li>
+<li class="chapter" data-level="13.3.3" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#topographic-data"><i class="fa fa-check"></i><b>13.3.3</b> TOPOGRAPHIC DATA</a></li>
+<li class="chapter" data-level="13.3.4" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#trait-data"><i class="fa fa-check"></i><b>13.3.4</b> TRAIT DATA</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#publication-databases"><i class="fa fa-check"></i><b>13.4</b> Publication Databases</a></li>
+<li class="chapter" data-level="13.5" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#example-research-questions"><i class="fa fa-check"></i><b>13.5</b> Example research questions:</a>
+<ul>
+<li class="chapter" data-level="13.5.1" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#biogeography-and-phylogenetic-diversity"><i class="fa fa-check"></i><b>13.5.1</b> Biogeography and Phylogenetic Diversity:</a></li>
+<li class="chapter" data-level="13.5.2" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#community-ecology"><i class="fa fa-check"></i><b>13.5.2</b> Community Ecology:</a></li>
+<li class="chapter" data-level="13.5.3" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#coevolution-1"><i class="fa fa-check"></i><b>13.5.3</b> Coevolution:</a></li>
+<li class="chapter" data-level="13.5.4" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#species-tree"><i class="fa fa-check"></i><b>13.5.4</b> Species tree:</a></li>
+</ul></li>
+<li class="chapter" data-level="13.6" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#how-to-submit-jobs-on-scholar-cluster-and-run-remotely"><i class="fa fa-check"></i><b>13.6</b> How to submit jobs on Scholar Cluster and run remotely</a></li>
+<li class="chapter" data-level="13.7" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#term-project-proposal"><i class="fa fa-check"></i><b>13.7</b> Term project proposal</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><i class="fa fa-check"></i><b>14</b> Systematic Retrieval of orthologous DNA sequences form GenBank</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#introduction"><i class="fa fa-check"></i><b>14.1</b> Introduction</a></li>
+<li class="chapter" data-level="14.2" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#installing-tools"><i class="fa fa-check"></i><b>14.2</b> Installing Tools</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#windows-1"><i class="fa fa-check"></i><b>14.2.1</b> Windows</a></li>
+<li class="chapter" data-level="14.2.2" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#mac"><i class="fa fa-check"></i><b>14.2.2</b> Mac</a></li>
+<li class="chapter" data-level="14.2.3" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#ncbi-blast-tools"><i class="fa fa-check"></i><b>14.2.3</b> NCBI BLAST+ Tools</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#using-phylotar"><i class="fa fa-check"></i><b>14.3</b> Using <code>phylotaR</code></a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#pipeline"><i class="fa fa-check"></i><b>14.3.1</b> Pipeline</a></li>
+<li class="chapter" data-level="14.3.2" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#running"><i class="fa fa-check"></i><b>14.3.2</b> Running</a></li>
+<li class="chapter" data-level="14.3.3" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#restarting"><i class="fa fa-check"></i><b>14.3.3</b> Restarting</a></li>
+<li class="chapter" data-level="14.3.4" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cluster-i.e.-orthologous-genes-selection"><i class="fa fa-check"></i><b>14.3.4</b> Cluster (i.e., orthologous genes) selection</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#exercise-i-1"><i class="fa fa-check"></i><b>14.4</b> Exercise I</a></li>
+<li class="chapter" data-level="14.5" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#using-annotationbustr"><i class="fa fa-check"></i><b>14.5</b> Using <code>AnnotationBustR</code></a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#introduction-1"><i class="fa fa-check"></i><b>14.5.1</b> Introduction</a></li>
+<li class="chapter" data-level="14.5.2" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#install-the-tools"><i class="fa fa-check"></i><b>14.5.2</b> Install the tools</a></li>
+<li class="chapter" data-level="14.5.3" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#specify-search-terms-of-genomes"><i class="fa fa-check"></i><b>14.5.3</b> Specify search terms of genomes</a></li>
+<li class="chapter" data-level="14.5.4" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#load-gene-search-terms-of-interest"><i class="fa fa-check"></i><b>14.5.4</b> Load Gene Search Terms of Interest</a></li>
+<li class="chapter" data-level="14.5.5" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#extract-sequences-with-annotationbust"><i class="fa fa-check"></i><b>14.5.5</b> Extract sequences with AnnotationBust</a></li>
+</ul></li>
+<li class="chapter" data-level="14.6" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#exercise-ii-1"><i class="fa fa-check"></i><b>14.6</b> Exercise II</a></li>
+<li class="chapter" data-level="14.7" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#combine-gene-information-from-the-two-analyses"><i class="fa fa-check"></i><b>14.7</b> Combine gene information from the two analyses</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="sequence-alignment.html"><a href="sequence-alignment.html"><i class="fa fa-check"></i><b>15</b> Sequence alignment</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="sequence-alignment.html"><a href="sequence-alignment.html#load-libraries"><i class="fa fa-check"></i><b>15.1</b> Load libraries</a></li>
+<li class="chapter" data-level="15.2" data-path="sequence-alignment.html"><a href="sequence-alignment.html#perform-alignments"><i class="fa fa-check"></i><b>15.2</b> Perform Alignments</a></li>
+<li class="chapter" data-level="15.3" data-path="sequence-alignment.html"><a href="sequence-alignment.html#processing-multiple-alignments"><i class="fa fa-check"></i><b>15.3</b> Processing Multiple Alignments</a></li>
+<li class="chapter" data-level="15.4" data-path="sequence-alignment.html"><a href="sequence-alignment.html#build-your-first-nj-tree"><i class="fa fa-check"></i><b>15.4</b> Build your first NJ tree</a></li>
+<li class="chapter" data-level="15.5" data-path="sequence-alignment.html"><a href="sequence-alignment.html#exercise"><i class="fa fa-check"></i><b>15.5</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html"><i class="fa fa-check"></i><b>16</b> Maximum likelihood, model tests, tree and branch tests</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#learning-goals-1"><i class="fa fa-check"></i><b>16.1</b> Learning Goals</a></li>
+<li class="chapter" data-level="16.2" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#iqtree"><i class="fa fa-check"></i><b>16.2</b> IQtree</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#version"><i class="fa fa-check"></i><b>16.2.1</b> Version</a></li>
+<li class="chapter" data-level="16.2.2" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#find-the-best-explanatory-sequence-evolution-model"><i class="fa fa-check"></i><b>16.2.2</b> find the best explanatory sequence evolution model</a></li>
+<li class="chapter" data-level="16.2.3" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#using-the-best-sequence-evolution-model"><i class="fa fa-check"></i><b>16.2.3</b> using the best sequence evolution model</a></li>
+<li class="chapter" data-level="16.2.4" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#different-partitions-for-the-data-for-multiple-genes-or-different-codons"><i class="fa fa-check"></i><b>16.2.4</b> Different partitions for the data for multiple genes, or different codons</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#run-an-ml-tree-with-multiple-gene-files-in-a-folder"><i class="fa fa-check"></i><b>16.3</b> Run an ML tree with multiple gene files in a folder</a></li>
+<li class="chapter" data-level="16.4" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#gene-concordance-factor"><i class="fa fa-check"></i><b>16.4</b> Gene concordance factor</a></li>
+<li class="chapter" data-level="16.5" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#tree-topology-tests"><i class="fa fa-check"></i><b>16.5</b> Tree topology tests</a></li>
+<li class="chapter" data-level="16.6" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#tree-branches-tests"><i class="fa fa-check"></i><b>16.6</b> Tree branches tests</a></li>
+<li class="chapter" data-level="16.7" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#assignments"><i class="fa fa-check"></i><b>16.7</b> Assignments</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="molecular-clock-and-phylogenetic-dating.html"><a href="molecular-clock-and-phylogenetic-dating.html"><i class="fa fa-check"></i><b>17</b> Molecular Clock and Phylogenetic Dating</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="molecular-clock-and-phylogenetic-dating.html"><a href="molecular-clock-and-phylogenetic-dating.html#inferring-time-tree-with-tip-dates"><i class="fa fa-check"></i><b>17.1</b> Inferring time tree with tip dates</a></li>
+<li class="chapter" data-level="17.2" data-path="molecular-clock-and-phylogenetic-dating.html"><a href="molecular-clock-and-phylogenetic-dating.html#calibrating-tree-using-ancestral-dates"><i class="fa fa-check"></i><b>17.2</b> Calibrating tree using ancestral dates</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="molecular-clock-and-phylogenetic-dating.html"><a href="molecular-clock-and-phylogenetic-dating.html#search-for-an-ml-tree"><i class="fa fa-check"></i><b>17.2.1</b> search for an ML tree</a></li>
+<li class="chapter" data-level="17.2.2" data-path="molecular-clock-and-phylogenetic-dating.html"><a href="molecular-clock-and-phylogenetic-dating.html#root-calibration"><i class="fa fa-check"></i><b>17.2.2</b> Root calibration</a></li>
+<li class="chapter" data-level="17.2.3" data-path="molecular-clock-and-phylogenetic-dating.html"><a href="molecular-clock-and-phylogenetic-dating.html#internal-nodes"><i class="fa fa-check"></i><b>17.2.3</b> Internal nodes</a></li>
+<li class="chapter" data-level="17.2.4" data-path="molecular-clock-and-phylogenetic-dating.html"><a href="molecular-clock-and-phylogenetic-dating.html#confidence-interval"><i class="fa fa-check"></i><b>17.2.4</b> Confidence interval</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="molecular-clock-and-phylogenetic-dating.html"><a href="molecular-clock-and-phylogenetic-dating.html#exercise-4"><i class="fa fa-check"></i><b>17.3</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html"><i class="fa fa-check"></i><b>18</b> Character evolution and Ancestral state reconstruction</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#continuous-characters"><i class="fa fa-check"></i><b>18.1</b> Continuous characters</a>
+<ul>
+<li class="chapter" data-level="18.1.1" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#load-libraries-1"><i class="fa fa-check"></i><b>18.1.1</b> load libraries</a></li>
+<li class="chapter" data-level="18.1.2" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#tree-file-and-the-character-file"><i class="fa fa-check"></i><b>18.1.2</b> Tree file and the character file</a></li>
+<li class="chapter" data-level="18.1.3" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#visualization-of-the-reconstructed-nodes"><i class="fa fa-check"></i><b>18.1.3</b> Visualization of the reconstructed nodes</a></li>
+<li class="chapter" data-level="18.1.4" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#visualization-of-phenotypic-evolution"><i class="fa fa-check"></i><b>18.1.4</b> Visualization of phenotypic evolution</a></li>
+</ul></li>
+<li class="chapter" data-level="18.2" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#brownian-motion-vs-ornstein-uhlenbeck-process"><i class="fa fa-check"></i><b>18.2</b> Brownian Motion vs Ornstein-Uhlenbeck Process</a></li>
+<li class="chapter" data-level="18.3" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#brownian-motion"><i class="fa fa-check"></i><b>18.3</b> Brownian Motion</a>
+<ul>
+<li class="chapter" data-level="18.3.1" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#ornsteinuhlenbeck-process"><i class="fa fa-check"></i><b>18.3.1</b> Ornstein–Uhlenbeck process</a></li>
+<li class="chapter" data-level="18.3.2" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#incorporate-prior-knowledge-using-bayesian-estimates"><i class="fa fa-check"></i><b>18.3.2</b> Incorporate prior knowledge using Bayesian estimates</a></li>
+</ul></li>
+<li class="chapter" data-level="18.4" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#discrete-characters"><i class="fa fa-check"></i><b>18.4</b> Discrete characters</a></li>
+<li class="chapter" data-level="18.5" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#exercises-1"><i class="fa fa-check"></i><b>18.5</b> Exercises:</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html"><i class="fa fa-check"></i><b>19</b> Model Selection of Character Evolution</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html#load-libraries-2"><i class="fa fa-check"></i><b>19.1</b> Load libraries</a></li>
+<li class="chapter" data-level="19.2" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html#discrete-traits-model-fitting"><i class="fa fa-check"></i><b>19.2</b> Discrete traits model fitting</a>
+<ul>
+<li class="chapter" data-level="19.2.1" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html#choosing-a-character-model"><i class="fa fa-check"></i><b>19.2.1</b> Choosing a character model</a></li>
+<li class="chapter" data-level="19.2.2" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html#marginal-ancestral-state-reconstruction"><i class="fa fa-check"></i><b>19.2.2</b> Marginal ancestral state reconstruction</a></li>
+<li class="chapter" data-level="19.2.3" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html#more-than-two-states"><i class="fa fa-check"></i><b>19.2.3</b> More than two states</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html#exercise-i-2"><i class="fa fa-check"></i><b>19.3</b> Exercise I</a></li>
+<li class="chapter" data-level="19.4" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html#continuous-traits-model-fitting"><i class="fa fa-check"></i><b>19.4</b> Continuous traits model fitting</a>
+<ul>
+<li class="chapter" data-level="19.4.1" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html#model-selection"><i class="fa fa-check"></i><b>19.4.1</b> Model selection</a></li>
+<li class="chapter" data-level="19.4.2" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html#ancestral-states"><i class="fa fa-check"></i><b>19.4.2</b> Ancestral states</a></li>
+</ul></li>
+<li class="chapter" data-level="19.5" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html#exercise-ii-2"><i class="fa fa-check"></i><b>19.5</b> Exercise II</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">BIO595 The Tree of Life</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="gene-tree-vs-species-tree" class="section level1 hasAnchor" number="11">
+<h1><span class="header-section-number">Chapter 11</span> Gene tree vs Species tree<a href="gene-tree-vs-species-tree.html#gene-tree-vs-species-tree" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="learning-goals" class="section level2 hasAnchor" number="11.1">
+<h2><span class="header-section-number">11.1</span> Learning goals:<a href="gene-tree-vs-species-tree.html#learning-goals" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Definition of coalescence</li>
+<li>Wright-Fisher population dynamics</li>
+<li>trace ancestry back in time</li>
+<li>common patterns of coalescence</li>
+<li>probability of deep coalescence</li>
+</ul>
+</div>
+<div id="tracing-ancestry-within-one-population" class="section level2 hasAnchor" number="11.2">
+<h2><span class="header-section-number">11.2</span> Tracing ancestry within one population<a href="gene-tree-vs-species-tree.html#tracing-ancestry-within-one-population" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Here we develop a code to sample ancestors of each generation back in
+time within a haploid population of a fixed population size.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="gene-tree-vs-species-tree.html#cb1-1" aria-hidden="true" tabindex="-1"></a>ancestryTrace<span class="ot">&lt;-</span><span class="cf">function</span>(<span class="at">n=</span><span class="dv">10</span>,<span class="at">generation =</span><span class="dv">10</span>){</span>
+<span id="cb1-2"><a href="gene-tree-vs-species-tree.html#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># n indicates the population size</span></span>
+<span id="cb1-3"><a href="gene-tree-vs-species-tree.html#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># leaf matrix: child lineage</span></span>
+<span id="cb1-4"><a href="gene-tree-vs-species-tree.html#cb1-4" aria-hidden="true" tabindex="-1"></a>  leafMat<span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span>(n),generation,n,<span class="at">byrow=</span>T)</span>
+<span id="cb1-5"><a href="gene-tree-vs-species-tree.html#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># parental nodes in the previous generation</span></span>
+<span id="cb1-6"><a href="gene-tree-vs-species-tree.html#cb1-6" aria-hidden="true" tabindex="-1"></a>  parentMat<span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="dv">0</span>,generation,n)</span>
+<span id="cb1-7"><a href="gene-tree-vs-species-tree.html#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># randomly sample a parent for each child (leaf node)</span></span>
+<span id="cb1-8"><a href="gene-tree-vs-species-tree.html#cb1-8" aria-hidden="true" tabindex="-1"></a>  parentMat[,]<span class="ot">&lt;-</span><span class="fu">ceiling</span>(<span class="fu">runif</span>(n<span class="sc">*</span>generation,<span class="dv">0</span>,n))</span>
+<span id="cb1-9"><a href="gene-tree-vs-species-tree.html#cb1-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-10"><a href="gene-tree-vs-species-tree.html#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (g <span class="cf">in</span> <span class="fu">seq</span>(generation,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>)){</span>
+<span id="cb1-11"><a href="gene-tree-vs-species-tree.html#cb1-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-12"><a href="gene-tree-vs-species-tree.html#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># reordering the labels of the parents per generation</span></span>
+<span id="cb1-13"><a href="gene-tree-vs-species-tree.html#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># and all the generations afterwards for parents and children</span></span>
+<span id="cb1-14"><a href="gene-tree-vs-species-tree.html#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># to make the graph look pretty</span></span>
+<span id="cb1-15"><a href="gene-tree-vs-species-tree.html#cb1-15" aria-hidden="true" tabindex="-1"></a>    newOrder<span class="ot">&lt;-</span><span class="fu">order</span>(parentMat[g,])</span>
+<span id="cb1-16"><a href="gene-tree-vs-species-tree.html#cb1-16" aria-hidden="true" tabindex="-1"></a>    parentMat[<span class="dv">1</span><span class="sc">:</span>g,]<span class="ot">&lt;-</span>parentMat[<span class="dv">1</span><span class="sc">:</span>g,newOrder]</span>
+<span id="cb1-17"><a href="gene-tree-vs-species-tree.html#cb1-17" aria-hidden="true" tabindex="-1"></a>    leafMat[<span class="dv">1</span><span class="sc">:</span>g,]<span class="ot">&lt;-</span>leafMat[<span class="dv">1</span><span class="sc">:</span>g,newOrder]</span>
+<span id="cb1-18"><a href="gene-tree-vs-species-tree.html#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">#relabeling</span></span>
+<span id="cb1-19"><a href="gene-tree-vs-species-tree.html#cb1-19" aria-hidden="true" tabindex="-1"></a>    oriLabel<span class="ot">&lt;-</span>leafMat[g,]</span>
+<span id="cb1-20"><a href="gene-tree-vs-species-tree.html#cb1-20" aria-hidden="true" tabindex="-1"></a>    newLabel<span class="ot">&lt;-</span>(<span class="dv">1</span><span class="sc">:</span>n)</span>
+<span id="cb1-21"><a href="gene-tree-vs-species-tree.html#cb1-21" aria-hidden="true" tabindex="-1"></a>    leafMat[g,]<span class="ot">&lt;-</span>newLabel</span>
+<span id="cb1-22"><a href="gene-tree-vs-species-tree.html#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(g<span class="sc">&gt;</span><span class="dv">1</span>){</span>
+<span id="cb1-23"><a href="gene-tree-vs-species-tree.html#cb1-23" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb1-24"><a href="gene-tree-vs-species-tree.html#cb1-24" aria-hidden="true" tabindex="-1"></a>        parentMat[g<span class="dv">-1</span>,j]<span class="ot">&lt;-</span>newLabel[oriLabel<span class="sc">==</span>parentMat[g<span class="dv">-1</span>,j]]</span>
+<span id="cb1-25"><a href="gene-tree-vs-species-tree.html#cb1-25" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb1-26"><a href="gene-tree-vs-species-tree.html#cb1-26" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-27"><a href="gene-tree-vs-species-tree.html#cb1-27" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-28"><a href="gene-tree-vs-species-tree.html#cb1-28" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-29"><a href="gene-tree-vs-species-tree.html#cb1-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-30"><a href="gene-tree-vs-species-tree.html#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ouput a table record all the linking patterns between a </span></span>
+<span id="cb1-31"><a href="gene-tree-vs-species-tree.html#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># child node and a parental node</span></span>
+<span id="cb1-32"><a href="gene-tree-vs-species-tree.html#cb1-32" aria-hidden="true" tabindex="-1"></a>  outDat<span class="ot">&lt;-</span><span class="fu">c</span>()</span>
+<span id="cb1-33"><a href="gene-tree-vs-species-tree.html#cb1-33" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (g <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>generation){</span>
+<span id="cb1-34"><a href="gene-tree-vs-species-tree.html#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb1-35"><a href="gene-tree-vs-species-tree.html#cb1-35" aria-hidden="true" tabindex="-1"></a>      outDat<span class="ot">&lt;-</span><span class="fu">rbind</span>(outDat,<span class="fu">c</span>(g,i,i,g<span class="dv">-1</span>))</span>
+<span id="cb1-36"><a href="gene-tree-vs-species-tree.html#cb1-36" aria-hidden="true" tabindex="-1"></a>      outDat<span class="ot">&lt;-</span><span class="fu">rbind</span>(outDat,<span class="fu">c</span>(g,i,parentMat[g,i],g))</span>
+<span id="cb1-37"><a href="gene-tree-vs-species-tree.html#cb1-37" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-38"><a href="gene-tree-vs-species-tree.html#cb1-38" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-39"><a href="gene-tree-vs-species-tree.html#cb1-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(outDat)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;generation&quot;</span>,<span class="st">&quot;ind&quot;</span>,<span class="st">&quot;x&quot;</span>,<span class="st">&quot;y&quot;</span>)</span>
+<span id="cb1-40"><a href="gene-tree-vs-species-tree.html#cb1-40" aria-hidden="true" tabindex="-1"></a>  <span class="co"># return the list of linking patterns, and the parent list</span></span>
+<span id="cb1-41"><a href="gene-tree-vs-species-tree.html#cb1-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="fu">as.data.frame</span>(outDat),parentMat))</span>
+<span id="cb1-42"><a href="gene-tree-vs-species-tree.html#cb1-42" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="gene-tree-vs-species-tree.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># getting as divergent color as possible for the individuals</span></span>
+<span id="cb2-2"><a href="gene-tree-vs-species-tree.html#cb2-2" aria-hidden="true" tabindex="-1"></a>color <span class="ot">=</span> grDevices<span class="sc">::</span><span class="fu">colors</span>()[<span class="fu">grep</span>(<span class="st">&#39;gr(a|e)y&#39;</span>, grDevices<span class="sc">::</span><span class="fu">colors</span>(), <span class="at">invert =</span> T)]</span>
+<span id="cb2-3"><a href="gene-tree-vs-species-tree.html#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="gene-tree-vs-species-tree.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># function to paint the color pattern nodes</span></span>
+<span id="cb2-5"><a href="gene-tree-vs-species-tree.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># each node will be colored according to its ancestor at g generations back</span></span>
+<span id="cb2-6"><a href="gene-tree-vs-species-tree.html#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="gene-tree-vs-species-tree.html#cb2-7" aria-hidden="true" tabindex="-1"></a>getColorPattern<span class="ot">&lt;-</span><span class="cf">function</span>(<span class="at">n=</span><span class="dv">10</span>,<span class="at">generation =</span> <span class="dv">10</span>, ancestorMat){</span>
+<span id="cb2-8"><a href="gene-tree-vs-species-tree.html#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># initiate a matrix of color</span></span>
+<span id="cb2-9"><a href="gene-tree-vs-species-tree.html#cb2-9" aria-hidden="true" tabindex="-1"></a>  colPat<span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="st">&quot;white&quot;</span>,generation<span class="sc">+</span><span class="dv">1</span>,n)</span>
+<span id="cb2-10"><a href="gene-tree-vs-species-tree.html#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sample the color for the ancestors</span></span>
+<span id="cb2-11"><a href="gene-tree-vs-species-tree.html#cb2-11" aria-hidden="true" tabindex="-1"></a>  colPat[generation<span class="sc">+</span><span class="dv">1</span>,]<span class="ot">&lt;-</span><span class="fu">sample</span>(color,n)</span>
+<span id="cb2-12"><a href="gene-tree-vs-species-tree.html#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># for each generation forward, the color of the node correspond to its </span></span>
+<span id="cb2-13"><a href="gene-tree-vs-species-tree.html#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">#parental node&#39;s color in the previous generation</span></span>
+<span id="cb2-14"><a href="gene-tree-vs-species-tree.html#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (g <span class="cf">in</span> <span class="fu">seq</span>(generation,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>)){</span>
+<span id="cb2-15"><a href="gene-tree-vs-species-tree.html#cb2-15" aria-hidden="true" tabindex="-1"></a>    colPat[g,]<span class="ot">&lt;-</span>colPat[g<span class="sc">+</span><span class="dv">1</span>,][ancestorMat[g,]]</span>
+<span id="cb2-16"><a href="gene-tree-vs-species-tree.html#cb2-16" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-17"><a href="gene-tree-vs-species-tree.html#cb2-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-18"><a href="gene-tree-vs-species-tree.html#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">#convert matrix to a tabular format</span></span>
+<span id="cb2-19"><a href="gene-tree-vs-species-tree.html#cb2-19" aria-hidden="true" tabindex="-1"></a>  outpoints<span class="ot">&lt;-</span><span class="fu">c</span>()</span>
+<span id="cb2-20"><a href="gene-tree-vs-species-tree.html#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (g <span class="cf">in</span> <span class="dv">0</span><span class="sc">:</span>generation){</span>
+<span id="cb2-21"><a href="gene-tree-vs-species-tree.html#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb2-22"><a href="gene-tree-vs-species-tree.html#cb2-22" aria-hidden="true" tabindex="-1"></a>      outpoints<span class="ot">&lt;-</span><span class="fu">rbind</span>(outpoints,<span class="fu">c</span>(i,g,colPat[g<span class="sc">+</span><span class="dv">1</span>,i]))</span>
+<span id="cb2-23"><a href="gene-tree-vs-species-tree.html#cb2-23" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-24"><a href="gene-tree-vs-species-tree.html#cb2-24" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-25"><a href="gene-tree-vs-species-tree.html#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(outpoints)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;x&quot;</span>,<span class="st">&quot;y&quot;</span>,<span class="st">&quot;color&quot;</span>)</span>
+<span id="cb2-26"><a href="gene-tree-vs-species-tree.html#cb2-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-27"><a href="gene-tree-vs-species-tree.html#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">as.data.frame</span>(outpoints))</span>
+<span id="cb2-28"><a href="gene-tree-vs-species-tree.html#cb2-28" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div id="vary-pop-size-and-generation" class="section level3 hasAnchor" number="11.2.1">
+<h3><span class="header-section-number">11.2.1</span> Vary pop size and generation<a href="gene-tree-vs-species-tree.html#vary-pop-size-and-generation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>let’s first explore the scenario of a pop size of 10 individuals tracing
+back 10 generations</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="gene-tree-vs-species-tree.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># n represents population size, </span></span>
+<span id="cb3-2"><a href="gene-tree-vs-species-tree.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># g represents the number of generations we trace back in time</span></span>
+<span id="cb3-3"><a href="gene-tree-vs-species-tree.html#cb3-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">10</span></span>
+<span id="cb3-4"><a href="gene-tree-vs-species-tree.html#cb3-4" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> <span class="dv">10</span></span>
+<span id="cb3-5"><a href="gene-tree-vs-species-tree.html#cb3-5" aria-hidden="true" tabindex="-1"></a>ancTree<span class="ot">&lt;-</span><span class="fu">ancestryTrace</span>(<span class="at">n=</span>n, <span class="at">generation=</span>g)</span>
+<span id="cb3-6"><a href="gene-tree-vs-species-tree.html#cb3-6" aria-hidden="true" tabindex="-1"></a>treeEdges <span class="ot">&lt;-</span> ancTree[[<span class="dv">1</span>]]</span>
+<span id="cb3-7"><a href="gene-tree-vs-species-tree.html#cb3-7" aria-hidden="true" tabindex="-1"></a>parentMatrix <span class="ot">&lt;-</span> ancTree[[<span class="dv">2</span>]]</span>
+<span id="cb3-8"><a href="gene-tree-vs-species-tree.html#cb3-8" aria-hidden="true" tabindex="-1"></a>colPat<span class="ot">&lt;-</span><span class="fu">getColorPattern</span>(<span class="at">n=</span>n, <span class="at">generation =</span>g, parentMatrix)</span>
+<span id="cb3-9"><a href="gene-tree-vs-species-tree.html#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Let&#39;s plot how this tracing of ancestors look</span></span>
+<span id="cb3-10"><a href="gene-tree-vs-species-tree.html#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="gene-tree-vs-species-tree.html#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># first plot all the individuals</span></span>
+<span id="cb3-12"><a href="gene-tree-vs-species-tree.html#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(colPat[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>],<span class="at">pch=</span><span class="dv">21</span>,<span class="at">col=</span><span class="st">&quot;black&quot;</span>,</span>
+<span id="cb3-13"><a href="gene-tree-vs-species-tree.html#cb3-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex=</span><span class="dv">3</span>,<span class="at">xlab=</span><span class="st">&quot;ind&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;generations back in time&quot;</span>)</span>
+<span id="cb3-14"><a href="gene-tree-vs-species-tree.html#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="gene-tree-vs-species-tree.html#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># plot connecting lines between parent and child</span></span>
+<span id="cb3-16"><a href="gene-tree-vs-species-tree.html#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>g){</span>
+<span id="cb3-17"><a href="gene-tree-vs-species-tree.html#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb3-18"><a href="gene-tree-vs-species-tree.html#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines</span>(treeEdges[(treeEdges<span class="sc">$</span>generation<span class="sc">==</span>k)<span class="sc">&amp;</span>(treeEdges<span class="sc">$</span>ind<span class="sc">==</span>i),<span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>],</span>
+<span id="cb3-19"><a href="gene-tree-vs-species-tree.html#cb3-19" aria-hidden="true" tabindex="-1"></a>          <span class="at">lty=</span><span class="dv">1</span>)</span>
+<span id="cb3-20"><a href="gene-tree-vs-species-tree.html#cb3-20" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-21"><a href="gene-tree-vs-species-tree.html#cb3-21" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/cl1-1.png" width="672" /></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="gene-tree-vs-species-tree.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add color to the plot</span></span>
+<span id="cb4-2"><a href="gene-tree-vs-species-tree.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(colPat[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>],<span class="at">pch=</span><span class="dv">21</span>,<span class="at">col=</span><span class="st">&quot;black&quot;</span>,</span>
+<span id="cb4-3"><a href="gene-tree-vs-species-tree.html#cb4-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">bg =</span> colPat[,<span class="dv">3</span>],</span>
+<span id="cb4-4"><a href="gene-tree-vs-species-tree.html#cb4-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex=</span><span class="dv">3</span>,<span class="at">xlab=</span><span class="st">&quot;ind&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;generations back in time&quot;</span>)</span>
+<span id="cb4-5"><a href="gene-tree-vs-species-tree.html#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="gene-tree-vs-species-tree.html#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="gene-tree-vs-species-tree.html#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># plot connecting lines between parent and child</span></span>
+<span id="cb4-8"><a href="gene-tree-vs-species-tree.html#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="gene-tree-vs-species-tree.html#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>g){</span>
+<span id="cb4-10"><a href="gene-tree-vs-species-tree.html#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb4-11"><a href="gene-tree-vs-species-tree.html#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines</span>(treeEdges[(treeEdges<span class="sc">$</span>generation<span class="sc">==</span>k)<span class="sc">&amp;</span>(treeEdges<span class="sc">$</span>ind<span class="sc">==</span>i),<span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>]</span>
+<span id="cb4-12"><a href="gene-tree-vs-species-tree.html#cb4-12" aria-hidden="true" tabindex="-1"></a>          ,<span class="at">lty=</span><span class="dv">1</span>,</span>
+<span id="cb4-13"><a href="gene-tree-vs-species-tree.html#cb4-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">col=</span>colPat[(colPat<span class="sc">$</span>x<span class="sc">==</span>i)<span class="sc">&amp;</span>(colPat<span class="sc">$</span>y<span class="sc">==</span>(k<span class="dv">-1</span>)),<span class="dv">3</span>])</span>
+<span id="cb4-14"><a href="gene-tree-vs-species-tree.html#cb4-14" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-15"><a href="gene-tree-vs-species-tree.html#cb4-15" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/cl1-2.png" width="672" /></p>
+</div>
+</div>
+<div id="speciation-and-coalescence" class="section level2 hasAnchor" number="11.3">
+<h2><span class="header-section-number">11.3</span> Speciation and coalescence<a href="gene-tree-vs-species-tree.html#speciation-and-coalescence" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Here we develop a two species evolutionary model that track the full
+population history of both species that diverged <em>T</em> generations ago.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="gene-tree-vs-species-tree.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">## coalescence of individuals from two species, which diverged T generations ago</span></span>
+<span id="cb5-2"><a href="gene-tree-vs-species-tree.html#cb5-2" aria-hidden="true" tabindex="-1"></a>coal2sp<span class="ot">&lt;-</span><span class="cf">function</span>(<span class="at">n1=</span><span class="dv">10</span>,<span class="at">n2=</span><span class="dv">10</span>, <span class="at">generation =</span> <span class="dv">10</span>,<span class="at">divergence =</span><span class="dv">5</span>){</span>
+<span id="cb5-3"><a href="gene-tree-vs-species-tree.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(generation<span class="sc">&lt;</span>divergence){</span>
+<span id="cb5-4"><a href="gene-tree-vs-species-tree.html#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>()</span>
+<span id="cb5-5"><a href="gene-tree-vs-species-tree.html#cb5-5" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-6"><a href="gene-tree-vs-species-tree.html#cb5-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-7"><a href="gene-tree-vs-species-tree.html#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># n indicates the population size</span></span>
+<span id="cb5-8"><a href="gene-tree-vs-species-tree.html#cb5-8" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">=</span> n1 <span class="sc">+</span> n2</span>
+<span id="cb5-9"><a href="gene-tree-vs-species-tree.html#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># leaf matrix: child lineage</span></span>
+<span id="cb5-10"><a href="gene-tree-vs-species-tree.html#cb5-10" aria-hidden="true" tabindex="-1"></a>  leafMat<span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span>(n),generation,n,<span class="at">byrow=</span>T)</span>
+<span id="cb5-11"><a href="gene-tree-vs-species-tree.html#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># parental nodes in the previous generation</span></span>
+<span id="cb5-12"><a href="gene-tree-vs-species-tree.html#cb5-12" aria-hidden="true" tabindex="-1"></a>  parentMat<span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="dv">0</span>,generation,n)</span>
+<span id="cb5-13"><a href="gene-tree-vs-species-tree.html#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># randomly sample a parent for each child (leaf node)</span></span>
+<span id="cb5-14"><a href="gene-tree-vs-species-tree.html#cb5-14" aria-hidden="true" tabindex="-1"></a>  parentMat[<span class="dv">1</span><span class="sc">:</span>divergence,<span class="dv">1</span><span class="sc">:</span>n1]<span class="ot">&lt;-</span><span class="fu">ceiling</span>(<span class="fu">runif</span>(n1<span class="sc">*</span>divergence,<span class="dv">0</span>,n1))</span>
+<span id="cb5-15"><a href="gene-tree-vs-species-tree.html#cb5-15" aria-hidden="true" tabindex="-1"></a>  parentMat[<span class="dv">1</span><span class="sc">:</span>divergence,(n1<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>n]<span class="ot">&lt;-</span><span class="fu">ceiling</span>(<span class="fu">runif</span>(n2<span class="sc">*</span>divergence,n1,n))</span>
+<span id="cb5-16"><a href="gene-tree-vs-species-tree.html#cb5-16" aria-hidden="true" tabindex="-1"></a>  parentMat[(divergence<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>generation,<span class="dv">1</span><span class="sc">:</span>n]<span class="ot">&lt;-</span><span class="fu">ceiling</span>(<span class="fu">runif</span>(n<span class="sc">*</span>(generation<span class="sc">-</span>divergence),<span class="dv">0</span>,n))</span>
+<span id="cb5-17"><a href="gene-tree-vs-species-tree.html#cb5-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-18"><a href="gene-tree-vs-species-tree.html#cb5-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-19"><a href="gene-tree-vs-species-tree.html#cb5-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (g <span class="cf">in</span> <span class="fu">seq</span>(generation,divergence<span class="sc">+</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>)){</span>
+<span id="cb5-20"><a href="gene-tree-vs-species-tree.html#cb5-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-21"><a href="gene-tree-vs-species-tree.html#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># reordering the labels of the parents per generation</span></span>
+<span id="cb5-22"><a href="gene-tree-vs-species-tree.html#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># and all the generations afterwards for parents and children</span></span>
+<span id="cb5-23"><a href="gene-tree-vs-species-tree.html#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># to make the graph look pretty</span></span>
+<span id="cb5-24"><a href="gene-tree-vs-species-tree.html#cb5-24" aria-hidden="true" tabindex="-1"></a>    newOrder<span class="ot">&lt;-</span><span class="fu">order</span>(parentMat[g,])</span>
+<span id="cb5-25"><a href="gene-tree-vs-species-tree.html#cb5-25" aria-hidden="true" tabindex="-1"></a>    parentMat[(divergence<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>g,]<span class="ot">&lt;-</span>parentMat[(divergence<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>g,newOrder]</span>
+<span id="cb5-26"><a href="gene-tree-vs-species-tree.html#cb5-26" aria-hidden="true" tabindex="-1"></a>    leafMat[(divergence<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>g,]<span class="ot">&lt;-</span>leafMat[(divergence<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>g,newOrder]</span>
+<span id="cb5-27"><a href="gene-tree-vs-species-tree.html#cb5-27" aria-hidden="true" tabindex="-1"></a>    <span class="co">#relabeling</span></span>
+<span id="cb5-28"><a href="gene-tree-vs-species-tree.html#cb5-28" aria-hidden="true" tabindex="-1"></a>    oriLabel<span class="ot">&lt;-</span>leafMat[g,]</span>
+<span id="cb5-29"><a href="gene-tree-vs-species-tree.html#cb5-29" aria-hidden="true" tabindex="-1"></a>    newLabel<span class="ot">&lt;-</span>(<span class="dv">1</span><span class="sc">:</span>n)</span>
+<span id="cb5-30"><a href="gene-tree-vs-species-tree.html#cb5-30" aria-hidden="true" tabindex="-1"></a>    leafMat[g,]<span class="ot">&lt;-</span>newLabel</span>
+<span id="cb5-31"><a href="gene-tree-vs-species-tree.html#cb5-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(g<span class="sc">&gt;</span>(divergence<span class="sc">+</span><span class="dv">1</span>)){</span>
+<span id="cb5-32"><a href="gene-tree-vs-species-tree.html#cb5-32" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb5-33"><a href="gene-tree-vs-species-tree.html#cb5-33" aria-hidden="true" tabindex="-1"></a>        parentMat[g<span class="dv">-1</span>,j]<span class="ot">&lt;-</span>newLabel[oriLabel<span class="sc">==</span>parentMat[g<span class="dv">-1</span>,j]]</span>
+<span id="cb5-34"><a href="gene-tree-vs-species-tree.html#cb5-34" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb5-35"><a href="gene-tree-vs-species-tree.html#cb5-35" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb5-36"><a href="gene-tree-vs-species-tree.html#cb5-36" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-37"><a href="gene-tree-vs-species-tree.html#cb5-37" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-38"><a href="gene-tree-vs-species-tree.html#cb5-38" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-39"><a href="gene-tree-vs-species-tree.html#cb5-39" aria-hidden="true" tabindex="-1"></a>  popIndex<span class="ot">&lt;-</span><span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span>n1,(n1<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>n)</span>
+<span id="cb5-40"><a href="gene-tree-vs-species-tree.html#cb5-40" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (g <span class="cf">in</span> <span class="fu">seq</span>(divergence<span class="sc">+</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>)){</span>
+<span id="cb5-41"><a href="gene-tree-vs-species-tree.html#cb5-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(popIndex)){</span>
+<span id="cb5-42"><a href="gene-tree-vs-species-tree.html#cb5-42" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-43"><a href="gene-tree-vs-species-tree.html#cb5-43" aria-hidden="true" tabindex="-1"></a>      <span class="co"># reordering the labels of the parents per generation</span></span>
+<span id="cb5-44"><a href="gene-tree-vs-species-tree.html#cb5-44" aria-hidden="true" tabindex="-1"></a>      <span class="co"># and all the generations afterwards for parents and children</span></span>
+<span id="cb5-45"><a href="gene-tree-vs-species-tree.html#cb5-45" aria-hidden="true" tabindex="-1"></a>      <span class="co"># to make the graph look pretty</span></span>
+<span id="cb5-46"><a href="gene-tree-vs-species-tree.html#cb5-46" aria-hidden="true" tabindex="-1"></a>      newOrder<span class="ot">&lt;-</span><span class="fu">order</span>(parentMat[g,popIndex[[i]]])</span>
+<span id="cb5-47"><a href="gene-tree-vs-species-tree.html#cb5-47" aria-hidden="true" tabindex="-1"></a>      parentMat[<span class="dv">1</span><span class="sc">:</span>g,popIndex[[i]]]<span class="ot">&lt;-</span>parentMat[<span class="dv">1</span><span class="sc">:</span>g,newOrder<span class="sc">+</span><span class="fu">min</span>(popIndex[[i]])<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb5-48"><a href="gene-tree-vs-species-tree.html#cb5-48" aria-hidden="true" tabindex="-1"></a>      leafMat[<span class="dv">1</span><span class="sc">:</span>g,popIndex[[i]]]<span class="ot">&lt;-</span>leafMat[<span class="dv">1</span><span class="sc">:</span>g,newOrder<span class="sc">+</span><span class="fu">min</span>(popIndex[[i]])<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb5-49"><a href="gene-tree-vs-species-tree.html#cb5-49" aria-hidden="true" tabindex="-1"></a>      <span class="co">#relabeling</span></span>
+<span id="cb5-50"><a href="gene-tree-vs-species-tree.html#cb5-50" aria-hidden="true" tabindex="-1"></a>      oriLabel<span class="ot">&lt;-</span>leafMat[g,popIndex[[i]]]</span>
+<span id="cb5-51"><a href="gene-tree-vs-species-tree.html#cb5-51" aria-hidden="true" tabindex="-1"></a>      newLabel<span class="ot">&lt;-</span>popIndex[[i]]</span>
+<span id="cb5-52"><a href="gene-tree-vs-species-tree.html#cb5-52" aria-hidden="true" tabindex="-1"></a>      leafMat[g,popIndex[[i]]]<span class="ot">&lt;-</span>newLabel</span>
+<span id="cb5-53"><a href="gene-tree-vs-species-tree.html#cb5-53" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span>(g<span class="sc">&gt;</span><span class="dv">1</span>){</span>
+<span id="cb5-54"><a href="gene-tree-vs-species-tree.html#cb5-54" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span>(j <span class="cf">in</span> popIndex[[i]]){</span>
+<span id="cb5-55"><a href="gene-tree-vs-species-tree.html#cb5-55" aria-hidden="true" tabindex="-1"></a>          parentMat[g<span class="dv">-1</span>,j]<span class="ot">&lt;-</span>newLabel[oriLabel<span class="sc">==</span>parentMat[g<span class="dv">-1</span>,j]]</span>
+<span id="cb5-56"><a href="gene-tree-vs-species-tree.html#cb5-56" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb5-57"><a href="gene-tree-vs-species-tree.html#cb5-57" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb5-58"><a href="gene-tree-vs-species-tree.html#cb5-58" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-59"><a href="gene-tree-vs-species-tree.html#cb5-59" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb5-60"><a href="gene-tree-vs-species-tree.html#cb5-60" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-61"><a href="gene-tree-vs-species-tree.html#cb5-61" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-62"><a href="gene-tree-vs-species-tree.html#cb5-62" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-63"><a href="gene-tree-vs-species-tree.html#cb5-63" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ouput a table record all the linking patterns between a </span></span>
+<span id="cb5-64"><a href="gene-tree-vs-species-tree.html#cb5-64" aria-hidden="true" tabindex="-1"></a>  <span class="co"># child node and a parental node</span></span>
+<span id="cb5-65"><a href="gene-tree-vs-species-tree.html#cb5-65" aria-hidden="true" tabindex="-1"></a>  outDat<span class="ot">&lt;-</span><span class="fu">c</span>()</span>
+<span id="cb5-66"><a href="gene-tree-vs-species-tree.html#cb5-66" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (g <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>generation){</span>
+<span id="cb5-67"><a href="gene-tree-vs-species-tree.html#cb5-67" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb5-68"><a href="gene-tree-vs-species-tree.html#cb5-68" aria-hidden="true" tabindex="-1"></a>      outDat<span class="ot">&lt;-</span><span class="fu">rbind</span>(outDat,<span class="fu">c</span>(g,i,i,g<span class="dv">-1</span>))</span>
+<span id="cb5-69"><a href="gene-tree-vs-species-tree.html#cb5-69" aria-hidden="true" tabindex="-1"></a>      outDat<span class="ot">&lt;-</span><span class="fu">rbind</span>(outDat,<span class="fu">c</span>(g,i,parentMat[g,i],g))</span>
+<span id="cb5-70"><a href="gene-tree-vs-species-tree.html#cb5-70" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb5-71"><a href="gene-tree-vs-species-tree.html#cb5-71" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-72"><a href="gene-tree-vs-species-tree.html#cb5-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(outDat)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;generation&quot;</span>,<span class="st">&quot;ind&quot;</span>,<span class="st">&quot;x&quot;</span>,<span class="st">&quot;y&quot;</span>)</span>
+<span id="cb5-73"><a href="gene-tree-vs-species-tree.html#cb5-73" aria-hidden="true" tabindex="-1"></a>  <span class="co"># return the list of linking patterns, and the parent list</span></span>
+<span id="cb5-74"><a href="gene-tree-vs-species-tree.html#cb5-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="fu">as.data.frame</span>(outDat),parentMat))</span>
+<span id="cb5-75"><a href="gene-tree-vs-species-tree.html#cb5-75" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div id="two-species-coalescent-history" class="section level3 hasAnchor" number="11.3.1">
+<h3><span class="header-section-number">11.3.1</span> Two-species coalescent history<a href="gene-tree-vs-species-tree.html#two-species-coalescent-history" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="gene-tree-vs-species-tree.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#number of individuals in SpeciesA</span></span>
+<span id="cb6-2"><a href="gene-tree-vs-species-tree.html#cb6-2" aria-hidden="true" tabindex="-1"></a>n1 <span class="ot">=</span> <span class="dv">10</span></span>
+<span id="cb6-3"><a href="gene-tree-vs-species-tree.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#number of individuals in SpeciesB</span></span>
+<span id="cb6-4"><a href="gene-tree-vs-species-tree.html#cb6-4" aria-hidden="true" tabindex="-1"></a>n2 <span class="ot">=</span> <span class="dv">10</span></span>
+<span id="cb6-5"><a href="gene-tree-vs-species-tree.html#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Total generation</span></span>
+<span id="cb6-6"><a href="gene-tree-vs-species-tree.html#cb6-6" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> <span class="dv">10</span></span>
+<span id="cb6-7"><a href="gene-tree-vs-species-tree.html#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Divergence time (divergence time needs to be shorter than the total generation)</span></span>
+<span id="cb6-8"><a href="gene-tree-vs-species-tree.html#cb6-8" aria-hidden="true" tabindex="-1"></a>d <span class="ot">=</span> <span class="dv">5</span></span>
+<span id="cb6-9"><a href="gene-tree-vs-species-tree.html#cb6-9" aria-hidden="true" tabindex="-1"></a>ancTree<span class="ot">&lt;-</span><span class="fu">coal2sp</span>(n1,n2,g,d)</span>
+<span id="cb6-10"><a href="gene-tree-vs-species-tree.html#cb6-10" aria-hidden="true" tabindex="-1"></a>treeEdges <span class="ot">&lt;-</span> ancTree[[<span class="dv">1</span>]]</span>
+<span id="cb6-11"><a href="gene-tree-vs-species-tree.html#cb6-11" aria-hidden="true" tabindex="-1"></a>parentMatrix <span class="ot">&lt;-</span> ancTree[[<span class="dv">2</span>]]</span>
+<span id="cb6-12"><a href="gene-tree-vs-species-tree.html#cb6-12" aria-hidden="true" tabindex="-1"></a>colPat<span class="ot">&lt;-</span><span class="fu">getColorPattern</span>(n1<span class="sc">+</span>n2,g,parentMatrix)</span>
+<span id="cb6-13"><a href="gene-tree-vs-species-tree.html#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="gene-tree-vs-species-tree.html#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the genealogy of individuals from two species</span></span>
+<span id="cb6-15"><a href="gene-tree-vs-species-tree.html#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(colPat[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>],<span class="at">pch=</span><span class="dv">21</span>,<span class="at">col=</span><span class="st">&quot;black&quot;</span>,</span>
+<span id="cb6-16"><a href="gene-tree-vs-species-tree.html#cb6-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">bg=</span>colPat<span class="sc">$</span>color,<span class="at">cex=</span><span class="dv">3</span>,<span class="at">xlab=</span><span class="st">&quot;&quot;</span>,</span>
+<span id="cb6-17"><a href="gene-tree-vs-species-tree.html#cb6-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;generations back in time&quot;</span>,</span>
+<span id="cb6-18"><a href="gene-tree-vs-species-tree.html#cb6-18" aria-hidden="true" tabindex="-1"></a>     <span class="at">xaxt =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb6-19"><a href="gene-tree-vs-species-tree.html#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(n1<span class="fl">+0.5</span>, <span class="dv">0</span><span class="fl">-0.5</span>, n1<span class="fl">+0.5</span>, d<span class="fl">+0.5</span>,<span class="at">lty=</span><span class="dv">1</span>,<span class="at">cex=</span><span class="dv">4</span>)</span>
+<span id="cb6-20"><a href="gene-tree-vs-species-tree.html#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> d<span class="fl">+0.5</span>,<span class="at">lty=</span><span class="dv">2</span>)</span>
+<span id="cb6-21"><a href="gene-tree-vs-species-tree.html#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="sc">-</span><span class="fl">0.5</span>,d<span class="fl">+0.5</span>,<span class="st">&quot;Div T&quot;</span>, <span class="at">xpd=</span><span class="cn">NA</span>)</span>
+<span id="cb6-22"><a href="gene-tree-vs-species-tree.html#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="fu">c</span>(n1<span class="sc">/</span><span class="dv">2</span>,(n1<span class="sc">+</span><span class="dv">2</span><span class="sc">+</span>n1<span class="sc">+</span>n2)<span class="sc">/</span><span class="dv">2</span>),<span class="at">y=</span><span class="sc">-</span><span class="dv">1</span>,<span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Species A&quot;</span>, <span class="st">&quot;Species B&quot;</span>), <span class="at">xpd=</span><span class="cn">NA</span>)</span>
+<span id="cb6-23"><a href="gene-tree-vs-species-tree.html#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>g){</span>
+<span id="cb6-24"><a href="gene-tree-vs-species-tree.html#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(n1<span class="sc">+</span>n2)){</span>
+<span id="cb6-25"><a href="gene-tree-vs-species-tree.html#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines</span>(treeEdges[(treeEdges<span class="sc">$</span>generation<span class="sc">==</span>k)<span class="sc">&amp;</span>(treeEdges<span class="sc">$</span>ind<span class="sc">==</span>i),<span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>]</span>
+<span id="cb6-26"><a href="gene-tree-vs-species-tree.html#cb6-26" aria-hidden="true" tabindex="-1"></a>          ,<span class="at">lty=</span><span class="dv">1</span>,<span class="at">col=</span>colPat[(colPat<span class="sc">$</span>x<span class="sc">==</span>i)<span class="sc">&amp;</span>(colPat<span class="sc">$</span>y<span class="sc">==</span>(k<span class="dv">-1</span>)),<span class="dv">3</span>])</span>
+<span id="cb6-27"><a href="gene-tree-vs-species-tree.html#cb6-27" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb6-28"><a href="gene-tree-vs-species-tree.html#cb6-28" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/cl2-1.png" width="672" /></p>
+</div>
+</div>
+<div id="exercise-i" class="section level2 hasAnchor" number="11.4">
+<h2><span class="header-section-number">11.4</span> Exercise I<a href="gene-tree-vs-species-tree.html#exercise-i" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Using the one population coalescence model to answer the following
+questions:</p>
+<ol style="list-style-type: decimal">
+<li><ol style="list-style-type: lower-alpha">
+<li>run one instance of the model: when the pop size (n) is 10, and
+the generation time (g) is 10, how many ancestors still have
+child lineages at generation 5? how many ancestors still have
+child lineages at generation 10 back in time?</li>
+</ol></li>
+</ol>
+<!-- -->
+<ol start="2" style="list-style-type: lower-alpha">
+<li>run 10 iterations of the code above. out of these replicates, how
+many ancestors still have child lineages at generation 5 and 10 back
+in time? what can you conclude from this observation: do populations
+tend to coalesce faster in earlier generations or later generations?
+and why? [Hint: use <code>length(unique(colPat[colPat$y==0, 3]))</code> to get
+the number of ancestors at the last generation back in time]</li>
+</ol>
+<!-- -->
+<ol start="2" style="list-style-type: decimal">
+<li><p>vary the population sizes run the code and explore the coalescence
+patterns of larger or smaller pop sizes, longer or short
+generations. Question: do populations coalesce faster with larger
+population sizes or smaller population sizes? do populations
+coalesce faster in earlier generations or later generations?</p></li>
+<li><p>bonus: write a for-loop for 1000 iterations, and calculate the
+average number of generations it takes for all the current
+individuals (n=10) to find a common ancestor (the remaining number
+of ancestors = 1).</p></li>
+</ol>
+<p>Hint: set <code>g</code> to a very large number, e.g., 200, and call
+<code>ancTree&lt;-ancestryTrace(n=10,g=200); parentMatrix &lt;- ancTree[[2]]</code>, then</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="gene-tree-vs-species-tree.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (gv <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">200</span>) {</span>
+<span id="cb7-2"><a href="gene-tree-vs-species-tree.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  colPat<span class="ot">&lt;-</span><span class="fu">getColorPattern</span>(n,gv,parentMatrix)</span>
+<span id="cb7-3"><a href="gene-tree-vs-species-tree.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">#remaining # of ancestors</span></span>
+<span id="cb7-4"><a href="gene-tree-vs-species-tree.html#cb7-4" aria-hidden="true" tabindex="-1"></a>  remAnc <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(colPat[colPat<span class="sc">$</span>y<span class="sc">==</span><span class="dv">0</span>, <span class="dv">3</span>]))</span>
+<span id="cb7-5"><a href="gene-tree-vs-species-tree.html#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (remAnc <span class="sc">==</span> <span class="dv">1</span>) {</span>
+<span id="cb7-6"><a href="gene-tree-vs-species-tree.html#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="do">### we got the generation when all individuals find one common ancestor</span></span>
+<span id="cb7-7"><a href="gene-tree-vs-species-tree.html#cb7-7" aria-hidden="true" tabindex="-1"></a>    T_tot <span class="ot">=</span> gv</span>
+<span id="cb7-8"><a href="gene-tree-vs-species-tree.html#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="do">### stop the for-loop </span></span>
+<span id="cb7-9"><a href="gene-tree-vs-species-tree.html#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span></span>
+<span id="cb7-10"><a href="gene-tree-vs-species-tree.html#cb7-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-11"><a href="gene-tree-vs-species-tree.html#cb7-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>repeat the above process 1000 times, and store <code>T_tot</code> in a vector, report the average of <code>T_tot</code>.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>Use the two-population coalescence model to answer the following
+question: vary the divergence time (d) and run the following three scenarios:
+<ol style="list-style-type: lower-alpha">
+<li>d=5, g=15; b) d=10, g=20; c) d=20, g=25. run 10 iterations of the
+code and calculate the probability that two species still have
+multiple ancestors at the last generation back in time. What can you
+conclude from the results?</li>
+</ol></li>
+</ol>
+</div>
+<div id="gene-tree-locus-tree-and-species-tree" class="section level2 hasAnchor" number="11.5">
+<h2><span class="header-section-number">11.5</span> Gene tree, Locus tree and Species tree<a href="gene-tree-vs-species-tree.html#gene-tree-locus-tree-and-species-tree" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="loading-data-and-packages" class="section level3 hasAnchor" number="11.5.1">
+<h3><span class="header-section-number">11.5.1</span> loading data and packages<a href="gene-tree-vs-species-tree.html#loading-data-and-packages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>treeducken is a package for simulating gene trees under species
+tree/locus tree or cophylogenetic simulation of host-sybiont systems</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="gene-tree-vs-species-tree.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;treeducken&quot;)</span></span>
+<span id="cb8-2"><a href="gene-tree-vs-species-tree.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;phangorn&quot;)</span></span>
+<span id="cb8-3"><a href="gene-tree-vs-species-tree.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(treeducken)</span>
+<span id="cb8-4"><a href="gene-tree-vs-species-tree.html#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(phangorn)</span>
+<span id="cb8-5"><a href="gene-tree-vs-species-tree.html#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="gene-tree-vs-species-tree.html#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="do">##</span></span>
+<span id="cb8-7"><a href="gene-tree-vs-species-tree.html#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">34</span>)</span></code></pre></div>
+</div>
+</div>
+<div id="effects-of-incomplete-lineage-sorting-ils-alone" class="section level2 hasAnchor" number="11.6">
+<h2><span class="header-section-number">11.6</span> Effects of Incomplete Lineage Sorting (ILS) alone<a href="gene-tree-vs-species-tree.html#effects-of-incomplete-lineage-sorting-ils-alone" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="generate-species-tree-with-no-extinction" class="section level3 hasAnchor" number="11.6.1">
+<h3><span class="header-section-number">11.6.1</span> generate species tree with no extinction<a href="gene-tree-vs-species-tree.html#generate-species-tree-with-no-extinction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="gene-tree-vs-species-tree.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="do">## speciation rate</span></span>
+<span id="cb9-2"><a href="gene-tree-vs-species-tree.html#cb9-2" aria-hidden="true" tabindex="-1"></a>lambda<span class="ot">&lt;-</span><span class="fl">1.0</span></span>
+<span id="cb9-3"><a href="gene-tree-vs-species-tree.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="do">## death rate</span></span>
+<span id="cb9-4"><a href="gene-tree-vs-species-tree.html#cb9-4" aria-hidden="true" tabindex="-1"></a>mu<span class="ot">&lt;-</span><span class="dv">0</span></span>
+<span id="cb9-5"><a href="gene-tree-vs-species-tree.html#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="do">## number of replications</span></span>
+<span id="cb9-6"><a href="gene-tree-vs-species-tree.html#cb9-6" aria-hidden="true" tabindex="-1"></a>numb_replicates<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb9-7"><a href="gene-tree-vs-species-tree.html#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="do">## number of current species</span></span>
+<span id="cb9-8"><a href="gene-tree-vs-species-tree.html#cb9-8" aria-hidden="true" tabindex="-1"></a>numb_extant_tips<span class="ot">&lt;-</span><span class="dv">4</span></span>
+<span id="cb9-9"><a href="gene-tree-vs-species-tree.html#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="gene-tree-vs-species-tree.html#cb9-10" aria-hidden="true" tabindex="-1"></a>sptree_no_extinction <span class="ot">&lt;-</span> <span class="fu">sim_stBD</span>(<span class="at">sbr =</span> lambda,</span>
+<span id="cb9-11"><a href="gene-tree-vs-species-tree.html#cb9-11" aria-hidden="true" tabindex="-1"></a>                      <span class="at">sdr =</span> mu,</span>
+<span id="cb9-12"><a href="gene-tree-vs-species-tree.html#cb9-12" aria-hidden="true" tabindex="-1"></a>                      <span class="at">numbsim =</span> numb_replicates,</span>
+<span id="cb9-13"><a href="gene-tree-vs-species-tree.html#cb9-13" aria-hidden="true" tabindex="-1"></a>                      <span class="at">n_tips =</span> numb_extant_tips)</span>
+<span id="cb9-14"><a href="gene-tree-vs-species-tree.html#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect the tree</span></span>
+<span id="cb9-15"><a href="gene-tree-vs-species-tree.html#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfcol =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb9-16"><a href="gene-tree-vs-species-tree.html#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sptree_no_extinction[[<span class="dv">1</span>]])</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/pn1-1.png" width="672" /></p>
+</div>
+<div id="simulate-gene-trees-using-the-multispecies-coalescent-process" class="section level3 hasAnchor" number="11.6.2">
+<h3><span class="header-section-number">11.6.2</span> simulate gene trees using the multispecies coalescent process<a href="gene-tree-vs-species-tree.html#simulate-gene-trees-using-the-multispecies-coalescent-process" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let’s inspect the probability of ILS given different theta values. Theta
+is the product of population size and mutation rate per generation. If we are considering a diploid population with sexual reproduction,
+<span class="math display">\[\theta = 4 N_e \mu\]</span>
+If the population we are simulation is a haploid population with asexual reproduction,
+<span class="math display">\[\theta = 2 N_e \mu\]</span>
+where <span class="math inline">\(N_e\)</span> is the effective population size, and <span class="math inline">\(\mu\)</span> is the mutation rate of the genes per generation.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="gene-tree-vs-species-tree.html#cb10-1" aria-hidden="true" tabindex="-1"></a>theta<span class="ot">&lt;-</span><span class="fl">0.1</span></span>
+<span id="cb10-2"><a href="gene-tree-vs-species-tree.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#number of genes to simulate</span></span>
+<span id="cb10-3"><a href="gene-tree-vs-species-tree.html#cb10-3" aria-hidden="true" tabindex="-1"></a>n_gene<span class="ot">&lt;-</span><span class="dv">100</span></span>
+<span id="cb10-4"><a href="gene-tree-vs-species-tree.html#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#number of individuals sampled per species</span></span>
+<span id="cb10-5"><a href="gene-tree-vs-species-tree.html#cb10-5" aria-hidden="true" tabindex="-1"></a>n_ind<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb10-6"><a href="gene-tree-vs-species-tree.html#cb10-6" aria-hidden="true" tabindex="-1"></a>gtree_coal_only_1<span class="ot">&lt;-</span> <span class="fu">sim_msc</span>(sptree_no_extinction[[<span class="dv">1</span>]],</span>
+<span id="cb10-7"><a href="gene-tree-vs-species-tree.html#cb10-7" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">ne =</span> theta,</span>
+<span id="cb10-8"><a href="gene-tree-vs-species-tree.html#cb10-8" aria-hidden="true" tabindex="-1"></a>                        <span class="at">num_sampled_individuals =</span> n_ind,</span>
+<span id="cb10-9"><a href="gene-tree-vs-species-tree.html#cb10-9" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">num_genes=</span>n_gene,</span>
+<span id="cb10-10"><a href="gene-tree-vs-species-tree.html#cb10-10" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">rescale =</span> F)</span>
+<span id="cb10-11"><a href="gene-tree-vs-species-tree.html#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="gene-tree-vs-species-tree.html#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfcol =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb10-13"><a href="gene-tree-vs-species-tree.html#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gtree_coal_only_1[[<span class="dv">1</span>]]<span class="sc">$</span>gene.trees[[<span class="dv">1</span>]])</span>
+<span id="cb10-14"><a href="gene-tree-vs-species-tree.html#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gtree_coal_only_1[[<span class="dv">1</span>]]<span class="sc">$</span>gene.trees[[<span class="dv">2</span>]])</span>
+<span id="cb10-15"><a href="gene-tree-vs-species-tree.html#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gtree_coal_only_1[[<span class="dv">1</span>]]<span class="sc">$</span>gene.trees[[<span class="dv">3</span>]])</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/pn2-1.png" width="672" /></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="gene-tree-vs-species-tree.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="do">## repeat the analysis with a larger theta value</span></span>
+<span id="cb11-2"><a href="gene-tree-vs-species-tree.html#cb11-2" aria-hidden="true" tabindex="-1"></a>theta<span class="ot">&lt;-</span><span class="fl">0.5</span></span>
+<span id="cb11-3"><a href="gene-tree-vs-species-tree.html#cb11-3" aria-hidden="true" tabindex="-1"></a>gtree_coal_only_2<span class="ot">&lt;-</span> <span class="fu">sim_msc</span>(sptree_no_extinction[[<span class="dv">1</span>]],</span>
+<span id="cb11-4"><a href="gene-tree-vs-species-tree.html#cb11-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">ne =</span> theta,</span>
+<span id="cb11-5"><a href="gene-tree-vs-species-tree.html#cb11-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">num_sampled_individuals =</span> n_ind,</span>
+<span id="cb11-6"><a href="gene-tree-vs-species-tree.html#cb11-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">num_genes=</span>n_gene,</span>
+<span id="cb11-7"><a href="gene-tree-vs-species-tree.html#cb11-7" aria-hidden="true" tabindex="-1"></a>                            <span class="at">rescale =</span> F)</span>
+<span id="cb11-8"><a href="gene-tree-vs-species-tree.html#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfcol =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb11-9"><a href="gene-tree-vs-species-tree.html#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gtree_coal_only_2[[<span class="dv">1</span>]]<span class="sc">$</span>gene.trees[[<span class="dv">1</span>]])</span>
+<span id="cb11-10"><a href="gene-tree-vs-species-tree.html#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gtree_coal_only_2[[<span class="dv">1</span>]]<span class="sc">$</span>gene.trees[[<span class="dv">2</span>]])</span>
+<span id="cb11-11"><a href="gene-tree-vs-species-tree.html#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gtree_coal_only_2[[<span class="dv">1</span>]]<span class="sc">$</span>gene.trees[[<span class="dv">3</span>]])</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/pn2-2.png" width="672" /></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="gene-tree-vs-species-tree.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="do">## repeat the analysis with a larger theta value</span></span>
+<span id="cb12-2"><a href="gene-tree-vs-species-tree.html#cb12-2" aria-hidden="true" tabindex="-1"></a>theta<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb12-3"><a href="gene-tree-vs-species-tree.html#cb12-3" aria-hidden="true" tabindex="-1"></a>gtree_coal_only_3<span class="ot">&lt;-</span> <span class="fu">sim_msc</span>(sptree_no_extinction[[<span class="dv">1</span>]],</span>
+<span id="cb12-4"><a href="gene-tree-vs-species-tree.html#cb12-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">ne =</span> theta,</span>
+<span id="cb12-5"><a href="gene-tree-vs-species-tree.html#cb12-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">num_sampled_individuals =</span> n_ind,</span>
+<span id="cb12-6"><a href="gene-tree-vs-species-tree.html#cb12-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">num_genes=</span>n_gene,</span>
+<span id="cb12-7"><a href="gene-tree-vs-species-tree.html#cb12-7" aria-hidden="true" tabindex="-1"></a>                            <span class="at">rescale =</span> F)</span>
+<span id="cb12-8"><a href="gene-tree-vs-species-tree.html#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="gene-tree-vs-species-tree.html#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfcol =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb12-10"><a href="gene-tree-vs-species-tree.html#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gtree_coal_only_3[[<span class="dv">1</span>]]<span class="sc">$</span>gene.trees[[<span class="dv">5</span>]],<span class="at">cex=</span><span class="dv">2</span>)</span>
+<span id="cb12-11"><a href="gene-tree-vs-species-tree.html#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gtree_coal_only_3[[<span class="dv">1</span>]]<span class="sc">$</span>gene.trees[[<span class="dv">6</span>]],<span class="at">cex=</span><span class="dv">2</span>)</span>
+<span id="cb12-12"><a href="gene-tree-vs-species-tree.html#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gtree_coal_only_3[[<span class="dv">1</span>]]<span class="sc">$</span>gene.trees[[<span class="dv">7</span>]],<span class="at">cex=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/pn2-3.png" width="672" /></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="gene-tree-vs-species-tree.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="do">## how does the cloud of gene trees look like </span></span>
+<span id="cb13-2"><a href="gene-tree-vs-species-tree.html#cb13-2" aria-hidden="true" tabindex="-1"></a>genetree_list_1<span class="ot">&lt;-</span>gtree_coal_only_1[[<span class="dv">1</span>]]<span class="sc">$</span>gene.trees</span>
+<span id="cb13-3"><a href="gene-tree-vs-species-tree.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(genetree_list_1)<span class="ot">&lt;-</span><span class="st">&quot;multiPhylo&quot;</span></span>
+<span id="cb13-4"><a href="gene-tree-vs-species-tree.html#cb13-4" aria-hidden="true" tabindex="-1"></a>genetree_list_2<span class="ot">&lt;-</span>gtree_coal_only_2[[<span class="dv">1</span>]]<span class="sc">$</span>gene.trees</span>
+<span id="cb13-5"><a href="gene-tree-vs-species-tree.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(genetree_list_2)<span class="ot">&lt;-</span><span class="st">&quot;multiPhylo&quot;</span></span>
+<span id="cb13-6"><a href="gene-tree-vs-species-tree.html#cb13-6" aria-hidden="true" tabindex="-1"></a>genetree_list_3<span class="ot">&lt;-</span>gtree_coal_only_3[[<span class="dv">1</span>]]<span class="sc">$</span>gene.trees</span>
+<span id="cb13-7"><a href="gene-tree-vs-species-tree.html#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(genetree_list_3)<span class="ot">&lt;-</span><span class="st">&quot;multiPhylo&quot;</span></span>
+<span id="cb13-8"><a href="gene-tree-vs-species-tree.html#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="gene-tree-vs-species-tree.html#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co"># define a plotting area with one row and three columns of subfigures.</span></span>
+<span id="cb13-10"><a href="gene-tree-vs-species-tree.html#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfcol =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb13-11"><a href="gene-tree-vs-species-tree.html#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="do">## densiTree overlay individual tree on top of each other</span></span>
+<span id="cb13-12"><a href="gene-tree-vs-species-tree.html#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="fu">densiTree</span>(genetree_list_1,<span class="at">type=</span><span class="st">&quot;cladogram&quot;</span>,<span class="at">col=</span><span class="st">&quot;red&quot;</span>,</span>
+<span id="cb13-13"><a href="gene-tree-vs-species-tree.html#cb13-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">alpha=</span><span class="fl">0.2</span>,<span class="at">scaleX=</span>F)</span>
+<span id="cb13-14"><a href="gene-tree-vs-species-tree.html#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="at">text =</span> <span class="st">&quot;theta = 0.1&quot;</span>)</span>
+<span id="cb13-15"><a href="gene-tree-vs-species-tree.html#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="fu">densiTree</span>(genetree_list_2,<span class="at">type=</span><span class="st">&quot;cladogram&quot;</span>,<span class="at">col=</span><span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb13-16"><a href="gene-tree-vs-species-tree.html#cb13-16" aria-hidden="true" tabindex="-1"></a>          <span class="at">alpha=</span><span class="fl">0.2</span>,<span class="at">scaleX=</span>F)</span>
+<span id="cb13-17"><a href="gene-tree-vs-species-tree.html#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="at">text =</span> <span class="st">&quot;theta = 0.5&quot;</span>)</span>
+<span id="cb13-18"><a href="gene-tree-vs-species-tree.html#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="fu">densiTree</span>(genetree_list_3,<span class="at">type=</span><span class="st">&quot;cladogram&quot;</span>,<span class="at">col=</span><span class="st">&quot;orange&quot;</span>,</span>
+<span id="cb13-19"><a href="gene-tree-vs-species-tree.html#cb13-19" aria-hidden="true" tabindex="-1"></a>          <span class="at">alpha=</span><span class="fl">0.2</span>,<span class="at">scaleX=</span>F)</span>
+<span id="cb13-20"><a href="gene-tree-vs-species-tree.html#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="at">text =</span> <span class="st">&quot;theta = 1&quot;</span>)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/pn2-4.png" width="672" /></p>
+</div>
+</div>
+<div id="calculate-tree-distances" class="section level2 hasAnchor" number="11.7">
+<h2><span class="header-section-number">11.7</span> Calculate tree distances<a href="gene-tree-vs-species-tree.html#calculate-tree-distances" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="rf-distances" class="section level3 hasAnchor" number="11.7.1">
+<h3><span class="header-section-number">11.7.1</span> RF distances<a href="gene-tree-vs-species-tree.html#rf-distances" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Robinson-Foulds (RF) distance is a commonly used metrics for comparing phylogenetic trees. As we introduced in the lectures, RF counts the number of incompatible splits between two phylogenetic trees. The original RF distance only considers topological differences, while <code>wRF.dist</code> calculates the weighted RF distance.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="gene-tree-vs-species-tree.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># consider topology alone</span></span>
+<span id="cb14-2"><a href="gene-tree-vs-species-tree.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">RF.dist</span>(genetree_list_1[[<span class="dv">1</span>]],genetree_list_1[[<span class="dv">2</span>]])</span>
+<span id="cb14-3"><a href="gene-tree-vs-species-tree.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># consider both topoly and branch lengths, and store the output to a variable</span></span>
+<span id="cb14-4"><a href="gene-tree-vs-species-tree.html#cb14-4" aria-hidden="true" tabindex="-1"></a>gt_distances<span class="ot">&lt;-</span><span class="fu">wRF.dist</span>(genetree_list_3[[<span class="dv">1</span>]],genetree_list_3[[<span class="dv">2</span>]])</span></code></pre></div>
+</div>
+<div id="inspect-pairwise-rf-distances-among-all-the-gene-trees-generated-under-one-guiding-species-tree" class="section level3 hasAnchor" number="11.7.2">
+<h3><span class="header-section-number">11.7.2</span> Inspect pairwise RF distances among all the gene trees generated under one guiding species tree<a href="gene-tree-vs-species-tree.html#inspect-pairwise-rf-distances-among-all-the-gene-trees-generated-under-one-guiding-species-tree" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="gene-tree-vs-species-tree.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># write a for-loop to calculate the mean topological differences between </span></span>
+<span id="cb15-2"><a href="gene-tree-vs-species-tree.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># different gene trees</span></span>
+<span id="cb15-3"><a href="gene-tree-vs-species-tree.html#cb15-3" aria-hidden="true" tabindex="-1"></a>gt_distances<span class="ot">&lt;-</span><span class="fu">c</span>()</span>
+<span id="cb15-4"><a href="gene-tree-vs-species-tree.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(n_gene<span class="dv">-1</span>)){</span>
+<span id="cb15-5"><a href="gene-tree-vs-species-tree.html#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> (i<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>n_gene){</span>
+<span id="cb15-6"><a href="gene-tree-vs-species-tree.html#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># calculate one pairwise distance between</span></span>
+<span id="cb15-7"><a href="gene-tree-vs-species-tree.html#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># genetree i and genetree j</span></span>
+<span id="cb15-8"><a href="gene-tree-vs-species-tree.html#cb15-8" aria-hidden="true" tabindex="-1"></a>    tempDist<span class="ot">&lt;-</span><span class="fu">wRF.dist</span>(genetree_list_1[[i]],genetree_list_1[[j]])</span>
+<span id="cb15-9"><a href="gene-tree-vs-species-tree.html#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># store tempDist value into a vector</span></span>
+<span id="cb15-10"><a href="gene-tree-vs-species-tree.html#cb15-10" aria-hidden="true" tabindex="-1"></a>    gt_distances<span class="ot">&lt;-</span><span class="fu">c</span>(gt_distances,tempDist)</span>
+<span id="cb15-11"><a href="gene-tree-vs-species-tree.html#cb15-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb15-12"><a href="gene-tree-vs-species-tree.html#cb15-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-13"><a href="gene-tree-vs-species-tree.html#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="do">## plot the histogram of the calculated gt_distances</span></span>
+<span id="cb15-14"><a href="gene-tree-vs-species-tree.html#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(gt_distances)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/pn18-1.png" width="672" /></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="gene-tree-vs-species-tree.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="do">## display the densitree along with the distribution of their RF distances</span></span>
+<span id="cb16-2"><a href="gene-tree-vs-species-tree.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfcol =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb16-3"><a href="gene-tree-vs-species-tree.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">densiTree</span>(genetree_list_1,<span class="at">type=</span><span class="st">&quot;cladogram&quot;</span>,<span class="at">col=</span><span class="st">&quot;orange&quot;</span>,</span>
+<span id="cb16-4"><a href="gene-tree-vs-species-tree.html#cb16-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">alpha=</span><span class="fl">0.2</span>,<span class="at">scaleX=</span>F)</span>
+<span id="cb16-5"><a href="gene-tree-vs-species-tree.html#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(gt_distances)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/pn18-2.png" width="672" /></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="gene-tree-vs-species-tree.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># repeat the analysis for all the theta values explored. What can you conclude?</span></span></code></pre></div>
+</div>
+</div>
+<div id="inspect-node-support-i.e.-subtrees-defined-by-a-split" class="section level2 hasAnchor" number="11.8">
+<h2><span class="header-section-number">11.8</span> Inspect node support (i.e., subtrees defined by a split)<a href="gene-tree-vs-species-tree.html#inspect-node-support-i.e.-subtrees-defined-by-a-split" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We would like to know whether the topology of simulated gene trees align with the underlying species tree. If not, which node/branch has the lowest support from the gene trees due to ILS.</p>
+<p>First we need to relabel the species tree so that their names match with the gene tree labels, because species tree is labelled as “H_1, H_2…” while gene tree has the species label as well as individual ID: “1_1, 2_1…”.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="gene-tree-vs-species-tree.html#cb18-1" aria-hidden="true" tabindex="-1"></a>sptree_no_extinction[[<span class="dv">1</span>]]<span class="sc">$</span>tip.label</span>
+<span id="cb18-2"><a href="gene-tree-vs-species-tree.html#cb18-2" aria-hidden="true" tabindex="-1"></a>genetree_list_1[[<span class="dv">1</span>]]<span class="sc">$</span>tip.label</span>
+<span id="cb18-3"><a href="gene-tree-vs-species-tree.html#cb18-3" aria-hidden="true" tabindex="-1"></a>trueSpTree <span class="ot">&lt;-</span> sptree_no_extinction[[<span class="dv">1</span>]]</span>
+<span id="cb18-4"><a href="gene-tree-vs-species-tree.html#cb18-4" aria-hidden="true" tabindex="-1"></a>trueSpTree<span class="sc">$</span>tip.label <span class="ot">&lt;-</span> genetree_list_1[[<span class="dv">1</span>]]<span class="sc">$</span>tip.label</span></code></pre></div>
+<p>We then use the <code>trueSpTree</code> as the focal tree of interest, and the set of gene trees as comparisons to the focal tree to calculate node support values. Let’s inspect the gene trees generated under <span class="math inline">\(\theta = 0.1\)</span> first.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="gene-tree-vs-species-tree.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfcol =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb19-2"><a href="gene-tree-vs-species-tree.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotBS</span>(trueSpTree, <span class="at">BStrees=</span>genetree_list_1, <span class="at">type =</span> <span class="st">&quot;phylogram&quot;</span>, <span class="at">bs.col=</span><span class="st">&quot;red&quot;</span>,</span>
+<span id="cb19-3"><a href="gene-tree-vs-species-tree.html#cb19-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">bs.adj =</span> <span class="fu">c</span>(<span class="fl">0.1</span>,<span class="dv">0</span>),<span class="at">cex=</span><span class="dv">2</span>)</span>
+<span id="cb19-4"><a href="gene-tree-vs-species-tree.html#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="at">text =</span> <span class="st">&quot;theta = 0.1&quot;</span>)</span>
+<span id="cb19-5"><a href="gene-tree-vs-species-tree.html#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plotBS</span>(trueSpTree, <span class="at">BStrees=</span>genetree_list_2, <span class="at">type =</span> <span class="st">&quot;phylogram&quot;</span>, <span class="at">bs.col=</span><span class="st">&quot;red&quot;</span>,</span>
+<span id="cb19-6"><a href="gene-tree-vs-species-tree.html#cb19-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">bs.adj =</span> <span class="fu">c</span>(<span class="fl">0.1</span>,<span class="dv">0</span>),<span class="at">cex=</span><span class="dv">2</span>)</span>
+<span id="cb19-7"><a href="gene-tree-vs-species-tree.html#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="at">text =</span> <span class="st">&quot;theta = 0.5&quot;</span>)</span>
+<span id="cb19-8"><a href="gene-tree-vs-species-tree.html#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plotBS</span>(trueSpTree, <span class="at">BStrees=</span>genetree_list_3, <span class="at">type =</span> <span class="st">&quot;phylogram&quot;</span>, <span class="at">bs.col=</span><span class="st">&quot;red&quot;</span>,</span>
+<span id="cb19-9"><a href="gene-tree-vs-species-tree.html#cb19-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">bs.adj =</span> <span class="fu">c</span>(<span class="fl">0.1</span>,<span class="dv">0</span>),<span class="at">cex=</span><span class="dv">2</span>)</span>
+<span id="cb19-10"><a href="gene-tree-vs-species-tree.html#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="at">text =</span> <span class="st">&quot;theta = 1&quot;</span>)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/gt14-1.png" width="672" /></p>
+<p>In this example, we see that node support of the two splits: (4,3) and (2,1) decreases as theta value increases. Here we only simulated four taxa, the errors are balanced for the two internal branches. If we simulate more taxa, we would see the node support changes as a function of internal branch lengths (intervals between speciation events).</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="gene-tree-vs-species-tree.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="do">## speciation rate</span></span>
+<span id="cb20-2"><a href="gene-tree-vs-species-tree.html#cb20-2" aria-hidden="true" tabindex="-1"></a>lambda<span class="ot">&lt;-</span><span class="fl">1.0</span></span>
+<span id="cb20-3"><a href="gene-tree-vs-species-tree.html#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="do">## death rate</span></span>
+<span id="cb20-4"><a href="gene-tree-vs-species-tree.html#cb20-4" aria-hidden="true" tabindex="-1"></a>mu<span class="ot">&lt;-</span><span class="dv">0</span></span>
+<span id="cb20-5"><a href="gene-tree-vs-species-tree.html#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="do">## number of replications</span></span>
+<span id="cb20-6"><a href="gene-tree-vs-species-tree.html#cb20-6" aria-hidden="true" tabindex="-1"></a>numb_replicates<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb20-7"><a href="gene-tree-vs-species-tree.html#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="do">## number of current species</span></span>
+<span id="cb20-8"><a href="gene-tree-vs-species-tree.html#cb20-8" aria-hidden="true" tabindex="-1"></a>numb_extant_tips<span class="ot">&lt;-</span><span class="dv">10</span></span>
+<span id="cb20-9"><a href="gene-tree-vs-species-tree.html#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="gene-tree-vs-species-tree.html#cb20-10" aria-hidden="true" tabindex="-1"></a>sptree_20 <span class="ot">&lt;-</span> <span class="fu">sim_stBD</span>(<span class="at">sbr =</span> lambda,</span>
+<span id="cb20-11"><a href="gene-tree-vs-species-tree.html#cb20-11" aria-hidden="true" tabindex="-1"></a>                      <span class="at">sdr =</span> mu,</span>
+<span id="cb20-12"><a href="gene-tree-vs-species-tree.html#cb20-12" aria-hidden="true" tabindex="-1"></a>                      <span class="at">numbsim =</span> numb_replicates,</span>
+<span id="cb20-13"><a href="gene-tree-vs-species-tree.html#cb20-13" aria-hidden="true" tabindex="-1"></a>                      <span class="at">n_tips =</span> numb_extant_tips)</span>
+<span id="cb20-14"><a href="gene-tree-vs-species-tree.html#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect the tree</span></span>
+<span id="cb20-15"><a href="gene-tree-vs-species-tree.html#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfcol =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb20-16"><a href="gene-tree-vs-species-tree.html#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sptree_20[[<span class="dv">1</span>]])</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/gt15-1.png" width="672" /></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="gene-tree-vs-species-tree.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># generate 1000 gene trees</span></span>
+<span id="cb21-2"><a href="gene-tree-vs-species-tree.html#cb21-2" aria-hidden="true" tabindex="-1"></a>theta<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb21-3"><a href="gene-tree-vs-species-tree.html#cb21-3" aria-hidden="true" tabindex="-1"></a>n_gene<span class="ot">&lt;-</span><span class="dv">1000</span></span>
+<span id="cb21-4"><a href="gene-tree-vs-species-tree.html#cb21-4" aria-hidden="true" tabindex="-1"></a>n_ind<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb21-5"><a href="gene-tree-vs-species-tree.html#cb21-5" aria-hidden="true" tabindex="-1"></a>gtree_coal_20<span class="ot">&lt;-</span> <span class="fu">sim_msc</span>(sptree_20[[<span class="dv">1</span>]],</span>
+<span id="cb21-6"><a href="gene-tree-vs-species-tree.html#cb21-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">ne =</span> theta,</span>
+<span id="cb21-7"><a href="gene-tree-vs-species-tree.html#cb21-7" aria-hidden="true" tabindex="-1"></a>                            <span class="at">num_sampled_individuals =</span> n_ind,</span>
+<span id="cb21-8"><a href="gene-tree-vs-species-tree.html#cb21-8" aria-hidden="true" tabindex="-1"></a>                            <span class="at">num_genes=</span>n_gene,</span>
+<span id="cb21-9"><a href="gene-tree-vs-species-tree.html#cb21-9" aria-hidden="true" tabindex="-1"></a>                            <span class="at">rescale =</span> F)</span>
+<span id="cb21-10"><a href="gene-tree-vs-species-tree.html#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="co"># save the gene tree as a MultiPhylo class object</span></span>
+<span id="cb21-11"><a href="gene-tree-vs-species-tree.html#cb21-11" aria-hidden="true" tabindex="-1"></a>genetree_list_20<span class="ot">&lt;-</span>gtree_coal_20[[<span class="dv">1</span>]]<span class="sc">$</span>gene.trees</span>
+<span id="cb21-12"><a href="gene-tree-vs-species-tree.html#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(genetree_list_20)<span class="ot">&lt;-</span><span class="st">&quot;multiPhylo&quot;</span></span>
+<span id="cb21-13"><a href="gene-tree-vs-species-tree.html#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect one tree</span></span>
+<span id="cb21-14"><a href="gene-tree-vs-species-tree.html#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(genetree_list_20[[<span class="dv">5</span>]],<span class="at">cex=</span><span class="dv">1</span>)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/gt16-1.png" width="672" /></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="gene-tree-vs-species-tree.html#cb22-1" aria-hidden="true" tabindex="-1"></a>trueSpTree <span class="ot">&lt;-</span> sptree_20[[<span class="dv">1</span>]]</span>
+<span id="cb22-2"><a href="gene-tree-vs-species-tree.html#cb22-2" aria-hidden="true" tabindex="-1"></a>trueSpTree<span class="sc">$</span>tip.label <span class="ot">&lt;-</span> genetree_list_20[[<span class="dv">1</span>]]<span class="sc">$</span>tip.label</span>
+<span id="cb22-3"><a href="gene-tree-vs-species-tree.html#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plotBS</span>(trueSpTree, <span class="at">BStrees=</span>genetree_list_20, <span class="at">type =</span> <span class="st">&quot;phylogram&quot;</span>, <span class="at">bs.col=</span><span class="st">&quot;red&quot;</span>,</span>
+<span id="cb22-4"><a href="gene-tree-vs-species-tree.html#cb22-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex=</span><span class="dv">1</span>)</span>
+<span id="cb22-5"><a href="gene-tree-vs-species-tree.html#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="at">text =</span> <span class="fu">paste</span>(<span class="st">&quot;theta =&quot;</span>,theta))</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/gt17-1.png" width="672" /></p>
+</div>
+<div id="combined-effects-of-gene-duplication-loss-and-horizontal-gene-transfer-events" class="section level2 hasAnchor" number="11.9">
+<h2><span class="header-section-number">11.9</span> Combined effects of gene duplication, loss and horizontal gene transfer events<a href="gene-tree-vs-species-tree.html#combined-effects-of-gene-duplication-loss-and-horizontal-gene-transfer-events" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>sim_ltBD simulates a locus evolutionary history with potential duplication, loss, and honrizontal transfer events of genes based on the rate we specify.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="gene-tree-vs-species-tree.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># e.g., 1 gene birth event per 1 length of branch</span></span>
+<span id="cb23-2"><a href="gene-tree-vs-species-tree.html#cb23-2" aria-hidden="true" tabindex="-1"></a>gene_birth_rate<span class="ot">&lt;-</span><span class="fl">0.1</span></span>
+<span id="cb23-3"><a href="gene-tree-vs-species-tree.html#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># gene loss rate</span></span>
+<span id="cb23-4"><a href="gene-tree-vs-species-tree.html#cb23-4" aria-hidden="true" tabindex="-1"></a>gene_loss_rate<span class="ot">&lt;-</span><span class="fl">0.05</span></span>
+<span id="cb23-5"><a href="gene-tree-vs-species-tree.html#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co"># horizontal gene transfer rate</span></span>
+<span id="cb23-6"><a href="gene-tree-vs-species-tree.html#cb23-6" aria-hidden="true" tabindex="-1"></a>hgt_rate<span class="ot">&lt;-</span><span class="fl">0.05</span></span>
+<span id="cb23-7"><a href="gene-tree-vs-species-tree.html#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="gene-tree-vs-species-tree.html#cb23-8" aria-hidden="true" tabindex="-1"></a>locus_tree<span class="ot">&lt;-</span><span class="fu">sim_ltBD</span>(sptree_no_extinction[[<span class="dv">1</span>]],</span>
+<span id="cb23-9"><a href="gene-tree-vs-species-tree.html#cb23-9" aria-hidden="true" tabindex="-1"></a>                     <span class="at">gbr =</span> gene_birth_rate,</span>
+<span id="cb23-10"><a href="gene-tree-vs-species-tree.html#cb23-10" aria-hidden="true" tabindex="-1"></a>                     <span class="at">gdr =</span> gene_loss_rate,</span>
+<span id="cb23-11"><a href="gene-tree-vs-species-tree.html#cb23-11" aria-hidden="true" tabindex="-1"></a>                     <span class="at">lgtr =</span> hgt_rate,</span>
+<span id="cb23-12"><a href="gene-tree-vs-species-tree.html#cb23-12" aria-hidden="true" tabindex="-1"></a>                     <span class="at">num_loci =</span> <span class="dv">10</span></span>
+<span id="cb23-13"><a href="gene-tree-vs-species-tree.html#cb23-13" aria-hidden="true" tabindex="-1"></a>                     )</span>
+<span id="cb23-14"><a href="gene-tree-vs-species-tree.html#cb23-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-15"><a href="gene-tree-vs-species-tree.html#cb23-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-16"><a href="gene-tree-vs-species-tree.html#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="do">## explore the locus tree shape with changes to gene_birth_rate, loss rate, and hgt rate</span></span></code></pre></div>
+</div>
+<div id="exercise-ii" class="section level2 hasAnchor" number="11.10">
+<h2><span class="header-section-number">11.10</span> Exercise II<a href="gene-tree-vs-species-tree.html#exercise-ii" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li><ol style="list-style-type: lower-alpha">
+<li>generate a species tree with 5 extant species, speciation rate equals 2, and extinction rate of 0.4</li>
+<li>generate 200 gene trees, varying the theta values: 0.01, 0.1,0.5, 1</li>
+<li>calculate RF, and wRF distances between the gene trees</li>
+<li>plot densitrees of gene trees with different theta values.</li>
+<li>which theta values had the highest RF or wRF values, and why?</li>
+<li>which splits (the subtree defined by the branch, i.e., node support) had the highest number of ILS (therefore, lowest node support), and why?</li>
+</ol></li>
+<li><ol style="list-style-type: lower-alpha">
+<li>generate a locus tree using the previous species tree with only positive gene_birth_rate 1.0, or hgt_rate 0.2, with 10 iterations</li>
+<li>plot all the 10 iterations of the locus trees</li>
+<li>pick one locus tree which contains gene duplication events,
+label branches of the orthologous genes with the same color. E.g., all gene 1 with color
+“red”, and all gene 2 with color “blue”</li>
+<li>plot the trees of the original gene and the duplicated gene separately,
+so the two subtrees contain only orthologous copies.</li>
+</ol></li>
+</ol>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="phylogenetic-visualization-in-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="overview-of-phylogenetic-inferences.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/10_coalescent.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

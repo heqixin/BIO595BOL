@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 9 Coevolution and Phylogenetic Signals in R | BIO595 The Tree of Life</title>
+  <meta name="description" content="Test writing the book for the course bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 9 Coevolution and Phylogenetic Signals in R | BIO595 The Tree of Life" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Test writing the book for the course bookdown::gitbook." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 9 Coevolution and Phylogenetic Signals in R | BIO595 The Tree of Life" />
+  
+  <meta name="twitter:description" content="Test writing the book for the course bookdown::gitbook." />
+  
+
+<meta name="author" content="Qixin He, Daniel Park" />
+
+
+<meta name="date" content="2023-04-10" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="community-phylogenetics.html"/>
+<link rel="next" href="phylogenetic-visualization-in-r.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Tree of Life: Phylogenetic inferences and applications</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
+<li class="chapter" data-level="2" data-path="unix.html"><a href="unix.html"><i class="fa fa-check"></i><b>2</b> Unix</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="unix.html"><a href="unix.html#what-is-unix-and-why-do-we-use-it"><i class="fa fa-check"></i><b>2.1</b> What is Unix and why do we use it?</a></li>
+<li class="chapter" data-level="2.2" data-path="unix.html"><a href="unix.html#installation"><i class="fa fa-check"></i><b>2.2</b> Installation</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="unix.html"><a href="unix.html#mac-os-and-linux"><i class="fa fa-check"></i><b>2.2.1</b> Mac OS and Linux</a></li>
+<li class="chapter" data-level="2.2.2" data-path="unix.html"><a href="unix.html#windows"><i class="fa fa-check"></i><b>2.2.2</b> Windows</a></li>
+<li class="chapter" data-level="2.2.3" data-path="unix.html"><a href="unix.html#use-scholar-remote-desktop-during-the-class"><i class="fa fa-check"></i><b>2.2.3</b> Use Scholar Remote Desktop During the Class</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="unix.html"><a href="unix.html#operation"><i class="fa fa-check"></i><b>2.3</b> Operation</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="unix.html"><a href="unix.html#starting-the-shell"><i class="fa fa-check"></i><b>2.3.1</b> Starting the Shell</a></li>
+<li class="chapter" data-level="2.3.2" data-path="unix.html"><a href="unix.html#directoryfolder-sturcture"><i class="fa fa-check"></i><b>2.3.2</b> Directory/folder sturcture</a></li>
+<li class="chapter" data-level="2.3.3" data-path="unix.html"><a href="unix.html#absolute-and-relative-directory"><i class="fa fa-check"></i><b>2.3.3</b> Absolute and Relative directory</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="unix.html"><a href="unix.html#handling-directories-and-files"><i class="fa fa-check"></i><b>2.4</b> Handling directories and files</a></li>
+<li class="chapter" data-level="2.5" data-path="unix.html"><a href="unix.html#excercises-i"><i class="fa fa-check"></i><b>2.5</b> Excercises I</a></li>
+<li class="chapter" data-level="2.6" data-path="unix.html"><a href="unix.html#viewing-and-processing-text-files"><i class="fa fa-check"></i><b>2.6</b> Viewing and processing text files</a></li>
+<li class="chapter" data-level="2.7" data-path="unix.html"><a href="unix.html#redirecting-printouts-and-piping"><i class="fa fa-check"></i><b>2.7</b> Redirecting printouts and piping</a></li>
+<li class="chapter" data-level="2.8" data-path="unix.html"><a href="unix.html#exercises-ii"><i class="fa fa-check"></i><b>2.8</b> Exercises II</a></li>
+<li class="chapter" data-level="2.9" data-path="unix.html"><a href="unix.html#useful-wildcards"><i class="fa fa-check"></i><b>2.9</b> Useful wildcards</a></li>
+<li class="chapter" data-level="2.10" data-path="unix.html"><a href="unix.html#exercises-iii"><i class="fa fa-check"></i><b>2.10</b> Exercises III</a></li>
+<li class="chapter" data-level="2.11" data-path="unix.html"><a href="unix.html#search-and-select-lines-using-grep"><i class="fa fa-check"></i><b>2.11</b> Search and select lines using <em>grep</em></a></li>
+<li class="chapter" data-level="2.12" data-path="unix.html"><a href="unix.html#substituting-characters-using-tr"><i class="fa fa-check"></i><b>2.12</b> Substituting characters using <em>tr</em></a></li>
+<li class="chapter" data-level="2.13" data-path="unix.html"><a href="unix.html#cut-sort-and-unique"><i class="fa fa-check"></i><b>2.13</b> cut, sort and unique</a></li>
+<li class="chapter" data-level="2.14" data-path="unix.html"><a href="unix.html#exercises-iv"><i class="fa fa-check"></i><b>2.14</b> Exercises IV</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-basics-i.html"><a href="r-basics-i.html"><i class="fa fa-check"></i><b>3</b> R Basics I</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="r-basics-i.html"><a href="r-basics-i.html#what-is-programming"><i class="fa fa-check"></i><b>3.1</b> What is programming?</a></li>
+<li class="chapter" data-level="3.2" data-path="r-basics-i.html"><a href="r-basics-i.html#r"><i class="fa fa-check"></i><b>3.2</b> <code>R</code></a></li>
+<li class="chapter" data-level="3.3" data-path="r-basics-i.html"><a href="r-basics-i.html#installation-1"><i class="fa fa-check"></i><b>3.3</b> Installation</a></li>
+<li class="chapter" data-level="3.4" data-path="r-basics-i.html"><a href="r-basics-i.html#variables"><i class="fa fa-check"></i><b>3.4</b> Variables</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="r-basics-i.html"><a href="r-basics-i.html#exercise-1"><i class="fa fa-check"></i><b>3.4.1</b> Exercise (1):</a></li>
+<li class="chapter" data-level="3.4.2" data-path="r-basics-i.html"><a href="r-basics-i.html#variable-naming-conventions"><i class="fa fa-check"></i><b>3.4.2</b> Variable naming conventions</a></li>
+<li class="chapter" data-level="3.4.3" data-path="r-basics-i.html"><a href="r-basics-i.html#arithmetic-operators"><i class="fa fa-check"></i><b>3.4.3</b> Arithmetic Operators</a></li>
+<li class="chapter" data-level="3.4.4" data-path="r-basics-i.html"><a href="r-basics-i.html#logical-operators"><i class="fa fa-check"></i><b>3.4.4</b> Logical Operators</a></li>
+<li class="chapter" data-level="3.4.5" data-path="r-basics-i.html"><a href="r-basics-i.html#basic-built-in-mathematical-functions"><i class="fa fa-check"></i><b>3.4.5</b> Basic built-in mathematical functions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="r-basics-i.html"><a href="r-basics-i.html#subsetting-data"><i class="fa fa-check"></i><b>3.5</b> Subsetting data</a></li>
+<li class="chapter" data-level="3.6" data-path="r-basics-i.html"><a href="r-basics-i.html#logical-values"><i class="fa fa-check"></i><b>3.6</b> Logical values</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="r-basics-i.html"><a href="r-basics-i.html#missing-dealing-with-na-values"><i class="fa fa-check"></i><b>3.6.1</b> Missing: dealing with <code>NA</code> values</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="r-basics-i.html"><a href="r-basics-i.html#generating-data"><i class="fa fa-check"></i><b>3.7</b> Generating Data</a></li>
+<li class="chapter" data-level="3.8" data-path="r-basics-i.html"><a href="r-basics-i.html#data-structures-and-types"><i class="fa fa-check"></i><b>3.8</b> Data Structures and Types</a>
+<ul>
+<li class="chapter" data-level="3.8.1" data-path="r-basics-i.html"><a href="r-basics-i.html#vectors"><i class="fa fa-check"></i><b>3.8.1</b> Vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="3.9" data-path="r-basics-i.html"><a href="r-basics-i.html#matrices"><i class="fa fa-check"></i><b>3.9</b> Matrices</a>
+<ul>
+<li class="chapter" data-level="3.9.1" data-path="r-basics-i.html"><a href="r-basics-i.html#exercise-2"><i class="fa fa-check"></i><b>3.9.1</b> Exercise (2):</a></li>
+</ul></li>
+<li class="chapter" data-level="3.10" data-path="r-basics-i.html"><a href="r-basics-i.html#data-frames"><i class="fa fa-check"></i><b>3.10</b> Data Frames</a>
+<ul>
+<li class="chapter" data-level="3.10.1" data-path="r-basics-i.html"><a href="r-basics-i.html#exercise-3"><i class="fa fa-check"></i><b>3.10.1</b> Exercise (3):</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="r-basics-ii.html"><a href="r-basics-ii.html"><i class="fa fa-check"></i><b>4</b> R Basics II</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="r-basics-ii.html"><a href="r-basics-ii.html#setting-up-the-environment"><i class="fa fa-check"></i><b>4.1</b> Setting up the environment</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="r-basics-ii.html"><a href="r-basics-ii.html#exercise-1-1"><i class="fa fa-check"></i><b>4.1.1</b> Exercise (1)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="r-basics-ii.html"><a href="r-basics-ii.html#reading-in-data-from-files"><i class="fa fa-check"></i><b>4.2</b> Reading in data from files</a></li>
+<li class="chapter" data-level="4.3" data-path="r-basics-ii.html"><a href="r-basics-ii.html#wrangling-data"><i class="fa fa-check"></i><b>4.3</b> Wrangling Data</a></li>
+<li class="chapter" data-level="4.4" data-path="r-basics-ii.html"><a href="r-basics-ii.html#subsetting-by-columns-and-rows"><i class="fa fa-check"></i><b>4.4</b> Subsetting by columns and rows</a></li>
+<li class="chapter" data-level="4.5" data-path="r-basics-ii.html"><a href="r-basics-ii.html#subsetting-with-conditions"><i class="fa fa-check"></i><b>4.5</b> Subsetting with conditions</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="r-basics-ii.html"><a href="r-basics-ii.html#exercise-2-1"><i class="fa fa-check"></i><b>4.5.1</b> Exercise (2)</a></li>
+<li class="chapter" data-level="4.5.2" data-path="r-basics-ii.html"><a href="r-basics-ii.html#bonus-1"><i class="fa fa-check"></i><b>4.5.2</b> Bonus [1]</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="r-basics-ii.html"><a href="r-basics-ii.html#merging-data"><i class="fa fa-check"></i><b>4.6</b> Merging data</a></li>
+<li class="chapter" data-level="4.7" data-path="r-basics-ii.html"><a href="r-basics-ii.html#saving-files-and-sessions"><i class="fa fa-check"></i><b>4.7</b> Saving files and sessions</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="r-basics-ii.html"><a href="r-basics-ii.html#exercise-3-1"><i class="fa fa-check"></i><b>4.7.1</b> Exercise (3)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="r-basics-ii.html"><a href="r-basics-ii.html#the-for-loop"><i class="fa fa-check"></i><b>4.8</b> The <span class="smallcaps">for</span>-loop</a></li>
+<li class="chapter" data-level="4.9" data-path="r-basics-ii.html"><a href="r-basics-ii.html#lists"><i class="fa fa-check"></i><b>4.9</b> Lists</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="tree-and-traits-in-r.html"><a href="tree-and-traits-in-r.html"><i class="fa fa-check"></i><b>5</b> Tree and Traits in R</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="tree-and-traits-in-r.html"><a href="tree-and-traits-in-r.html#setting-up-the-environment-1"><i class="fa fa-check"></i><b>5.1</b> Setting up the environment</a></li>
+<li class="chapter" data-level="5.2" data-path="tree-and-traits-in-r.html"><a href="tree-and-traits-in-r.html#examining-phylogenetic-trees"><i class="fa fa-check"></i><b>5.2</b> Examining phylogenetic trees</a></li>
+<li class="chapter" data-level="5.3" data-path="tree-and-traits-in-r.html"><a href="tree-and-traits-in-r.html#plotting-phylogenetic-trees"><i class="fa fa-check"></i><b>5.3</b> Plotting phylogenetic trees</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="tree-and-traits-in-r.html"><a href="tree-and-traits-in-r.html#exercise-1-2"><i class="fa fa-check"></i><b>5.3.1</b> Exercise (1)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="tree-and-traits-in-r.html"><a href="tree-and-traits-in-r.html#associating-phylogenies-and-traits"><i class="fa fa-check"></i><b>5.4</b> Associating phylogenies and traits</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="tree-and-traits-in-r.html"><a href="tree-and-traits-in-r.html#saving-plots"><i class="fa fa-check"></i><b>5.4.1</b> Saving plots</a></li>
+<li class="chapter" data-level="5.4.2" data-path="tree-and-traits-in-r.html"><a href="tree-and-traits-in-r.html#exercise-2-2"><i class="fa fa-check"></i><b>5.4.2</b> Exercise (2)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html"><i class="fa fa-check"></i><b>6</b> Biogeography and Macroevolution in R</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#setting-up-the-environment-2"><i class="fa fa-check"></i><b>6.1</b> Setting up the environment</a></li>
+<li class="chapter" data-level="6.2" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#ancestral-state-reconstructions"><i class="fa fa-check"></i><b>6.2</b> Ancestral State Reconstructions</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#bonus-2"><i class="fa fa-check"></i><b>6.2.1</b> Bonus [2]</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#continuous-traits"><i class="fa fa-check"></i><b>6.3</b> Continuous traits</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#maximum-likelihood"><i class="fa fa-check"></i><b>6.3.1</b> Maximum likelihood</a></li>
+<li class="chapter" data-level="6.3.2" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#phylogenetically-independent-contrasts"><i class="fa fa-check"></i><b>6.3.2</b> Phylogenetically independent contrasts</a></li>
+<li class="chapter" data-level="6.3.3" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#plotting-ancestral-states"><i class="fa fa-check"></i><b>6.3.3</b> Plotting ancestral states</a></li>
+<li class="chapter" data-level="6.3.4" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#exercise-1-3"><i class="fa fa-check"></i><b>6.3.4</b> Exercise (1)</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#discrete-traits"><i class="fa fa-check"></i><b>6.4</b> Discrete traits</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#exercise-2-3"><i class="fa fa-check"></i><b>6.4.1</b> Exercise (2)</a></li>
+<li class="chapter" data-level="6.4.2" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#maximum-likelihood-1"><i class="fa fa-check"></i><b>6.4.2</b> Maximum likelihood</a></li>
+<li class="chapter" data-level="6.4.3" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#choosing-models"><i class="fa fa-check"></i><b>6.4.3</b> Choosing models</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#saving-multiple-plots-together"><i class="fa fa-check"></i><b>6.5</b> Saving multiple plots together</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="biogeography-and-macroevolution-in-r.html"><a href="biogeography-and-macroevolution-in-r.html#exercise-3-2"><i class="fa fa-check"></i><b>6.5.1</b> Exercise (3)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="phylogenetic-diversity-in-r.html"><a href="phylogenetic-diversity-in-r.html"><i class="fa fa-check"></i><b>7</b> Phylogenetic Diversity in R</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="phylogenetic-diversity-in-r.html"><a href="phylogenetic-diversity-in-r.html#setting-up-the-environment-3"><i class="fa fa-check"></i><b>7.1</b> Setting up the environment</a></li>
+<li class="chapter" data-level="7.2" data-path="phylogenetic-diversity-in-r.html"><a href="phylogenetic-diversity-in-r.html#phylogenetic-diversity"><i class="fa fa-check"></i><b>7.2</b> Phylogenetic Diversity</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="phylogenetic-diversity-in-r.html"><a href="phylogenetic-diversity-in-r.html#preprocessing"><i class="fa fa-check"></i><b>7.2.1</b> Preprocessing</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="phylogenetic-diversity-in-r.html"><a href="phylogenetic-diversity-in-r.html#estimating-phylogenetic-diversity-metrics"><i class="fa fa-check"></i><b>7.3</b> Estimating phylogenetic diversity metrics</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="phylogenetic-diversity-in-r.html"><a href="phylogenetic-diversity-in-r.html#exercise-1-4"><i class="fa fa-check"></i><b>7.3.1</b> Exercise (1)</a></li>
+<li class="chapter" data-level="7.3.2" data-path="phylogenetic-diversity-in-r.html"><a href="phylogenetic-diversity-in-r.html#exercise-2-4"><i class="fa fa-check"></i><b>7.3.2</b> Exercise (2)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="community-phylogenetics.html"><a href="community-phylogenetics.html"><i class="fa fa-check"></i><b>8</b> Community Phylogenetics</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="community-phylogenetics.html"><a href="community-phylogenetics.html#setting-up-the-environment-4"><i class="fa fa-check"></i><b>8.1</b> Setting up the environment</a></li>
+<li class="chapter" data-level="8.2" data-path="community-phylogenetics.html"><a href="community-phylogenetics.html#definition-of-community-phylogenetics"><i class="fa fa-check"></i><b>8.2</b> Definition of Community Phylogenetics</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="community-phylogenetics.html"><a href="community-phylogenetics.html#alpha-diversity"><i class="fa fa-check"></i><b>8.2.1</b> Alpha diversity</a></li>
+<li class="chapter" data-level="8.2.2" data-path="community-phylogenetics.html"><a href="community-phylogenetics.html#beta-diversity"><i class="fa fa-check"></i><b>8.2.2</b> Beta diversity</a></li>
+<li class="chapter" data-level="8.2.3" data-path="community-phylogenetics.html"><a href="community-phylogenetics.html#exercise-1-5"><i class="fa fa-check"></i><b>8.2.3</b> Exercise (1)</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="community-phylogenetics.html"><a href="community-phylogenetics.html#standardized-effect-sizes"><i class="fa fa-check"></i><b>8.3</b> Standardized effect sizes</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="community-phylogenetics.html"><a href="community-phylogenetics.html#exercise-2-5"><i class="fa fa-check"></i><b>8.3.1</b> Exercise (2)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="coevolution-and-phylogenetic-signals-in-r.html"><a href="coevolution-and-phylogenetic-signals-in-r.html"><i class="fa fa-check"></i><b>9</b> Coevolution and Phylogenetic Signals in R</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="coevolution-and-phylogenetic-signals-in-r.html"><a href="coevolution-and-phylogenetic-signals-in-r.html#setting-up-the-environment-5"><i class="fa fa-check"></i><b>9.1</b> Setting up the environment</a></li>
+<li class="chapter" data-level="9.2" data-path="coevolution-and-phylogenetic-signals-in-r.html"><a href="coevolution-and-phylogenetic-signals-in-r.html#phylogenetic-signal"><i class="fa fa-check"></i><b>9.2</b> Phylogenetic Signal</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="coevolution-and-phylogenetic-signals-in-r.html"><a href="coevolution-and-phylogenetic-signals-in-r.html#blombergs-k"><i class="fa fa-check"></i><b>9.2.1</b> Blomberg’s K</a></li>
+<li class="chapter" data-level="9.2.2" data-path="coevolution-and-phylogenetic-signals-in-r.html"><a href="coevolution-and-phylogenetic-signals-in-r.html#pagels-lambda-λ"><i class="fa fa-check"></i><b>9.2.2</b> Pagel’s lambda (λ)</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="coevolution-and-phylogenetic-signals-in-r.html"><a href="coevolution-and-phylogenetic-signals-in-r.html#phylogenetically-independent-contrasts-1"><i class="fa fa-check"></i><b>9.3</b> Phylogenetically Independent Contrasts</a></li>
+<li class="chapter" data-level="9.4" data-path="coevolution-and-phylogenetic-signals-in-r.html"><a href="coevolution-and-phylogenetic-signals-in-r.html#coevolution"><i class="fa fa-check"></i><b>9.4</b> Coevolution</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="coevolution-and-phylogenetic-signals-in-r.html"><a href="coevolution-and-phylogenetic-signals-in-r.html#plotting-tanglegrams"><i class="fa fa-check"></i><b>9.4.1</b> Plotting tanglegrams</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html"><i class="fa fa-check"></i><b>10</b> Phylogenetic Visualization in R</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#setting-up-the-environment-6"><i class="fa fa-check"></i><b>10.1</b> Setting up the environment</a></li>
+<li class="chapter" data-level="10.2" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#using-phytools"><i class="fa fa-check"></i><b>10.2</b> Using <code>phytools</code></a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#phenograms"><i class="fa fa-check"></i><b>10.2.1</b> Phenograms</a></li>
+<li class="chapter" data-level="10.2.2" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#mapping-continuous-characters-on-branches"><i class="fa fa-check"></i><b>10.2.2</b> Mapping continuous characters on branches</a></li>
+<li class="chapter" data-level="10.2.3" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#plotting-images-on-phylogenies"><i class="fa fa-check"></i><b>10.2.3</b> Plotting images on phylogenies</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#using-ggtree"><i class="fa fa-check"></i><b>10.3</b> Using <code>ggtree</code></a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#basic-plotting"><i class="fa fa-check"></i><b>10.3.1</b> Basic plotting</a></li>
+<li class="chapter" data-level="10.3.2" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#labeling-tips-nodes-and-clades"><i class="fa fa-check"></i><b>10.3.2</b> Labeling tips, nodes, and clades</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#plotting-maps"><i class="fa fa-check"></i><b>10.4</b> Plotting maps</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#choropleth-maps"><i class="fa fa-check"></i><b>10.4.1</b> Choropleth maps</a></li>
+<li class="chapter" data-level="10.4.2" data-path="phylogenetic-visualization-in-r.html"><a href="phylogenetic-visualization-in-r.html#working-with-rasters"><i class="fa fa-check"></i><b>10.4.2</b> Working with rasters</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html"><i class="fa fa-check"></i><b>11</b> Gene tree vs Species tree</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#learning-goals"><i class="fa fa-check"></i><b>11.1</b> Learning goals:</a></li>
+<li class="chapter" data-level="11.2" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#tracing-ancestry-within-one-population"><i class="fa fa-check"></i><b>11.2</b> Tracing ancestry within one population</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#vary-pop-size-and-generation"><i class="fa fa-check"></i><b>11.2.1</b> Vary pop size and generation</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#speciation-and-coalescence"><i class="fa fa-check"></i><b>11.3</b> Speciation and coalescence</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#two-species-coalescent-history"><i class="fa fa-check"></i><b>11.3.1</b> Two-species coalescent history</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#exercise-i"><i class="fa fa-check"></i><b>11.4</b> Exercise I</a></li>
+<li class="chapter" data-level="11.5" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#gene-tree-locus-tree-and-species-tree"><i class="fa fa-check"></i><b>11.5</b> Gene tree, Locus tree and Species tree</a>
+<ul>
+<li class="chapter" data-level="11.5.1" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#loading-data-and-packages"><i class="fa fa-check"></i><b>11.5.1</b> loading data and packages</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#effects-of-incomplete-lineage-sorting-ils-alone"><i class="fa fa-check"></i><b>11.6</b> Effects of Incomplete Lineage Sorting (ILS) alone</a>
+<ul>
+<li class="chapter" data-level="11.6.1" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#generate-species-tree-with-no-extinction"><i class="fa fa-check"></i><b>11.6.1</b> generate species tree with no extinction</a></li>
+<li class="chapter" data-level="11.6.2" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#simulate-gene-trees-using-the-multispecies-coalescent-process"><i class="fa fa-check"></i><b>11.6.2</b> simulate gene trees using the multispecies coalescent process</a></li>
+</ul></li>
+<li class="chapter" data-level="11.7" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#calculate-tree-distances"><i class="fa fa-check"></i><b>11.7</b> Calculate tree distances</a>
+<ul>
+<li class="chapter" data-level="11.7.1" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#rf-distances"><i class="fa fa-check"></i><b>11.7.1</b> RF distances</a></li>
+<li class="chapter" data-level="11.7.2" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#inspect-pairwise-rf-distances-among-all-the-gene-trees-generated-under-one-guiding-species-tree"><i class="fa fa-check"></i><b>11.7.2</b> Inspect pairwise RF distances among all the gene trees generated under one guiding species tree</a></li>
+</ul></li>
+<li class="chapter" data-level="11.8" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#inspect-node-support-i.e.-subtrees-defined-by-a-split"><i class="fa fa-check"></i><b>11.8</b> Inspect node support (i.e., subtrees defined by a split)</a></li>
+<li class="chapter" data-level="11.9" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#combined-effects-of-gene-duplication-loss-and-horizontal-gene-transfer-events"><i class="fa fa-check"></i><b>11.9</b> Combined effects of gene duplication, loss and horizontal gene transfer events</a></li>
+<li class="chapter" data-level="11.10" data-path="gene-tree-vs-species-tree.html"><a href="gene-tree-vs-species-tree.html#exercise-ii"><i class="fa fa-check"></i><b>11.10</b> Exercise II</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="overview-of-phylogenetic-inferences.html"><a href="overview-of-phylogenetic-inferences.html"><i class="fa fa-check"></i><b>12</b> Overview of Phylogenetic Inferences</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="overview-of-phylogenetic-inferences.html"><a href="overview-of-phylogenetic-inferences.html#mega"><i class="fa fa-check"></i><b>12.1</b> <code>MEGA</code></a></li>
+<li class="chapter" data-level="12.2" data-path="overview-of-phylogenetic-inferences.html"><a href="overview-of-phylogenetic-inferences.html#view-and-align-sequences"><i class="fa fa-check"></i><b>12.2</b> View and Align Sequences</a></li>
+<li class="chapter" data-level="12.3" data-path="overview-of-phylogenetic-inferences.html"><a href="overview-of-phylogenetic-inferences.html#dnaprotein-evolution-model"><i class="fa fa-check"></i><b>12.3</b> DNA/protein evolution model</a></li>
+<li class="chapter" data-level="12.4" data-path="overview-of-phylogenetic-inferences.html"><a href="overview-of-phylogenetic-inferences.html#phylogenetic-inference"><i class="fa fa-check"></i><b>12.4</b> Phylogenetic inference</a></li>
+<li class="chapter" data-level="12.5" data-path="overview-of-phylogenetic-inferences.html"><a href="overview-of-phylogenetic-inferences.html#estimate-divergence-times"><i class="fa fa-check"></i><b>12.5</b> Estimate divergence times</a></li>
+<li class="chapter" data-level="12.6" data-path="overview-of-phylogenetic-inferences.html"><a href="overview-of-phylogenetic-inferences.html#exercises"><i class="fa fa-check"></i><b>12.6</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html"><i class="fa fa-check"></i><b>13</b> Resources and Guidelines for the Term Project</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#bioinformatics-databases"><i class="fa fa-check"></i><b>13.1</b> Bioinformatics Databases</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#ncbi-national-center-for-biotechnology-information"><i class="fa fa-check"></i><b>13.1.1</b> NCBI (National Center for Biotechnology Information)</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#retrieving-genetic-resources-for-your-taxa"><i class="fa fa-check"></i><b>13.2</b> Retrieving genetic resources for your taxa</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#ncbi-taxonomy-database"><i class="fa fa-check"></i><b>13.2.1</b> NCBI taxonomy database</a></li>
+<li class="chapter" data-level="13.2.2" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#individual-genes-from-the-whole-genome-data"><i class="fa fa-check"></i><b>13.2.2</b> Individual genes from the whole genome data</a></li>
+<li class="chapter" data-level="13.2.3" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#get-homologous-sequences-from-related-species"><i class="fa fa-check"></i><b>13.2.3</b> Get homologous sequences from related species</a></li>
+<li class="chapter" data-level="13.2.4" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#european-bioinformatics-institute-ebi"><i class="fa fa-check"></i><b>13.2.4</b> European Bioinformatics Institute (EBI)</a></li>
+<li class="chapter" data-level="13.2.5" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#protein-data-bank"><i class="fa fa-check"></i><b>13.2.5</b> Protein Data Bank</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#biogeographic-databases"><i class="fa fa-check"></i><b>13.3</b> Biogeographic Databases</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#climate-data"><i class="fa fa-check"></i><b>13.3.1</b> Climate Data</a></li>
+<li class="chapter" data-level="13.3.2" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#occurrence-data"><i class="fa fa-check"></i><b>13.3.2</b> Occurrence Data</a></li>
+<li class="chapter" data-level="13.3.3" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#topographic-data"><i class="fa fa-check"></i><b>13.3.3</b> TOPOGRAPHIC DATA</a></li>
+<li class="chapter" data-level="13.3.4" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#trait-data"><i class="fa fa-check"></i><b>13.3.4</b> TRAIT DATA</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#publication-databases"><i class="fa fa-check"></i><b>13.4</b> Publication Databases</a></li>
+<li class="chapter" data-level="13.5" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#example-research-questions"><i class="fa fa-check"></i><b>13.5</b> Example research questions:</a>
+<ul>
+<li class="chapter" data-level="13.5.1" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#biogeography-and-phylogenetic-diversity"><i class="fa fa-check"></i><b>13.5.1</b> Biogeography and Phylogenetic Diversity:</a></li>
+<li class="chapter" data-level="13.5.2" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#community-ecology"><i class="fa fa-check"></i><b>13.5.2</b> Community Ecology:</a></li>
+<li class="chapter" data-level="13.5.3" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#coevolution-1"><i class="fa fa-check"></i><b>13.5.3</b> Coevolution:</a></li>
+<li class="chapter" data-level="13.5.4" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#species-tree"><i class="fa fa-check"></i><b>13.5.4</b> Species tree:</a></li>
+</ul></li>
+<li class="chapter" data-level="13.6" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#how-to-submit-jobs-on-scholar-cluster-and-run-remotely"><i class="fa fa-check"></i><b>13.6</b> How to submit jobs on Scholar Cluster and run remotely</a></li>
+<li class="chapter" data-level="13.7" data-path="resources-and-guidelines-for-the-term-project.html"><a href="resources-and-guidelines-for-the-term-project.html#term-project-proposal"><i class="fa fa-check"></i><b>13.7</b> Term project proposal</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><i class="fa fa-check"></i><b>14</b> Systematic Retrieval of orthologous DNA sequences form GenBank</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#introduction"><i class="fa fa-check"></i><b>14.1</b> Introduction</a></li>
+<li class="chapter" data-level="14.2" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#installing-tools"><i class="fa fa-check"></i><b>14.2</b> Installing Tools</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#windows-1"><i class="fa fa-check"></i><b>14.2.1</b> Windows</a></li>
+<li class="chapter" data-level="14.2.2" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#mac"><i class="fa fa-check"></i><b>14.2.2</b> Mac</a></li>
+<li class="chapter" data-level="14.2.3" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#ncbi-blast-tools"><i class="fa fa-check"></i><b>14.2.3</b> NCBI BLAST+ Tools</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#using-phylotar"><i class="fa fa-check"></i><b>14.3</b> Using <code>phylotaR</code></a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#pipeline"><i class="fa fa-check"></i><b>14.3.1</b> Pipeline</a></li>
+<li class="chapter" data-level="14.3.2" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#running"><i class="fa fa-check"></i><b>14.3.2</b> Running</a></li>
+<li class="chapter" data-level="14.3.3" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#restarting"><i class="fa fa-check"></i><b>14.3.3</b> Restarting</a></li>
+<li class="chapter" data-level="14.3.4" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#cluster-i.e.-orthologous-genes-selection"><i class="fa fa-check"></i><b>14.3.4</b> Cluster (i.e., orthologous genes) selection</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#exercise-i-1"><i class="fa fa-check"></i><b>14.4</b> Exercise I</a></li>
+<li class="chapter" data-level="14.5" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#using-annotationbustr"><i class="fa fa-check"></i><b>14.5</b> Using <code>AnnotationBustR</code></a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#introduction-1"><i class="fa fa-check"></i><b>14.5.1</b> Introduction</a></li>
+<li class="chapter" data-level="14.5.2" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#install-the-tools"><i class="fa fa-check"></i><b>14.5.2</b> Install the tools</a></li>
+<li class="chapter" data-level="14.5.3" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#specify-search-terms-of-genomes"><i class="fa fa-check"></i><b>14.5.3</b> Specify search terms of genomes</a></li>
+<li class="chapter" data-level="14.5.4" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#load-gene-search-terms-of-interest"><i class="fa fa-check"></i><b>14.5.4</b> Load Gene Search Terms of Interest</a></li>
+<li class="chapter" data-level="14.5.5" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#extract-sequences-with-annotationbust"><i class="fa fa-check"></i><b>14.5.5</b> Extract sequences with AnnotationBust</a></li>
+</ul></li>
+<li class="chapter" data-level="14.6" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#exercise-ii-1"><i class="fa fa-check"></i><b>14.6</b> Exercise II</a></li>
+<li class="chapter" data-level="14.7" data-path="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html"><a href="systematic-retrieval-of-orthologous-dna-sequences-form-genbank.html#combine-gene-information-from-the-two-analyses"><i class="fa fa-check"></i><b>14.7</b> Combine gene information from the two analyses</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="sequence-alignment.html"><a href="sequence-alignment.html"><i class="fa fa-check"></i><b>15</b> Sequence alignment</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="sequence-alignment.html"><a href="sequence-alignment.html#load-libraries"><i class="fa fa-check"></i><b>15.1</b> Load libraries</a></li>
+<li class="chapter" data-level="15.2" data-path="sequence-alignment.html"><a href="sequence-alignment.html#perform-alignments"><i class="fa fa-check"></i><b>15.2</b> Perform Alignments</a></li>
+<li class="chapter" data-level="15.3" data-path="sequence-alignment.html"><a href="sequence-alignment.html#processing-multiple-alignments"><i class="fa fa-check"></i><b>15.3</b> Processing Multiple Alignments</a></li>
+<li class="chapter" data-level="15.4" data-path="sequence-alignment.html"><a href="sequence-alignment.html#build-your-first-nj-tree"><i class="fa fa-check"></i><b>15.4</b> Build your first NJ tree</a></li>
+<li class="chapter" data-level="15.5" data-path="sequence-alignment.html"><a href="sequence-alignment.html#exercise"><i class="fa fa-check"></i><b>15.5</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html"><i class="fa fa-check"></i><b>16</b> Maximum likelihood, model tests, tree and branch tests</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#learning-goals-1"><i class="fa fa-check"></i><b>16.1</b> Learning Goals</a></li>
+<li class="chapter" data-level="16.2" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#iqtree"><i class="fa fa-check"></i><b>16.2</b> IQtree</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#version"><i class="fa fa-check"></i><b>16.2.1</b> Version</a></li>
+<li class="chapter" data-level="16.2.2" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#find-the-best-explanatory-sequence-evolution-model"><i class="fa fa-check"></i><b>16.2.2</b> find the best explanatory sequence evolution model</a></li>
+<li class="chapter" data-level="16.2.3" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#using-the-best-sequence-evolution-model"><i class="fa fa-check"></i><b>16.2.3</b> using the best sequence evolution model</a></li>
+<li class="chapter" data-level="16.2.4" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#different-partitions-for-the-data-for-multiple-genes-or-different-codons"><i class="fa fa-check"></i><b>16.2.4</b> Different partitions for the data for multiple genes, or different codons</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#run-an-ml-tree-with-multiple-gene-files-in-a-folder"><i class="fa fa-check"></i><b>16.3</b> Run an ML tree with multiple gene files in a folder</a></li>
+<li class="chapter" data-level="16.4" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#gene-concordance-factor"><i class="fa fa-check"></i><b>16.4</b> Gene concordance factor</a></li>
+<li class="chapter" data-level="16.5" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#tree-topology-tests"><i class="fa fa-check"></i><b>16.5</b> Tree topology tests</a></li>
+<li class="chapter" data-level="16.6" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#tree-branches-tests"><i class="fa fa-check"></i><b>16.6</b> Tree branches tests</a></li>
+<li class="chapter" data-level="16.7" data-path="maximum-likelihood-model-tests-tree-and-branch-tests.html"><a href="maximum-likelihood-model-tests-tree-and-branch-tests.html#assignments"><i class="fa fa-check"></i><b>16.7</b> Assignments</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="molecular-clock-and-phylogenetic-dating.html"><a href="molecular-clock-and-phylogenetic-dating.html"><i class="fa fa-check"></i><b>17</b> Molecular Clock and Phylogenetic Dating</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="molecular-clock-and-phylogenetic-dating.html"><a href="molecular-clock-and-phylogenetic-dating.html#inferring-time-tree-with-tip-dates"><i class="fa fa-check"></i><b>17.1</b> Inferring time tree with tip dates</a></li>
+<li class="chapter" data-level="17.2" data-path="molecular-clock-and-phylogenetic-dating.html"><a href="molecular-clock-and-phylogenetic-dating.html#calibrating-tree-using-ancestral-dates"><i class="fa fa-check"></i><b>17.2</b> Calibrating tree using ancestral dates</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="molecular-clock-and-phylogenetic-dating.html"><a href="molecular-clock-and-phylogenetic-dating.html#search-for-an-ml-tree"><i class="fa fa-check"></i><b>17.2.1</b> search for an ML tree</a></li>
+<li class="chapter" data-level="17.2.2" data-path="molecular-clock-and-phylogenetic-dating.html"><a href="molecular-clock-and-phylogenetic-dating.html#root-calibration"><i class="fa fa-check"></i><b>17.2.2</b> Root calibration</a></li>
+<li class="chapter" data-level="17.2.3" data-path="molecular-clock-and-phylogenetic-dating.html"><a href="molecular-clock-and-phylogenetic-dating.html#internal-nodes"><i class="fa fa-check"></i><b>17.2.3</b> Internal nodes</a></li>
+<li class="chapter" data-level="17.2.4" data-path="molecular-clock-and-phylogenetic-dating.html"><a href="molecular-clock-and-phylogenetic-dating.html#confidence-interval"><i class="fa fa-check"></i><b>17.2.4</b> Confidence interval</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="molecular-clock-and-phylogenetic-dating.html"><a href="molecular-clock-and-phylogenetic-dating.html#exercise-4"><i class="fa fa-check"></i><b>17.3</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html"><i class="fa fa-check"></i><b>18</b> Character evolution and Ancestral state reconstruction</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#continuous-characters"><i class="fa fa-check"></i><b>18.1</b> Continuous characters</a>
+<ul>
+<li class="chapter" data-level="18.1.1" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#load-libraries-1"><i class="fa fa-check"></i><b>18.1.1</b> load libraries</a></li>
+<li class="chapter" data-level="18.1.2" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#tree-file-and-the-character-file"><i class="fa fa-check"></i><b>18.1.2</b> Tree file and the character file</a></li>
+<li class="chapter" data-level="18.1.3" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#visualization-of-the-reconstructed-nodes"><i class="fa fa-check"></i><b>18.1.3</b> Visualization of the reconstructed nodes</a></li>
+<li class="chapter" data-level="18.1.4" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#visualization-of-phenotypic-evolution"><i class="fa fa-check"></i><b>18.1.4</b> Visualization of phenotypic evolution</a></li>
+</ul></li>
+<li class="chapter" data-level="18.2" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#brownian-motion-vs-ornstein-uhlenbeck-process"><i class="fa fa-check"></i><b>18.2</b> Brownian Motion vs Ornstein-Uhlenbeck Process</a></li>
+<li class="chapter" data-level="18.3" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#brownian-motion"><i class="fa fa-check"></i><b>18.3</b> Brownian Motion</a>
+<ul>
+<li class="chapter" data-level="18.3.1" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#ornsteinuhlenbeck-process"><i class="fa fa-check"></i><b>18.3.1</b> Ornstein–Uhlenbeck process</a></li>
+<li class="chapter" data-level="18.3.2" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#incorporate-prior-knowledge-using-bayesian-estimates"><i class="fa fa-check"></i><b>18.3.2</b> Incorporate prior knowledge using Bayesian estimates</a></li>
+</ul></li>
+<li class="chapter" data-level="18.4" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#discrete-characters"><i class="fa fa-check"></i><b>18.4</b> Discrete characters</a></li>
+<li class="chapter" data-level="18.5" data-path="character-evolution-and-ancestral-state-reconstruction.html"><a href="character-evolution-and-ancestral-state-reconstruction.html#exercises-1"><i class="fa fa-check"></i><b>18.5</b> Exercises:</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html"><i class="fa fa-check"></i><b>19</b> Model Selection of Character Evolution</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html#load-libraries-2"><i class="fa fa-check"></i><b>19.1</b> Load libraries</a></li>
+<li class="chapter" data-level="19.2" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html#discrete-traits-model-fitting"><i class="fa fa-check"></i><b>19.2</b> Discrete traits model fitting</a>
+<ul>
+<li class="chapter" data-level="19.2.1" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html#choosing-a-character-model"><i class="fa fa-check"></i><b>19.2.1</b> Choosing a character model</a></li>
+<li class="chapter" data-level="19.2.2" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html#marginal-ancestral-state-reconstruction"><i class="fa fa-check"></i><b>19.2.2</b> Marginal ancestral state reconstruction</a></li>
+<li class="chapter" data-level="19.2.3" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html#more-than-two-states"><i class="fa fa-check"></i><b>19.2.3</b> More than two states</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html#exercise-i-2"><i class="fa fa-check"></i><b>19.3</b> Exercise I</a></li>
+<li class="chapter" data-level="19.4" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html#continuous-traits-model-fitting"><i class="fa fa-check"></i><b>19.4</b> Continuous traits model fitting</a>
+<ul>
+<li class="chapter" data-level="19.4.1" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html#model-selection"><i class="fa fa-check"></i><b>19.4.1</b> Model selection</a></li>
+<li class="chapter" data-level="19.4.2" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html#ancestral-states"><i class="fa fa-check"></i><b>19.4.2</b> Ancestral states</a></li>
+</ul></li>
+<li class="chapter" data-level="19.5" data-path="model-selection-of-character-evolution.html"><a href="model-selection-of-character-evolution.html#exercise-ii-2"><i class="fa fa-check"></i><b>19.5</b> Exercise II</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">BIO595 The Tree of Life</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="coevolution-and-phylogenetic-signals-in-r" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">Chapter 9</span> Coevolution and Phylogenetic Signals in R<a href="coevolution-and-phylogenetic-signals-in-r.html#coevolution-and-phylogenetic-signals-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="setting-up-the-environment-5" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Setting up the environment<a href="coevolution-and-phylogenetic-signals-in-r.html#setting-up-the-environment-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Set your working directory and load the necessary data.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;ape&quot;</span>)</span>
+<span id="cb1-2"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;picante&quot;</span>)</span>
+<span id="cb1-3"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;phytools&quot;</span>)</span>
+<span id="cb1-4"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;geiger&quot;</span>)</span>
+<span id="cb1-5"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;data.table&quot;</span>)</span>
+<span id="cb1-6"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># set working directory</span></span>
+<span id="cb1-8"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb1-8" aria-hidden="true" tabindex="-1"></a>wd <span class="ot">&lt;-</span> <span class="st">&quot;~/Dropbox/teaching/bookdown-demo-main/data2023/&quot;</span> <span class="co"># absolute address of the folder where you have the data you need and plan to work in.</span></span>
+<span id="cb1-9"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(wd)</span>
+<span id="cb1-10"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># load data</span></span>
+<span id="cb1-12"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(phylocom) <span class="co"># load example data</span></span></code></pre></div>
+<p><br></p>
+</div>
+<div id="phylogenetic-signal" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Phylogenetic Signal<a href="coevolution-and-phylogenetic-signals-in-r.html#phylogenetic-signal" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Phylogenetic signal is the tendency of related species to resemble each other more than species drawn at random from the same tree (<a href="https://onlinelibrary.wiley.com/doi/full/10.1046/j.1420-9101.2002.00472.x">Blomberg &amp; Garland 2002</a>).
+Incorporating the phylogenetic signal in the analysis of coevolution is crucial because it enables us to distinguish between truly coevolving patterns and similar patterns induced by the shared history of sequences.
+Evolutionary constraints (i.e., phylogenetic conservatism) can result in phylogenetic signals exhibited for traits related to species’ interactions, for all parties involved.
+This can lead to phylogenetically structured interactions, where closely related species have more similar interaction patterns than distantly related species.
+A strong phylogenetic signal indicates that these patterns are constrained by past evolutionary history (e.g., phylogenetic conservatism of traits).</p>
+<p>A variety of indices has been proposed to measure and test for phylogenetic signals in traits (see <a href="https://besjournals.onlinelibrary.wiley.com/doi/10.1111/j.2041-210X.2012.00196.x">Münkemüller et al. 2012</a>)- let’s examine the two most commonly used ones below.</p>
+<p></br></p>
+<div id="blombergs-k" class="section level3 hasAnchor" number="9.2.1">
+<h3><span class="header-section-number">9.2.1</span> Blomberg’s K<a href="coevolution-and-phylogenetic-signals-in-r.html#blombergs-k" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Blomberg’s K (<a href="https://bioone.org/journals/evolution/volume-57/issue-4/0014-3820(2003)057%5B0717%3ATFPSIC%5D2.0.CO%3B2/TESTING-FOR-PHYLOGENETIC-SIGNAL-IN-COMPARATIVE-DATA--BEHAVIORAL-TRAITS/10.1554/0014-3820(2003)057%5B0717:TFPSIC%5D2.0.CO;2.full">Blomberg et al. 2003</a>) expresses the strength of phylogenetic signal as the ratio of the mean squared error of the tip data measured from the phylogenetic corrected mean and the mean squared error based on the variance–covariance matrix derived from the given phylogeny under the assumption of a Brownian motion (BM) model.
+Under the assumption of a pure Brownian model of evolution, the phylogenetic relationships of species uniquely define the expected covariance matrix of their traits.</p>
+<p>In other words, Blomberg’s K compares the observed distribution of trait values to what we would expect if the trait evolved under BM (i.e., in concordance to phylogenetic relationships).
+Basically it is a ratio between the two.</p>
+<ul>
+<li><p>K = 1 suggests that relatives resemble one another as much as we should expect under BM (i.e., some degree of phylogenetic signal/conservatism in trait).</p></li>
+<li><p>K &lt; 1 suggests that there is less “phylogenetic signal” than expected under BM (i.e., random or convergent pattern of trait evolution).
+A value close to zero indicates phylogenetic independence.</p></li>
+<li><p>K &gt; 1 suggests that there is more (i.e., strong phylogenetic signal - traits are being conserved through evolutionary time).</p></li>
+</ul>
+<p>For more information see <a href="https://bioone.org/journals/evolution/volume-57/issue-4/0014-3820(2003)057%5B0717%3ATFPSIC%5D2.0.CO%3B2/TESTING-FOR-PHYLOGENETIC-SIGNAL-IN-COMPARATIVE-DATA--BEHAVIORAL-TRAITS/10.1554/0014-3820(2003)057%5B0717:TFPSIC%5D2.0.CO;2.full">Blomberg et al 2003</a>.</p>
+<p></br></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb2-1" aria-hidden="true" tabindex="-1"></a>treedata <span class="ot">&lt;-</span> <span class="fu">match.phylo.data</span>(phylocom<span class="sc">$</span>phylo, phylocom<span class="sc">$</span>traits) <span class="co"># matches and orders tree tips and dataframe - will only work if rownames/names correspond to tip labels.</span></span>
+<span id="cb2-2"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb2-2" aria-hidden="true" tabindex="-1"></a>prunedtree <span class="ot">&lt;-</span> treedata<span class="sc">$</span>phy</span>
+<span id="cb2-3"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb2-3" aria-hidden="true" tabindex="-1"></a>traits <span class="ot">&lt;-</span> treedata<span class="sc">$</span>data</span>
+<span id="cb2-4"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">phylosignal</span>(traits<span class="sc">$</span>traitD, prunedtree, <span class="at">reps =</span> <span class="dv">999</span>)</span>
+<span id="cb2-6"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">phylosignal</span>(traits<span class="sc">$</span>traitD, treedata<span class="sc">$</span>phy, <span class="at">reps =</span> <span class="dv">999</span>, <span class="at">checkdata =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>We can calculate phylogenetic signal across multiple traits at once using the <code>multiPhylosignal</code> function.
+Let’s see how it works.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">multiPhylosignal</span>(traits, prunedtree, <span class="at">reps =</span> <span class="dv">999</span>) <span class="co">#you can pass any arguments/conditions for &#39;phylosig&#39; to multiPhylosignal </span></span>
+<span id="cb3-2"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb3-3" aria-hidden="true" tabindex="-1"></a>multiPhylosignal</span>
+<span id="cb3-4"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># multiPhylosignal is just using a for loop to run phylosignal on each column!</span></span>
+<span id="cb3-6"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># let&#39;s try this for ourselves</span></span>
+<span id="cb3-7"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb3-7" aria-hidden="true" tabindex="-1"></a>output <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb3-8"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span> <span class="fu">ncol</span>(traits)){</span>
+<span id="cb3-9"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb3-9" aria-hidden="true" tabindex="-1"></a>  ps <span class="ot">&lt;-</span> <span class="fu">phylosignal</span>(traits[, i], prunedtree, <span class="at">reps =</span> <span class="dv">999</span>)</span>
+<span id="cb3-10"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb3-10" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> <span class="fu">rbind</span>(output, ps)</span>
+<span id="cb3-11"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb3-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-12"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># we can also &#39;apply&#39; functions across rows and columns! This is generally more efficient than using for-loops.</span></span>
+<span id="cb3-14"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(traits, <span class="dv">2</span>, phylosignal, <span class="at">phy =</span> prunedtree, <span class="at">reps =</span> <span class="dv">999</span>)</span></code></pre></div>
+<p></br></p>
+</div>
+<div id="pagels-lambda-λ" class="section level3 hasAnchor" number="9.2.2">
+<h3><span class="header-section-number">9.2.2</span> Pagel’s lambda (λ)<a href="coevolution-and-phylogenetic-signals-in-r.html#pagels-lambda-λ" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>As mentioned above, a pure Brownian model of evolution assumes that the phylogenetic relationships among taxa solely define the expected covariance of their traits.
+However, this is often not the case, as additional factors can affect trait evolution.</p>
+<p>Pagel’s λ was introduced as a scaling parameter for the phylogeny and measures phylogenetic dependence of observed trait data (<a href="https://besjournals.onlinelibrary.wiley.com/action/getFTRLinkout?url=https%3A%2F%2Fct.prod.getft.io%2Fd2lsZXksc3ByaW5nZXIsaHR0cDovL25hdHVyZS5jb20vYXJ0aWNsZXMvZG9pOjEwLjEwMzgvNDQ3NjY_dXRtX3NvdXJjZT1nZXRmdHImdXRtX21lZGl1bT1nZXRmdHImdXRtX2NhbXBhaWduPWdldGZ0cl9waWxvdA.7qi8N4mJLEhX9WhoYB9csM4PsvxG9pYLMSUgIert5qw&amp;doi=10.1111%2Fj.2041-210X.2012.00196.x&amp;doiOfLink=10.1038%2F44766&amp;linkType=VIEW_FULL_ACCESS&amp;linkLocation=Reference&amp;linkSource=FULL_TEXT">Pagel 1999</a>; <a href="https://www.journals.uchicago.edu/doi/full/10.1086/343873">Harvey &amp; Pagel 2002</a>).
+Basically, the coefficient λ defines the weight necessary to scale the Brownian phylogenetic covariances down to the actually observed ones.
+In other words, λ is the transformation of the phylogeny that ensures the best fit of trait data to a BM model.</p>
+<ul>
+<li><p>λ = 0 suggests that the trait does not exhibit a phylogenetic signal (i.e., the trait evolved independently of how the taxa evolved - phylogenetic independence).</p></li>
+<li><p>λ = 1 corresponds to a Brownian motion model (i.e., some degree of phylogenetic signal/conservatism in trait, or that traits are evolving at the same rate w/ taxa).</p></li>
+<li><p>λ &gt; 1 strong phylogenetic signal/conservation - happens when you have LONG terminal branches (i.e., traits are really conserved and evolving much slower than taxa).
+You are not likely to see this in practice.</p></li>
+</ul>
+<p>Let’s take a look at what λ does, and try calculating Pagel’s λ and Blomberg’s K using the <code>phylosig</code> function in the <code>geiger</code> package.</p>
+<p><em>*The values you get during these exercises are unrealistic as the data are not real.</em></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># let&#39;s see what lambda does</span></span>
+<span id="cb4-2"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb4-2" aria-hidden="true" tabindex="-1"></a>prunedtreeL0 <span class="ot">&lt;-</span> <span class="fu">rescale</span>(prunedtree, <span class="at">model =</span> <span class="st">&quot;lambda&quot;</span>, <span class="dv">0</span>)</span>
+<span id="cb4-3"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb4-3" aria-hidden="true" tabindex="-1"></a>prunedtreeL5 <span class="ot">&lt;-</span> <span class="fu">rescale</span>(prunedtree, <span class="at">model =</span> <span class="st">&quot;lambda&quot;</span>, <span class="fl">0.5</span>)</span>
+<span id="cb4-4"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfcol =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb4-5"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(prunedtree)</span>
+<span id="cb4-6"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(prunedtreeL5)</span>
+<span id="cb4-7"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(prunedtreeL0)</span>
+<span id="cb4-8"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># calculating Pagel&#39;s lambda</span></span>
+<span id="cb4-10"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">phylosig</span>(prunedtree, traits<span class="sc">$</span>traitD, <span class="at">method =</span> <span class="st">&quot;lambda&quot;</span>, <span class="at">test =</span> T) <span class="co">#Pagel&#39;s lambda</span></span>
+<span id="cb4-11"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># calculating Blomberg&#39;s K</span></span>
+<span id="cb4-13"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="fu">phylosig</span>(prunedtree, traits<span class="sc">$</span>traitD, <span class="at">method =</span> <span class="st">&quot;K&quot;</span>, <span class="at">test =</span> T) <span class="co">#Blomberg&#39;s K</span></span></code></pre></div>
+<p></br></p>
+<div id="exercise-1-6" class="section level4 hasAnchor" number="9.2.2.1">
+<h4><span class="header-section-number">9.2.2.1</span> Exercise (1)<a href="coevolution-and-phylogenetic-signals-in-r.html#exercise-1-6" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Assess phylogenetic signal using Pagel’s λ across all 4 traits at once.
+You can use <span class="smallcaps">for</span>-loops or the <code>apply</code> function.
+Combine the results into a single data frame and save as a csv file named “Firstname_Lastname.Pagel.csv”.
+Hint: read the documentation for the <code>phylosig</code> function to see what the arguments are called (?<code>phylosig</code>)</p>
+<p>Write your code and answers below:</p>
+<hr />
+<hr />
+<hr />
+<hr />
+<p></br></p>
+</div>
+</div>
+</div>
+<div id="phylogenetically-independent-contrasts-1" class="section level2 hasAnchor" number="9.3">
+<h2><span class="header-section-number">9.3</span> Phylogenetically Independent Contrasts<a href="coevolution-and-phylogenetic-signals-in-r.html#phylogenetically-independent-contrasts-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Trait data for species cannot be treated as independent data points from the point of view of statistical analysis.
+This is because in many cases, trait values are not independent of the evolutionary history of the taxa they belong to.
+Thus it is sometimes necessary to account for the effect of phylogeny when comparing trait values and reduce the phylogenetic interdependence of data points, which can violate the assumptions of many statistical tests.
+Phylogenetically independent contrasts (PIC; <a href="https://besjournals.onlinelibrary.wiley.com/servlet/linkout?suffix=null&amp;dbid=16&amp;doi=10.1111%2Fj.2041-210X.2012.00196.x&amp;key=10.1086%2F284325&amp;getFTLinkType=true&amp;doiForPubOfPage=10.1111%2Fj.2041-210X.2012.00196.x&amp;refDoi=10.1086/284325&amp;linkType=CROSSREF&amp;linkSource=FULL_TEXT&amp;linkLocation=Reference">Felsenstein 1985</a>; <a href="https://academic.oup.com/sysbio/article/41/1/18/1617342">Garland et al. 1992</a>) is a method for removing phylogenetic information from a trait data set.
+It is calculated by taking the difference between the mean trait value of the two taxa and dividing it by the branch length of the two taxa (<a href="https://journals.biologists.com/jeb/article/208/16/3015/15676/Phylogenetic-approaches-in-comparative-physiology">Garland et al. 2005</a>).
+PICs meet the assumption that samples are independent of one another, but they assume that trait evolution occurs under Brownian motion.</p>
+<p>PICs are often used for analyzing trait correlations; comparisons of closely related species are often conducted to detect whether species traits co‐vary, either with other traits or with the environment.
+For instance, Bhaskar et al (<a href="https://nph.onlinelibrary.wiley.com/doi/full/10.1111/j.1469-8137.2007.02208.x">2007</a>) examined whether evolutionary divergences in plant hydraulic traits were associated with contrasting seasonality of precipitation.
+Let’s see if body length correlates with weight among (fake) snake species.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb5-1" aria-hidden="true" tabindex="-1"></a>snake.tree <span class="ot">&lt;-</span> <span class="fu">rcoal</span>(<span class="at">n =</span> <span class="dv">100</span>)</span>
+<span id="cb5-2"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(snake.tree)</span>
+<span id="cb5-3"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Let&#39;s independently simulate the evolution of length and weight</span></span>
+<span id="cb5-5"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb5-5" aria-hidden="true" tabindex="-1"></a>snake.length <span class="ot">&lt;-</span> <span class="fu">fastBM</span>(snake.tree)</span>
+<span id="cb5-6"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb5-6" aria-hidden="true" tabindex="-1"></a>snake.weight <span class="ot">&lt;-</span> <span class="fu">fastBM</span>(snake.tree)</span>
+<span id="cb5-7"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb5-8"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(snake.length, snake.weight)</span>
+<span id="cb5-9"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(snake.weight <span class="sc">~</span> snake.length))</span>
+<span id="cb5-10"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(snake.length, snake.weight) </span></code></pre></div>
+<p>The two traits appear to be significantly correlated.
+However the trait data above were simulated in the absence of an evolutionary correlation between them.
+Let’s see what happens when we account for the phylogeny and transform the original tip data (trait values for species) into values that are statistically independent and identically distributed.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># transform trait data and plot</span></span>
+<span id="cb6-2"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb6-2" aria-hidden="true" tabindex="-1"></a>pic.length <span class="ot">&lt;-</span> <span class="fu">pic</span>(snake.length, snake.tree)</span>
+<span id="cb6-3"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb6-3" aria-hidden="true" tabindex="-1"></a>pic.weight <span class="ot">&lt;-</span> <span class="fu">pic</span>(snake.weight, snake.tree)</span>
+<span id="cb6-4"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pic.length, pic.weight)</span>
+<span id="cb6-5"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(pic.weight <span class="sc">~</span> pic.length))</span>
+<span id="cb6-6"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(pic.length, pic.weight) <span class="co"># not correlated</span></span>
+<span id="cb6-7"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># plot things side by side for comparison</span></span>
+<span id="cb6-9"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfcol =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb6-10"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(snake.length, snake.weight)</span>
+<span id="cb6-11"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(snake.weight <span class="sc">~</span> snake.length))</span>
+<span id="cb6-12"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pic.length, pic.weight)</span>
+<span id="cb6-13"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(pic.weight <span class="sc">~</span> pic.length))</span>
+<span id="cb6-14"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co"># make things a bit more colorful</span></span>
+<span id="cb6-16"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfcol =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb6-17"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(snake.length, snake.weight, <span class="at">main =</span> <span class="st">&quot;vanilla snakes&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;length&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;weight&quot;</span>)</span>
+<span id="cb6-18"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(snake.weight <span class="sc">~</span> snake.length), <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">lty =</span> <span class="st">&quot;dashed&quot;</span>)</span>
+<span id="cb6-19"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pic.length, pic.weight, <span class="at">main =</span> <span class="st">&quot;PIC snakes&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;length&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;weight&quot;</span>)</span>
+<span id="cb6-20"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(pic.weight <span class="sc">~</span> pic.length), <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lty =</span> <span class="st">&quot;dotted&quot;</span>)</span></code></pre></div>
+<p>Phylogenetically independent contrasts (PIC) remove the effect of shared evolutionary history by calculating differences in trait values between extant and ancestral sister taxa.
+We can see from this example, that it is not difficult for phylogeny to induce a type I error - remember, we know our data were simulated without a genuine evolutionary relationship between the traits.
+The relationship that we measure in the first case is a spurious relationship driven by the phylogeny.</p>
+<p></br></p>
+<div id="exercise-2-6" class="section level4 hasAnchor" number="9.3.0.1">
+<h4><span class="header-section-number">9.3.0.1</span> Exercise (2)<a href="coevolution-and-phylogenetic-signals-in-r.html#exercise-2-6" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>On BrightSpace in the folder for this week’s lab, you will find the following files:</p>
+<ul>
+<li><p>“anolis.phy” (tree file)</p></li>
+<li><p>“anolisDataAppended.csv” (trait data)</p></li>
+</ul>
+<p>Using these data and what we learned in lab:</p>
+<ol style="list-style-type: decimal">
+<li><p>Assess phylogenetic signal in “anoleSize”.
+Examine both Blomberg’s K and Pagel’s lambda.
+Save results as a csv file: e.g., “Firstname_Lastname.phylosig_K.csv”, “Firstname_Lastname.phylosig_lambda.csv”</p></li>
+<li><p>Plot the relationship between Anole awesomeness and attitude before and after conducting phylogenetically independent contrasts.
+Label each plot with the correlation coefficient (‘cor’ result from ‘cor.test’) as its main title e.g., “vanilla 0.445” and “PIC 0.03” Make sure to correctly label the x- and y-axes with the trait names.
+Feel free to experiment with plot parameters (e.g., colors, pch, line types)</p></li>
+</ol>
+<p>Write your code and answers below:</p>
+<hr />
+<hr />
+<hr />
+<hr />
+<p></br></p>
+</div>
+</div>
+<div id="coevolution" class="section level2 hasAnchor" number="9.4">
+<h2><span class="header-section-number">9.4</span> Coevolution<a href="coevolution-and-phylogenetic-signals-in-r.html#coevolution" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The function <code>parafit</code> tests the hypothesis of coevolution between two clades interacting species - hosts and parasites.
+The null hypothesis (H0) of the global test is that the evolution of the two groups, as revealed by the two phylogenetic trees and the set of host-parasite association links, has been independent.
+Tests of individual host-parasite links are also available as an option.
+The function provides tests for overall fit, interpreted as congruence, between phylogenies and assesses the contribution of individual host-parasite associations to the fit.
+In other words, <code>parafit</code> takes a host tree, parasite tree and association matrix as input, and tests for (non)random associations between the host and parasite trees.
+It can cope with unbalanced numbers of hosts and parasites, large phylogenies that are not completely resolved, and multihost parasitism.
+For more details see Legendre et al. (<a href="https://academic.oup.com/sysbio/article/51/2/217/1661471">2002</a>).</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simulating trees</span></span>
+<span id="cb7-2"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb7-2" aria-hidden="true" tabindex="-1"></a>H <span class="ot">&lt;-</span> <span class="fu">rcoal</span>(<span class="dv">10</span>) <span class="co">#host phylogeny</span></span>
+<span id="cb7-3"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb7-3" aria-hidden="true" tabindex="-1"></a>P <span class="ot">&lt;-</span> H <span class="co">#identical parasite phylogeny</span></span>
+<span id="cb7-4"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb7-4" aria-hidden="true" tabindex="-1"></a>H<span class="sc">$</span>tip.label <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;host&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb7-5"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb7-5" aria-hidden="true" tabindex="-1"></a>P<span class="sc">$</span>tip.label <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;parasite&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb7-6"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># examine simulated trees</span></span>
+<span id="cb7-8"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfcol =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb7-9"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(H)</span>
+<span id="cb7-10"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(P)</span>
+<span id="cb7-11"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co"># generating an example association matrix</span></span>
+<span id="cb7-13"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb7-13" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">diag</span>(<span class="dv">10</span>)</span>
+<span id="cb7-14"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(A) <span class="ot">&lt;-</span> <span class="fu">list</span>(H<span class="sc">$</span>tip.label, P<span class="sc">$</span>tip.label)</span>
+<span id="cb7-15"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(A)</span>
+<span id="cb7-16"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># testing for coevolution</span></span>
+<span id="cb7-18"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="fu">parafit</span>(<span class="fu">cophenetic</span>(H), <span class="fu">cophenetic</span>(P), A)</span></code></pre></div>
+<p>Here we simulated a pair of identical trees (i.e., with perfect cospeciation patterns) and the association matrix is a diagonal matrix.
+Thus, we expect a strongly significant signal of global coevolution.
+Let’s try changing the species’ associations and see what happens.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># filling an association matrix randomly</span></span>
+<span id="cb8-2"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb8-2" aria-hidden="true" tabindex="-1"></a>A2 <span class="ot">&lt;-</span> A</span>
+<span id="cb8-3"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb8-3" aria-hidden="true" tabindex="-1"></a>A2[] <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">100</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
+<span id="cb8-4"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># testing for coevolution</span></span>
+<span id="cb8-6"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">parafit</span>(<span class="fu">cophenetic</span>(H), <span class="fu">cophenetic</span>(P), A2)</span></code></pre></div>
+<p>Here we changed the association matrix by randomly assigning links among hosts and parasites.
+If the phylogenies of the hosts and the parasites are identical but their associations are random, there not likely to be a significant signal of coevolution.</p>
+<p></br></p>
+<div id="plotting-tanglegrams" class="section level3 hasAnchor" number="9.4.1">
+<h3><span class="header-section-number">9.4.1</span> Plotting tanglegrams<a href="coevolution-and-phylogenetic-signals-in-r.html#plotting-tanglegrams" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>It can be useful to plot out how taxa from different groups associate with each other.
+There are two commonly used functions for this, <code>cophyloplot</code> in the <code>ape</code> package and <code>cophylo</code> in the <code>phytools</code> package.
+The latter is a bit more flexible so that’s what we’ll use here, but feel free to experiment with the other.
+In both cases, we will need to modify our association matrix.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb9-1" aria-hidden="true" tabindex="-1"></a>?cophylo</span>
+<span id="cb9-2"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># if you are able to use the reshape2 package:</span></span>
+<span id="cb9-4"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb9-4" aria-hidden="true" tabindex="-1"></a>associations.A <span class="ot">&lt;-</span> reshape2<span class="sc">::</span><span class="fu">melt</span>(A)</span>
+<span id="cb9-5"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb9-5" aria-hidden="true" tabindex="-1"></a>associations.A <span class="ot">&lt;-</span> <span class="fu">unique</span>(associations.A[<span class="fu">which</span>(associations.A<span class="sc">$</span>value <span class="sc">&gt;</span> <span class="dv">0</span>), <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span>
+<span id="cb9-6"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb9-6" aria-hidden="true" tabindex="-1"></a>associations.A2 <span class="ot">&lt;-</span> reshape2<span class="sc">::</span><span class="fu">melt</span>(A2)</span>
+<span id="cb9-7"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb9-7" aria-hidden="true" tabindex="-1"></a>associations.A2 <span class="ot">&lt;-</span> <span class="fu">unique</span>(associations.A2[<span class="fu">which</span>(associations.A2<span class="sc">$</span>value <span class="sc">&gt;</span> <span class="dv">0</span>), <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span>
+<span id="cb9-8"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># if not (because it&#39;s deprecated); we can create our own function.</span></span>
+<span id="cb9-10"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb9-10" aria-hidden="true" tabindex="-1"></a>pairer <span class="ot">&lt;-</span> <span class="cf">function</span>(A){ </span>
+<span id="cb9-11"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb9-11" aria-hidden="true" tabindex="-1"></a>  ps <span class="ot">&lt;-</span> <span class="fu">apply</span>(A, <span class="dv">1</span>, <span class="cf">function</span>(x){<span class="fu">which</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>)}, <span class="at">simplify =</span> T)</span>
+<span id="cb9-12"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.list</span>(ps)){</span>
+<span id="cb9-13"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb9-13" aria-hidden="true" tabindex="-1"></a>    paired <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">unlist</span>(ps))</span>
+<span id="cb9-14"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb9-14" aria-hidden="true" tabindex="-1"></a>    paired <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">strsplit</span>(paired, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">.&quot;</span>))</span>
+<span id="cb9-15"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb9-15" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span>(<span class="fu">is.integer</span>(ps)){</span>
+<span id="cb9-16"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb9-16" aria-hidden="true" tabindex="-1"></a>      paired <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">names</span>(ps), <span class="fu">colnames</span>(A)[ps])</span>
+<span id="cb9-17"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb9-17" aria-hidden="true" tabindex="-1"></a>      } <span class="cf">else</span>{</span>
+<span id="cb9-18"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb9-18" aria-hidden="true" tabindex="-1"></a>        paired <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb9-19"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb9-19" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb9-20"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb9-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(paired)</span>
+<span id="cb9-21"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb9-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-22"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb9-22" aria-hidden="true" tabindex="-1"></a>associations.A <span class="ot">&lt;-</span> <span class="fu">pairer</span>(A)</span>
+<span id="cb9-23"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb9-23" aria-hidden="true" tabindex="-1"></a>associations.A2 <span class="ot">&lt;-</span> <span class="fu">pairer</span>(A2)</span>
+<span id="cb9-24"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb9-25" aria-hidden="true" tabindex="-1"></a>cophyloA <span class="ot">&lt;-</span> <span class="fu">cophylo</span>(H, P, associations.A, <span class="at">rotate =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-26"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb9-26" aria-hidden="true" tabindex="-1"></a>cophyloA2 <span class="ot">&lt;-</span> <span class="fu">cophylo</span>(H, P, associations.A2, <span class="at">rotate =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-27"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb9-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-28"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cophyloA)</span>
+<span id="cb9-29"><a href="coevolution-and-phylogenetic-signals-in-r.html#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cophyloA)</span></code></pre></div>
+<p></br></p>
+<div id="exercise-3-3" class="section level4 hasAnchor" number="9.4.1.1">
+<h4><span class="header-section-number">9.4.1.1</span> Exercise (3)<a href="coevolution-and-phylogenetic-signals-in-r.html#exercise-3-3" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Download the tree files with your first name (e.g., “Daniel_tree.nex”).
+and one other tree named after one of your classmates (i.e., not “Daniel”) from BrightSpace (lab 6 folder).
+See if species on these two trees are likely to have cospeciated using the <code>parafit</code> function in <code>ape</code>.
+Follow these instructions for creating your association matrix:</p>
+<ul>
+<li><p>Change the tip names on one (or both) of the trees (e.g., use the gsub function to substitute the “t” for something else).</p></li>
+<li><p>Create a diagonal matrix as we did above with simulated data in the Coevolution section - the column names and row names should each be the tip labels, and only the diagonal of the matrix will have values of 1 - the rest of the cells should contain 0.<br />
+<em>Hint: see the object named “A” that we created above</em>.</p></li>
+</ul>
+<p>Once you have all the data ready:</p>
+<ol style="list-style-type: decimal">
+<li><p>Report the statistic of the global H-P test and its associated p-value.</p></li>
+<li><p>Plot a tanglegram illustrating how species on the two trees are associated, and save it as a pdf file named “Firstname_Lastname.tanglegram.pdf”.
+Plot the trees as cladograms without branch lengths using the <code>cophylo</code> function in <code>phytools</code>.</p></li>
+</ol>
+<p>Write your code and answers below:</p>
+<hr />
+<hr />
+<hr />
+<hr />
+<p></br></p>
+<p><strong>Assignment [10]: Upload the code you wrote for the three exercises and their results to BrightSpace (lab10).</strong></p>
+<p></br></p>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="community-phylogenetics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="phylogenetic-visualization-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/08_R_lab7_physigCoevo.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
