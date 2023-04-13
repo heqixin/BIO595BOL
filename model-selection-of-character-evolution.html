@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 19 Model Selection of Character Evolution | BIO595 The Tree of Life</title>
   <meta name="description" content="Test writing the book for the course bookdown::gitbook." />
-  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 19 Model Selection of Character Evolution | BIO595 The Tree of Life" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Qixin He, Daniel Park" />
 
 
-<meta name="date" content="2023-04-10" />
+<meta name="date" content="2023-04-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -600,12 +600,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Finished. Inferring ancestral states using marginal reconstruction.</code></pre>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="model-selection-of-character-evolution.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(eel.anc.fit<span class="sc">$</span>states)</span></code></pre></div>
 <pre><code>##         (1,R1)    (2,R1)
-## [1,] 0.5480196 0.4519804
-## [2,] 0.6242662 0.3757338
-## [3,] 0.6561270 0.3438730
-## [4,] 0.6904540 0.3095460
-## [5,] 0.7066905 0.2933095
-## [6,] 0.7158532 0.2841468</code></pre>
+## [1,] 0.5480169 0.4519831
+## [2,] 0.6242609 0.3757391
+## [3,] 0.6561208 0.3438792
+## [4,] 0.6904473 0.3095527
+## [5,] 0.7066836 0.2933164
+## [6,] 0.7158460 0.2841540</code></pre>
 <p>Let’s plot the estimated states for the internal nodes</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="model-selection-of-character-evolution.html#cb18-1" aria-hidden="true" tabindex="-1"></a>colPattern <span class="ot">&lt;-</span> <span class="fu">setNames</span>(<span class="fu">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;lightblue&quot;</span>),<span class="fu">levels</span>(feed.mode))</span>
 <span id="cb18-2"><a href="model-selection-of-character-evolution.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotTree.datamatrix</span>(eel.tree, <span class="fu">as.data.frame</span>(feed.mode), </span>
@@ -697,7 +697,7 @@ We can also generate a random evolutionary history based on the internal node re
 </div>
 <div id="exercise-ii-2" class="section level2 hasAnchor" number="19.5">
 <h2><span class="header-section-number">19.5</span> Exercise II<a href="model-selection-of-character-evolution.html#exercise-ii-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Inspect the <code>nodeState</code> for the reconstructed states above, how many of the ancestral reconstructed nodes show that the ancestral eel length is longer than 80cm? (Hint: for an ancestral node x, we try to test if most of the reconstructed ancestral state (let’s say 2.5 percentile of the distribution) is longer than 80cm from the mcmc samples: quantile(nodeState[x, 201:1001], 0.025) &gt; log(80) )</p>
+<p>Inspect the <code>nodeState</code> for the reconstructed states above, how many of the ancestral reconstructed nodes show that the ancestral eel length is longer than 80cm? (Hint: for an ancestral node x, we try to test if most of the reconstructed ancestral state (let’s say 2.5 percentile of the distribution from the mcmc samples, i.e., lower-bound of the 95%CI) is longer than 80cm : quantile(nodeState[201:1001,x], 0.025) &gt; log(80) )</p>
 
 </div>
 </div>
